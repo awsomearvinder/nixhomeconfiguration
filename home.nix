@@ -5,6 +5,7 @@
     ./discord.nix
 	./git.nix
     ./vscode.nix
+    ./element.nix
   ];
 
   programs.neovim = import ./neovim.nix pkgs;
