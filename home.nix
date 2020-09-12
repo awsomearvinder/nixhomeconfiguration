@@ -6,6 +6,10 @@
 	./git.nix
     ./vscode.nix
     ./element.nix
+    ./sway.nix
+    ./spotify.nix
+    ./xournal.nix
+    ./pulseeffects.nix
   ];
 
   programs.neovim = import ./neovim.nix pkgs;
@@ -19,7 +23,8 @@
   home.homeDirectory = builtins.getEnv "HOME";
 
   home.packages = with pkgs; [
-    fzf #this is required for nvim. not detected as a dep but /shrug
+    fzf # this is required for nvim. not detected as a dep but /shrug
+    ytop # top sucks.
   ];
 
   # This value determines the Home Manager release that your
