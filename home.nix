@@ -2,17 +2,11 @@
 with lib;
 {
   imports = [
-    ./firefox.nix
-    ./alacritty.nix
-    ./discord.nix
-	./git.nix
-    ./vscode.nix
-    ./element.nix
-    ./sway.nix
-    ./spotify.nix
-    ./xournal.nix
-    ./pulseeffects.nix
-    ./mako.nix
+    ./applications/firefox.nix
+	./applications/git.nix
+    ./applications/vscode.nix
+    ./applications/sway.nix
+    ./applications/mako.nix
   ];
 
 
@@ -41,7 +35,7 @@ with lib;
     programs.home-manager.enable = true;
 
     #This is kinda gross, I know.
-    programs.neovim = import ./neovim.nix pkgs;
+    programs.neovim = import ./applications/neovim.nix pkgs;
 
     # Home Manager needs a bit of information about you and the
     # paths it should manage.
@@ -49,6 +43,15 @@ with lib;
     home.homeDirectory = builtins.getEnv "HOME";
 
     home.packages = with pkgs; [
+      pulseeffects
+      spotify
+      xournalpp
+      discord
+      element-desktop
+      alacritty
+      git
+      pulseeffects
+      sway 
       fzf # this is required for nvim's coc-fzf. not detected as a dep but /shrug
       ytop # top sucks.
       mako #notification daemon.
