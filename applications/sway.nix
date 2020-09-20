@@ -53,23 +53,20 @@
         keybindings = lib.mkOptionDefault {
           "${modifier}+n" = "exec caja";
           "${modifier}+m" = "exec \"GDK_BACKEND=x11 thunderbird\"";
-          "${modifier}+b" = lib.mkForce "exec emacsclient -c";
           "${modifier}+c" = "exec firefox";
           #"${modifier}+p" = "exec ${scripts + "/take_screenshot"}";
           #"${modifier}+Shift+p" = "exec ${scripts + "/take_screenshot"} full";
-          "${modifier}+l" = "exec \"swaylock -f -c 000000\"";
-          "XF86MonBrightnessUp" = "exec \"brillo -A 1\"";
-          "XF86MonBrightnessDown" = "exec \"brillo -U 1\"";
-          "XF86AudioLowerVolume" = "exec \"pactl set-sink-volume 0 -5%\"";
-          "XF86AudioRaiseVolume" = "exec \"pactl set-sink-volume 0 +5%\"";
-          "XF86AudioPlay" = "exec \"playerctl play\"";
-          "XF86AudioPause" = "exec \"playerctl pause\"";
-          "XF86AudioNext" = "exec \"playerctl next\"";
-          "XF86AudioPrev" = "exec \"playerctl previous\"";
-          "${modifier}+x" = "exec networkmanager_dmenu";
-          "${modifier}+Ctrl+r" = "exec reboot";
-          "${modifier}+Ctrl+k" = "exec \"shutdown -h now\"";
-          "${modifier}+Ctrl+s" = "exec \"swaylock -f -c 000000 && systemctl suspend\"";
+          #"XF86MonBrightnessUp" = "exec \"brillo -A 1\"";
+          #"XF86MonBrightnessDown" = "exec \"brillo -U 1\"";
+          #"XF86AudioLowerVolume" = "exec \"pactl set-sink-volume 0 -5%\"";
+          #"XF86AudioRaiseVolume" = "exec \"pactl set-sink-volume 0 +5%\"";
+          #"XF86AudioPlay" = "exec \"playerctl play\"";
+          #"XF86AudioPause" = "exec \"playerctl pause\"";
+          #"XF86AudioNext" = "exec \"playerctl next\"";
+          #"XF86AudioPrev" = "exec \"playerctl previous\"";
+          #"${modifier}+x" = "exec networkmanager_dmenu";
+          #"${modifier}+Ctrl+r" = "exec reboot";
+          "${modifier}+Ctrl+d" = "exec \"shutdown -h now\"";
         };
         window = {
           border = 1;
