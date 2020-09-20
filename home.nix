@@ -7,6 +7,7 @@ with lib;
     ./applications/vscode.nix
     ./applications/sway.nix
     ./applications/mako.nix
+    ./applications/alacritty.nix
   ];
 
 
