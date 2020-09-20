@@ -13,6 +13,12 @@ let
       sha256 = "0pj29k5pm1p7f987x9rjd0pks552fxvjv72dscxsk84svl132s0f";
     }
     {
+      name="cmake-tools";
+      publisher="ms-vscode";
+      version="1.4.2";
+      sha256 = "1azjqd5w14q1h8z6cib4lwyk3h9hl1lzzrnc150inn0c7v195qcl";
+    }
+    {
       name="CMake";
       publisher="twxs";
       version="0.0.17";
