@@ -2,6 +2,7 @@
   programs.alacritty = {
     enable = true;
     settings = {
+      shell = "ion";
       colors = {
         primary = {
           background = "0x1b2b34";

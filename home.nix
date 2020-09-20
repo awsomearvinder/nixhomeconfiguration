@@ -44,14 +44,14 @@ with lib;
     home.homeDirectory = builtins.getEnv "HOME";
 
     home.packages = with pkgs; [
+      xournalpp
       pulseeffects
       spotify
-      xournalpp
       discord
       element-desktop
       alacritty
+      ion
       git
-      pulseeffects
       sway 
       fzf # this is required for nvim's coc-fzf. not detected as a dep but /shrug
       ytop # top sucks.
