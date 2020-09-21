@@ -76,14 +76,6 @@
           #{ command = "dropbox start"; always = true; }
           { command = "mako"; always = true; }
         ];
-        input = {
-          "2:7:SynPS/2_Synaptics_TouchPad" = {
-            natural_scroll = "enabled";
-          };
-          "1739:0:Synaptics_TM2668-002" = {
-            natural_scroll = "enabled";
-          };
-        };
       };
     };
   }
