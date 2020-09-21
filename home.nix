@@ -50,7 +50,9 @@ with lib;
       element-desktop
       alacritty
       ion
+      exa
       git
+      ripgrep
       firefox-wayland
       sway 
       fzf # this is required for nvim's coc-fzf. not detected as a dep but /shrug
