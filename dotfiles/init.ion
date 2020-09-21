@@ -1,0 +1,2 @@
+alias ls = exa -a 
+alias lsl = exa -al
