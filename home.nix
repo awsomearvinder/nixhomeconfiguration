@@ -2,7 +2,6 @@
 with lib;
 {
   imports = [
-    ./applications/firefox.nix
 	./applications/git.nix
     ./applications/vscode.nix
     ./applications/sway.nix
@@ -52,6 +51,7 @@ with lib;
       alacritty
       ion
       git
+      firefox-wayland
       sway 
       fzf # this is required for nvim's coc-fzf. not detected as a dep but /shrug
       ytop # top sucks.
