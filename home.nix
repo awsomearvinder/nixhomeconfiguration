@@ -46,6 +46,8 @@ with lib;
     home.packages = with pkgs; [
       xournalpp
       pulseeffects
+      #until I setup something with pactl.
+      pavucontrol
       spotify
       discord
       element-desktop
@@ -56,9 +58,9 @@ with lib;
       ripgrep
       firefox-wayland
       sway 
+      mako #notification daemon.
       fzf # this is required for nvim's coc-fzf. not detected as a dep but /shrug
       ytop # top sucks.
-      mako #notification daemon.
     ];
 
     # This value determines the Home Manager release that your
