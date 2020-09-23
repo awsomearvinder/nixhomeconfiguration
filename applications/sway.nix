@@ -41,9 +41,14 @@
           };
         };
         fonts = [ "Source Code Pro 9" ];
+        output = {
+          "*" = {
+            bg = "\"${dots + "/wallpaper.png"}\" fill";
+          };
+        };
         gaps = {
-          inner = 1;
-          outer = 1;
+          inner = 5;
+          outer = 10;
           bottom = 0;
           smartBorders = "on";
         };
@@ -75,6 +80,7 @@
         startup = [
           #{ command = "dropbox start"; always = true; }
           { command = "mako"; always = true; }
+          { command = "waybar"; always = true; }
         ];
       };
     };

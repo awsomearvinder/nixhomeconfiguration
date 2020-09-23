@@ -8,6 +8,7 @@ with lib;
     ./applications/mako.nix
     ./applications/alacritty.nix
     ./applications/ion.nix
+    ./applications/waybar.nix
   ];
 
 
@@ -44,6 +45,7 @@ with lib;
     home.homeDirectory = builtins.getEnv "HOME";
 
     home.packages = with pkgs; [
+      font-awesome
       xournalpp
       pulseeffects
       #until I setup something with pactl.
@@ -58,6 +60,7 @@ with lib;
       ripgrep
       firefox-wayland
       sway 
+      waybar
       mako #notification daemon.
       fzf # this is required for nvim's coc-fzf. not detected as a dep but /shrug
       ytop # top sucks.
