@@ -53,6 +53,12 @@
             res = "1920x1080";
           };
         };
+        input = {
+          "1133:16489:Logitech_MX_Master_2S" = {
+            #disable mouse acceleration
+            pointer_accel = "-1";
+          };
+        };
         gaps = {
           inner = 5;
           outer = 10;
