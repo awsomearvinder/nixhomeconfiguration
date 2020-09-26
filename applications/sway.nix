@@ -6,7 +6,6 @@
   {
     wayland.windowManager.sway = {
       enable = true;
-      package = null;
 
       config = {
         bars = [];

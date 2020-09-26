@@ -1,5 +1,8 @@
 { config, lib, pkgs, ... } : 
 with lib;
+let 
+  unstable = import<unstable> {};
+in
 {
   imports = [
 	./applications/git.nix
@@ -59,7 +62,6 @@ with lib;
       git
       ripgrep
       firefox-wayland
-      sway 
       waybar
       mako #notification daemon.
       fzf # this is required for nvim's coc-fzf. not detected as a dep but /shrug
