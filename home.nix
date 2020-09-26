@@ -56,6 +56,7 @@ in {
       fzf # this is required for nvim's coc-fzf. not detected as a dep but /shrug
       ytop # top sucks.
       nixfmt
+      latest.rustChannels.stable.rust
     ];
 
     # This value determines the Home Manager release that your
