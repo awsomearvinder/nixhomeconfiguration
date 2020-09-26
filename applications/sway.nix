@@ -44,6 +44,14 @@
           "*" = {
             bg = "\"${dots + "/wallpaper.png"}\" fill";
           };
+          "eDP-1" = {
+            pos = "0 0";
+            res = "1920x1080";
+          };
+         "HDMI-A-1" = {
+            pos = "1920 0";
+            res = "1920x1080";
+          };
         };
         gaps = {
           inner = 5;
