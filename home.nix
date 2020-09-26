@@ -1,11 +1,9 @@
-{ config, lib, pkgs, ... } : 
+{ config, lib, pkgs, ... }:
 with lib;
-let 
-  unstable = import<unstable> {};
-in
-{
+let unstable = import <unstable> { };
+in {
   imports = [
-	./applications/git.nix
+    ./applications/git.nix
     ./applications/vscode.nix
     ./applications/sway.nix
     ./applications/mako.nix
@@ -14,23 +12,14 @@ in
     ./applications/waybar.nix
   ];
 
-
   options = {
-    dots = mkOption {
-      type = types.path;
-    };
-    modifier = mkOption {
-      type = types.str;
-    };
-    scripts = mkOption {
-      type = types.path;
-    };
+    dots = mkOption { type = types.path; };
+    modifier = mkOption { type = types.str; };
+    scripts = mkOption { type = types.path; };
   };
 
   config = {
-    nixpkgs.config = {
-      allowUnfree=true;
-    };
+    nixpkgs.config = { allowUnfree = true; };
 
     dots = ./dotfiles;
     modifier = "Mod4";
@@ -63,7 +52,7 @@ in
       ripgrep
       firefox-wayland
       waybar
-      mako #notification daemon.
+      mako # notification daemon.
       fzf # this is required for nvim's coc-fzf. not detected as a dep but /shrug
       ytop # top sucks.
       nixfmt
