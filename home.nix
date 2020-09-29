@@ -51,12 +51,14 @@ in {
       git
       ripgrep
       firefox-wayland
+      zathura
       waybar
       mako # notification daemon.
       fzf # this is required for nvim's coc-fzf. not detected as a dep but /shrug
       ytop # top sucks.
       nixfmt
       latest.rustChannels.stable.rust
+      texlive.combined.scheme-full
     ];
 
     # This value determines the Home Manager release that your

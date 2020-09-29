@@ -13,6 +13,7 @@ pkgs: {
     base16-vim
     typescript-vim
     vim-nix
+    vimtex
     #vim-jsx-typescript
     #vim-floaterm
   ];
@@ -92,5 +93,6 @@ pkgs: {
     nnoremap <c-t> :FloatermToggle <CR>
     nnoremap <silent> ; :call fzf#vim#files('.', {'options': '--prompt ""'})<CR> nnoremap <silent> <leader>b :Buffers<CR>
     noremap <c-c> <esc>
+    let g:vimtex_view_general_viewer = 'zathura'
   '';
 }
