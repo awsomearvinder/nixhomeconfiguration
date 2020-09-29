@@ -9,6 +9,12 @@ let
       vscodevim.vim
     ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
       {
+        name = "pretty-formatter";
+        publisher = "mblode";
+        version = "0.2.2";
+        sha256 = "1kdcxdvccf1fhg8lr8zwi5v7l2ja02p1kxq871jgakq2y42fclpy";
+      }
+      {
         name = "rust-analyzer";
         publisher = "matklad";
         version = "0.2.297";
