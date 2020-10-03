@@ -37,28 +37,47 @@ in {
     home.homeDirectory = builtins.getEnv "HOME";
 
     home.packages = with pkgs; [
+      #general
       xournalpp
+
+      #Audio
       pulseeffects
       #until I setup something with pactl.
       pavucontrol
       spotify
+
+      #chat clients
       discord
       element-desktop
+
+      #CLI stuff.
       alacritty
+      konsole
       ion
       exa
       git
       ripgrep
       firefox-wayland
       zathura
-      waybar
-      nodejs
-      mako # notification daemon.
-      fzf # this is required for nvim's coc-fzf. not detected as a dep but /shrug
       ytop # top sucks.
+
+      #Sway stuff. (Should place sway here when sway supports null package)
+      waybar
+      dolphin
+      breeze-icons
+      mako # notification daemon.
+      grim
+      slurp
+      wl-clipboard
+
+      fzf # this is required for nvim's coc-fzf. not detected as a dep but /shrug
+
+      #development stuff
       nixfmt
+      nodejs
       latest.rustChannels.stable.rust
       texlive.combined.scheme-full
+      gdb
 
       #fonts
       font-awesome
