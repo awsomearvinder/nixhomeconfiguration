@@ -37,7 +37,6 @@ in {
     home.homeDirectory = builtins.getEnv "HOME";
 
     home.packages = with pkgs; [
-      font-awesome
       xournalpp
       pulseeffects
       #until I setup something with pactl.
@@ -60,7 +59,14 @@ in {
       nixfmt
       latest.rustChannels.stable.rust
       texlive.combined.scheme-full
+
+      #fonts
+      font-awesome
+      fira-code
+
     ];
+
+    fonts.fontconfig = { enable = true; };
 
     # This value determines the Home Manager release that your
     # configuration is compatible with. This helps avoid breakage

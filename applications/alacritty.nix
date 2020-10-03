@@ -3,6 +3,13 @@
     enable = true;
     settings = {
       shell = "ion";
+      font = {
+        size = 12;
+        normal = {
+          family = "Fira Code";
+          style = "Mono";
+        };
+      };
       colors = {
         primary = {
           background = "0x1b2b34";
