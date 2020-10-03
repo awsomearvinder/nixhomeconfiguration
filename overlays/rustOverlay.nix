@@ -6,79 +6,81 @@ self: super:
 let
   fromTOML =
     # nix 2.1 added the fromTOML builtin
-    if builtins ? fromTOML
-    then builtins.fromTOML
-    else (import ./lib/parseTOML.nix).fromTOML;
+    if builtins ? fromTOML then
+      builtins.fromTOML
+    else
+      (import ./lib/parseTOML.nix).fromTOML;
 
   # Function that takes in a file, and 
   # returns an empty set if file is null, or
   # returns a set with channel and date.
-  parseRustToolchain = file: with builtins;
+  parseRustToolchain = file:
+    with builtins;
     if file == null then
-      {}
+      { }
     else
-    let
-      # matches toolchain descriptions of type "nightly" or "nightly-2020-01-01"
-      channel_by_name = match "([a-z]+)(-([0-9]{4}-[0-9]{2}-[0-9]{2}))?.*" (readFile file);
-      # matches toolchain descriptions of type "1.34.0" or "1.34.0-2019-04-10"
-      channel_by_version = match "([0-9]+\\.[0-9]+\\.[0-9]+)(-([0-9]{4}-[0-9]{2}-[0-9]{2}))?.*" (readFile file);
-    in
-      (x: { channel = head x; date = (head (tail (tail x))); }) (
-        if channel_by_name != null then
-          channel_by_name
-        else
-          channel_by_version
-        );
+      let
+        # matches toolchain descriptions of type "nightly" or "nightly-2020-01-01"
+        channel_by_name =
+          match "([a-z]+)(-([0-9]{4}-[0-9]{2}-[0-9]{2}))?.*" (readFile file);
+        # matches toolchain descriptions of type "1.34.0" or "1.34.0-2019-04-10"
+        channel_by_version =
+          match "([0-9]+\\.[0-9]+\\.[0-9]+)(-([0-9]{4}-[0-9]{2}-[0-9]{2}))?.*"
+          (readFile file);
+      in (x: {
+        channel = head x;
+        date = (head (tail (tail x)));
+      })
+      (if channel_by_name != null then channel_by_name else channel_by_version);
 
   # See https://github.com/rust-lang-nursery/rustup.rs/blob/master/src/dist/src/dist.rs
   defaultDistRoot = "https://static.rust-lang.org";
-  manifest_v1_url = {
-    dist_root ? defaultDistRoot + "/dist",
-    date ? null,
-    staging ? false,
+  manifest_v1_url = { dist_root ? defaultDistRoot + "/dist", date ? null
+    , staging ? false,
     # A channel can be "nightly", "beta", "stable", or "\d{1}\.\d{1,3}\.\d{1,2}".
     channel ? "nightly",
     # A path that points to a rust-toolchain file, typically ./rust-toolchain.
-    rustToolchain ? null,
-    ...
-  }:
-    let args = { inherit channel date; } // parseRustToolchain rustToolchain; in
-    let inherit (args) date channel; in
-    if date == null && staging == false
-    then "${dist_root}/channel-rust-${channel}"
-    else if date != null && staging == false
-    then "${dist_root}/${date}/channel-rust-${channel}"
-    else if date == null && staging == true
-    then "${dist_root}/staging/channel-rust-${channel}"
-    else throw "not a real-world case";
+    rustToolchain ? null, ... }:
+    let args = { inherit channel date; } // parseRustToolchain rustToolchain;
+    in let inherit (args) date channel;
+    in if date == null && staging == false then
+      "${dist_root}/channel-rust-${channel}"
+    else if date != null && staging == false then
+      "${dist_root}/${date}/channel-rust-${channel}"
+    else if date == null && staging == true then
+      "${dist_root}/staging/channel-rust-${channel}"
+    else
+      throw "not a real-world case";
 
   manifest_v2_url = args: (manifest_v1_url args) + ".toml";
 
   getComponentsWithFixedPlatform = pkgs: pkgname: stdenv:
     let
       pkg = pkgs.${pkgname};
-      srcInfo = pkg.target.${super.rust.toRustTarget stdenv.targetPlatform} or pkg.target."*";
-      components = srcInfo.components or [];
-      componentNamesList =
-        builtins.map (pkg: pkg.pkg) (builtins.filter (pkg: (pkg.target != "*")) components);
-    in
-      componentNamesList;
+      srcInfo = pkg.target.${
+          super.rust.toRustTarget stdenv.targetPlatform
+        } or pkg.target."*";
+      components = srcInfo.components or [ ];
+      componentNamesList = builtins.map (pkg: pkg.pkg)
+        (builtins.filter (pkg: (pkg.target != "*")) components);
+    in componentNamesList;
 
   getExtensions = pkgs: pkgname: stdenv:
     let
       inherit (super.lib) unique;
       pkg = pkgs.${pkgname};
-      srcInfo = pkg.target.${super.rust.toRustTarget stdenv.targetPlatform} or pkg.target."*";
-      extensions = srcInfo.extensions or [];
+      srcInfo = pkg.target.${
+          super.rust.toRustTarget stdenv.targetPlatform
+        } or pkg.target."*";
+      extensions = srcInfo.extensions or [ ];
       extensionNamesList = unique (builtins.map (pkg: pkg.pkg) extensions);
-    in
-      extensionNamesList;
+    in extensionNamesList;
 
-  hasTarget = pkgs: pkgname: target:
-    pkgs ? ${pkgname}.target.${target};
+  hasTarget = pkgs: pkgname: target: pkgs ? ${pkgname}.target.${target};
 
   getTuples = pkgs: name: targets:
-    builtins.map (target: { inherit name target; }) (builtins.filter (target: hasTarget pkgs name target) targets);
+    builtins.map (target: { inherit name target; })
+    (builtins.filter (target: hasTarget pkgs name target) targets);
 
   # In the manifest, a package might have different components which are bundled with it, as opposed as the extensions which can be added.
   # By default, a package will include the components for the same architecture, and offers them as extensions for other architectures.
@@ -92,16 +94,19 @@ let
       components = getComponentsWithFixedPlatform pkgs pkgname stdenv;
       extensions = getExtensions pkgs pkgname stdenv;
       compExtIntersect = intersectLists components extensions;
-      tuples = (getTuples pkgs pkgname pkgTargets) ++ (builtins.map (name: getTuples pkgs name compTargets) compExtIntersect);
-    in
-      tuples;
+      tuples = (getTuples pkgs pkgname pkgTargets)
+        ++ (builtins.map (name: getTuples pkgs name compTargets)
+          compExtIntersect);
+    in tuples;
 
   getFetchUrl = pkgs: pkgname: target: stdenv: fetchurl:
     let
       pkg = pkgs.${pkgname};
       srcInfo = pkg.target.${target};
-    in
-      (super.fetchurl { url = srcInfo.xz_url; sha256 = srcInfo.xz_hash; });
+    in (super.fetchurl {
+      url = srcInfo.xz_url;
+      sha256 = srcInfo.xz_hash;
+    });
 
   checkMissingExtensions = pkgs: pkgname: stdenv: extensions:
     let
@@ -109,31 +114,52 @@ let
       inherit (super.lib) concatStringsSep subtractLists;
       availableExtensions = getExtensions pkgs pkgname stdenv;
       missingExtensions = subtractLists availableExtensions extensions;
-      extensionsToInstall =
-        if missingExtensions == [] then extensions else throw ''
-          While compiling ${pkgname}: the extension ${head missingExtensions} is not available.
+      extensionsToInstall = if missingExtensions == [ ] then
+        extensions
+      else
+        throw ''
+          While compiling ${pkgname}: the extension ${
+            head missingExtensions
+          } is not available.
           Select extensions from the following list:
           ${concatStringsSep "\n" availableExtensions}'';
-    in
-      extensionsToInstall;
+    in extensionsToInstall;
 
-  getComponents = pkgs: pkgname: targets: extensions: targetExtensions: stdenv: fetchurl:
+  getComponents =
+    pkgs: pkgname: targets: extensions: targetExtensions: stdenv: fetchurl:
     let
       inherit (builtins) head map;
       inherit (super.lib) flatten remove subtractLists unique;
-      targetExtensionsToInstall = checkMissingExtensions pkgs pkgname stdenv targetExtensions;
-      extensionsToInstall = checkMissingExtensions pkgs pkgname stdenv extensions;
-      hostTargets = [ "*" (super.rust.toRustTarget stdenv.hostPlatform) (super.rust.toRustTarget stdenv.targetPlatform) ];
-      pkgTuples = flatten (getTargetPkgTuples pkgs pkgname hostTargets targets stdenv);
-      extensionTuples = flatten (map (name: getTargetPkgTuples pkgs name hostTargets targets stdenv) extensionsToInstall);
-      targetExtensionTuples = flatten (map (name: getTargetPkgTuples pkgs name targets targets stdenv) targetExtensionsToInstall);
+      targetExtensionsToInstall =
+        checkMissingExtensions pkgs pkgname stdenv targetExtensions;
+      extensionsToInstall =
+        checkMissingExtensions pkgs pkgname stdenv extensions;
+      hostTargets = [
+        "*"
+        (super.rust.toRustTarget stdenv.hostPlatform)
+        (super.rust.toRustTarget stdenv.targetPlatform)
+      ];
+      pkgTuples =
+        flatten (getTargetPkgTuples pkgs pkgname hostTargets targets stdenv);
+      extensionTuples = flatten
+        (map (name: getTargetPkgTuples pkgs name hostTargets targets stdenv)
+          extensionsToInstall);
+      targetExtensionTuples = flatten
+        (map (name: getTargetPkgTuples pkgs name targets targets stdenv)
+          targetExtensionsToInstall);
       pkgsTuples = pkgTuples ++ extensionTuples ++ targetExtensionTuples;
-      missingTargets = subtractLists (map (tuple: tuple.target) pkgsTuples) (remove "*" targets);
-      pkgsTuplesToInstall =
-        if missingTargets == [] then pkgsTuples else throw ''
-          While compiling ${pkgname}: the target ${head missingTargets} is not available for any package.'';
-    in
-      map (tuple: { name = tuple.name; src = (getFetchUrl pkgs tuple.name tuple.target stdenv fetchurl); }) pkgsTuplesToInstall;
+      missingTargets = subtractLists (map (tuple: tuple.target) pkgsTuples)
+        (remove "*" targets);
+      pkgsTuplesToInstall = if missingTargets == [ ] then
+        pkgsTuples
+      else
+        throw "While compiling ${pkgname}: the target ${
+          head missingTargets
+        } is not available for any package.";
+    in map (tuple: {
+      name = tuple.name;
+      src = (getFetchUrl pkgs tuple.name tuple.target stdenv fetchurl);
+    }) pkgsTuplesToInstall;
 
   installComponents = stdenv: namesAndSrcs:
     let
@@ -157,7 +183,7 @@ let
               [ -e "$dir" ] || return 0
               header "Patching interpreter of ELF executables and libraries in $dir"
               local i
-              while IFS= read -r -d ''$'\0' i; do
+              while IFS= read -r -d $'\0' i; do
                 if [[ "$i" =~ .build-id ]]; then continue; fi
                 if ! isELF "$i"; then continue; fi
                 echo "setting interpreter of $i"
@@ -166,12 +192,16 @@ let
                   # Handle executables
                   patchelf \
                     --set-interpreter "$(cat $NIX_CC/nix-support/dynamic-linker)" \
-                    --set-rpath "${super.lib.makeLibraryPath [ self.zlib ]}:$out/lib" \
+                    --set-rpath "${
+                      super.lib.makeLibraryPath [ self.zlib ]
+                    }:$out/lib" \
                     "$i" || true
                 else
                   # Handle libraries
                   patchelf \
-                    --set-rpath "${super.lib.makeLibraryPath [ self.zlib ]}:$out/lib" \
+                    --set-rpath "${
+                      super.lib.makeLibraryPath [ self.zlib ]
+                    }:$out/lib" \
                     "$i" || true
                 fi
               done < <(find "$dir" -type f -print0)
@@ -217,8 +247,8 @@ let
 
           dontStrip = true;
         };
-    in
-      map (nameAndSrc: (installComponent nameAndSrc.name nameAndSrc.src)) namesAndSrcs;
+    in map (nameAndSrc: (installComponent nameAndSrc.name nameAndSrc.src))
+    namesAndSrcs;
 
   # Manifest files are organized as follow:
   # { date = "2017-03-03";
@@ -248,82 +278,93 @@ let
   #                       All extensions in this list will be installed for the target architectures.
   #                       *Attention* If you want to install an extension like rust-src, that has no fixed architecture (arch *),
   #                       you will need to specify this extension in the extensions options or it will not be installed!
-  fromManifestFile = manifest: { stdenv, fetchurl, patchelf }:
+  fromManifestFile = manifest:
+    { stdenv, fetchurl, patchelf }:
     let
       inherit (builtins) elemAt;
       inherit (super) makeOverridable;
       inherit (super.lib) flip mapAttrs;
       pkgs = fromTOML (builtins.readFile manifest);
-    in
-    flip mapAttrs pkgs.pkg (name: pkg:
-      makeOverridable ({extensions, targets, targetExtensions}:
+    in flip mapAttrs pkgs.pkg (name: pkg:
+      makeOverridable ({ extensions, targets, targetExtensions }:
         let
           version' = builtins.match "([^ ]*) [(]([^ ]*) ([^ ]*)[)]" pkg.version;
-          version = "${elemAt version' 0}-${elemAt version' 2}-${elemAt version' 1}";
-          namesAndSrcs = getComponents pkgs.pkg name targets extensions targetExtensions stdenv fetchurl;
+          version =
+            "${elemAt version' 0}-${elemAt version' 2}-${elemAt version' 1}";
+          namesAndSrcs =
+            getComponents pkgs.pkg name targets extensions targetExtensions
+            stdenv fetchurl;
           components = installComponents stdenv namesAndSrcs;
-          componentsOuts = builtins.map (comp: (super.lib.strings.escapeNixString (super.lib.getOutput "out" comp))) components;
-        in
-          super.pkgs.symlinkJoin {
-            name = name + "-" + version;
-            paths = components;
-            postBuild = ''
-              # If rustc or rustdoc is in the derivation, we need to copy their
-              # executable into the final derivation. This is required
-              # for making them find the correct SYSROOT.
-              for target in $out/bin/{rustc,rustdoc}; do
-                if [ -e $target ]; then
-                  cp --remove-destination "$(realpath -e $target)" $target
-                fi
-              done
-            '';
+          componentsOuts = builtins.map (comp:
+            (super.lib.strings.escapeNixString
+              (super.lib.getOutput "out" comp))) components;
+        in super.pkgs.symlinkJoin {
+          name = name + "-" + version;
+          paths = components;
+          postBuild = ''
+            # If rustc or rustdoc is in the derivation, we need to copy their
+            # executable into the final derivation. This is required
+            # for making them find the correct SYSROOT.
+            for target in $out/bin/{rustc,rustdoc}; do
+              if [ -e $target ]; then
+                cp --remove-destination "$(realpath -e $target)" $target
+              fi
+            done
+          '';
 
-            # Add the compiler as part of the propagated build inputs in order
-            # to run:
-            #
-            #    $ nix-shell -p rustChannels.stable.rust
-            #
-            # And get a fully working Rust compiler, with the stdenv linker.
-            propagatedBuildInputs = [ stdenv.cc ];
+          # Add the compiler as part of the propagated build inputs in order
+          # to run:
+          #
+          #    $ nix-shell -p rustChannels.stable.rust
+          #
+          # And get a fully working Rust compiler, with the stdenv linker.
+          propagatedBuildInputs = [ stdenv.cc ];
 
-            meta.platforms = stdenv.lib.platforms.all;
-          }
-      ) { extensions = []; targets = []; targetExtensions = []; }
-    );
+          meta.platforms = stdenv.lib.platforms.all;
+        }) {
+          extensions = [ ];
+          targets = [ ];
+          targetExtensions = [ ];
+        });
 
-  fromManifest = sha256: manifest: { stdenv, fetchurl, patchelf }:
-    let manifestFile = if sha256 == null then builtins.fetchurl manifest else fetchurl { url = manifest; inherit sha256; };
+  fromManifest = sha256: manifest:
+    { stdenv, fetchurl, patchelf }:
+    let
+      manifestFile = if sha256 == null then
+        builtins.fetchurl manifest
+      else
+        fetchurl {
+          url = manifest;
+          inherit sha256;
+        };
     in fromManifestFile manifestFile { inherit stdenv fetchurl patchelf; };
 
-in
-
-rec {
+in rec {
   lib = super.lib // {
     inherit fromTOML;
-    rustLib = {
-      inherit fromManifest fromManifestFile manifest_v2_url;
-    };
+    rustLib = { inherit fromManifest fromManifestFile manifest_v2_url; };
   };
 
-  rustChannelOf = { sha256 ? null, ... } @ manifest_args: fromManifest
-    sha256 (manifest_v2_url manifest_args)
-    { inherit (self) stdenv fetchurl patchelf; }
-    ;
+  rustChannelOf = { sha256 ? null, ... }@manifest_args:
+    fromManifest sha256 (manifest_v2_url manifest_args) {
+      inherit (self) stdenv fetchurl patchelf;
+    };
 
   # Set of packages which are automagically updated. Do not rely on these for
   # reproducible builds.
-  latest = (super.latest or {}) // {
+  latest = (super.latest or { }) // {
     rustChannels = {
       nightly = rustChannelOf { channel = "nightly"; };
-      beta    = rustChannelOf { channel = "beta"; };
-      stable  = rustChannelOf { channel = "stable"; };
+      beta = rustChannelOf { channel = "beta"; };
+      stable = rustChannelOf { channel = "stable"; };
     };
   };
 
   # Helper builder
   rustChannelOfTargets = channel: date: targets:
-    (rustChannelOf { inherit channel date; })
-      .rust.override { inherit targets; };
+    (rustChannelOf { inherit channel date; }).rust.override {
+      inherit targets;
+    };
 
   # For backward compatibility
   rustChannels = latest.rustChannels;
