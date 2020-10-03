@@ -65,21 +65,9 @@ in {
       terminal = "alacritty";
       workspaceAutoBackAndForth = true;
       keybindings = lib.mkOptionDefault {
-        "${modifier}+n" = "exec caja";
-        "${modifier}+m" = ''exec "GDK_BACKEND=x11 thunderbird"'';
-        "${modifier}+c" = "exec firefox";
-        #"${modifier}+p" = "exec ${scripts + "/take_screenshot"}";
-        #"${modifier}+Shift+p" = "exec ${scripts + "/take_screenshot"} full";
-        #"XF86MonBrightnessUp" = "exec \"brillo -A 1\"";
-        #"XF86MonBrightnessDown" = "exec \"brillo -U 1\"";
-        #"XF86AudioLowerVolume" = "exec \"pactl set-sink-volume 0 -5%\"";
-        #"XF86AudioRaiseVolume" = "exec \"pactl set-sink-volume 0 +5%\"";
-        #"XF86AudioPlay" = "exec \"playerctl play\"";
-        #"XF86AudioPause" = "exec \"playerctl pause\"";
-        #"XF86AudioNext" = "exec \"playerctl next\"";
-        #"XF86AudioPrev" = "exec \"playerctl previous\"";
-        #"${modifier}+x" = "exec networkmanager_dmenu";
-        #"${modifier}+Ctrl+r" = "exec reboot";
+        "${modifier}+p" = "exec grim -g $(slurp) - | wl-copy";
+        "${modifier}+Shift+p" =
+          "exec grim -o $(swaymsg --pretty -t get_outputs | awk '/focused/ {print $2}') - | wl-copy";
         "${modifier}+Ctrl+d" = ''exec "shutdown -h now"'';
       };
       window = {
