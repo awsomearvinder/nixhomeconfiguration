@@ -31,6 +31,9 @@ in {
     #This is kinda gross, I know.
     programs.neovim = import ./applications/neovim.nix pkgs;
 
+    #enable these
+    programs.firefox.enable = true;
+
     # Home Manager needs a bit of information about you and the
     # paths it should manage.
     home.username = builtins.getEnv "USER";
@@ -39,6 +42,7 @@ in {
     home.packages = with pkgs; [
       #general
       xournalpp
+      #firefox-wayland
 
       #Audio
       pulseeffects
@@ -57,7 +61,6 @@ in {
       exa
       git
       ripgrep
-      firefox-wayland
       zathura
       ytop # top sucks.
 
@@ -82,7 +85,6 @@ in {
       #fonts
       font-awesome
       fira-code
-
     ];
 
     fonts.fontconfig = { enable = true; };
