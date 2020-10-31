@@ -1,12 +1,14 @@
 pkgs: {
   enable = true;
+  #defaultEditor = true;
   vimAlias = true;
+  viAlias = true;
   withPython = true;
   withNodeJs = true;
-  plugins = with pkgs.vimPlugins; [
+  withRuby = true;
+  /*plugins = with pkgs.vimPlugins; [
     coc-nvim
     auto-pairs
-    lightline-vim
     vim-highlightedyank
     vim-rooter
     fzf-vim
@@ -14,10 +16,29 @@ pkgs: {
     typescript-vim
     vim-nix
     vimtex
+    vim-airline
     #vim-jsx-typescript
     #vim-floaterm
-  ];
-  extraConfig = ''
+  ];*/
+  configure = {
+    packages.myVimPackage = with pkgs.vimPlugins; {
+      start = [
+        coc-nvim
+        auto-pairs
+        vim-highlightedyank
+        vim-rooter
+        fzf-vim
+        base16-vim
+        typescript-vim
+        vim-nix
+        vimtex
+        vim-airline
+        vim-sensible
+      ];
+      opt = [];
+    };
+  };
+  /*extraConfig = ''
     set nocompatible
     set shell=/bin/bash
     set hidden
@@ -94,5 +115,5 @@ pkgs: {
     nnoremap <silent> ; :call fzf#vim#files('.', {'options': '--prompt ""'})<CR> nnoremap <silent> <leader>b :Buffers<CR>
     noremap <c-c> <esc>
     let g:vimtex_view_general_viewer = 'zathura'
-  '';
+  '';*/
 }
