@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
-with lib;
-let unstable = import <unstable> { };
+  with lib;
+  let unstable = import <unstable> { };
 in {
   imports = [
     ./applications/git.nix
