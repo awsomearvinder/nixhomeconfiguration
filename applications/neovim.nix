@@ -14,7 +14,6 @@ pkgs: {
        fzf-vim
        base16-vim
        typescript-vim
-       vim-nix
        vimtex
        vim-airline
        #vim-jsx-typescript
@@ -23,6 +22,7 @@ pkgs: {
   */
   configure = {
     packages.myVimPackage = with pkgs.vimPlugins; {
+      #need to setup ion-vim
       start = [
         coc-nvim
         auto-pairs
@@ -30,16 +30,70 @@ pkgs: {
         vim-rooter
         fzf-vim
         base16-vim
-        typescript-vim
-        vim-nix
+        yats-vim
+        vim-gitgutter
         vimtex
         vim-airline
         vim-sensible
+        vim-nix
       ];
       opt = [ ];
     };
     customRC = ''
+      set number relativenumber 
+      set showcmd
+      set updatetime=300
+      set splitbelow
+      set tabstop=4
+      set shiftwidth=4
+      set expandtab
+
+      " javascript and typescript use tabs instead of spaces.
+      autocmd Filetype tsx setlocal noexpandtab
+      autocmd Filetype jsx setlocal noexpandtab
+      autocmd Filetype js setlocal noexpandtab
+      autocmd Filetype ts setlocal noexpandtab
+
       let g:tex_flavor = 'latex'
+      let g:vimtex_view_general_viewer = 'zathura'
+
+      let g:coc_global_extensions = [ 'coc-omnisharp', 'coc-rust-analyzer', 'coc-go', 'coc-actions', 'coc-emmet', 'coc-css', 'coc-tsserver', 'coc-prettier', 'coc-html', 'coc-eslint']
+
+      function! OpenTerminal()
+        split term://ion
+        resize 10
+      endfunction
+      nnoremap <c-n> :call OpenTerminal()<CR>
+
+      " git stuff.
+      let g:gitgutter_sign_added = '✚'
+      let g:gitgutter_sign_modified = '✹'
+      let g:gitgutter_sign_removed = '-'
+      let g:gitgutter_sign_removed_first_line = '-'
+      let g:gitgutter_sign_modified_removed = '-'
+
+      " use alt+hjkl to move between split/vsplit panels
+      tnoremap <A-h> <C-\><C-n><C-w>h
+      tnoremap <A-j> <C-\><C-n><C-w>j
+      tnoremap <A-k> <C-\><C-n><C-w>k
+      tnoremap <A-l> <C-\><C-n><C-w>l
+      nnoremap <A-h> <C-w>h
+      nnoremap <A-j> <C-w>j
+      nnoremap <A-k> <C-w>k
+      nnoremap <A-l> <C-w>l
+
+      inoremap <silent><expr><c-space> coc#refresh()
+
+      nmap <silent> gd <Plug>(coc-definition)
+      nmap <silent> gy <Plug>(coc-type-definition)
+      nmap <silent> gi <Plug>(coc-implementation)
+      nmap <silent> gr <Plug>(coc-references)
+
+      autocmd BufWritePre * :call CocAction('format')
+
+       "BASE16 themeing stuff
+       let base16colorspace=256  " Access colors present in 256 colorspace
+       colorscheme $BASE16_THEME
     '';
   };
   /* extraConfig = ''

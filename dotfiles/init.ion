@@ -1,3 +1,15 @@
 alias ls = exa -a 
 alias lsl = exa -al
+let active_theme = "base16-oceanicnext"
 keybindings vi
+
+#status -i is currently broken ( to check if in interactive mode )
+#fixed upstream a month back, but not updated to a new release.
+#need to make a nix package with new release too (and upstream to nixpkgs?)
+#if status -i 
+    let home: str = "${env::HOME}"
+    export BASE16_SHELL = "$home/.config/base16-shell"
+    export BASE16_THEME = "$active_theme"
+    # setup base16 oceanicnext theme.
+    cat "${BASE16_SHELL}/scripts/$active_theme.sh" | sh
+#end
