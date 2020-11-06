@@ -42,10 +42,10 @@ in {
     home.packages = with pkgs; [
       #general
       xournalpp
-      #firefox-wayland
 
       #Audio
       pulseeffects
+
       #until I setup something with pactl.
       pavucontrol
       spotify
@@ -57,6 +57,8 @@ in {
       #CLI stuff.
       alacritty
       konsole
+      #this is making me want to cry, I can't make an overlay with a new version
+      #without a stack overflow for some reason.
       ion
       exa
       git
@@ -78,6 +80,7 @@ in {
       #development stuff
       nixfmt
       nodejs
+      unstable.deno
       latest.rustChannels.stable.rust
       texlive.combined.scheme-full
       gdb

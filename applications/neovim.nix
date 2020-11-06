@@ -57,7 +57,7 @@ pkgs: {
       let g:tex_flavor = 'latex'
       let g:vimtex_view_general_viewer = 'zathura'
 
-      let g:coc_global_extensions = [ 'coc-omnisharp', 'coc-rust-analyzer', 'coc-go', 'coc-actions', 'coc-emmet', 'coc-css', 'coc-tsserver', 'coc-prettier', 'coc-html', 'coc-eslint']
+      let g:coc_global_extensions = [ 'coc-omnisharp', 'coc-rust-analyzer', 'coc-go', 'coc-actions', 'coc-emmet', 'coc-css', 'coc-tsserver', 'coc-prettier', 'coc-deno','coc-html', 'coc-eslint']
 
       function! OpenTerminal()
         split term://ion
