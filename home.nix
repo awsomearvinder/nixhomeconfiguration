@@ -81,6 +81,7 @@ in {
       nixfmt
       nodejs
       unstable.deno
+      python3
       (latest.rustChannels.stable.rust.override { extensions = ["rust-src"]; })
       texlive.combined.scheme-full
       gdb
