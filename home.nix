@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
   with lib;
-  let unstable = import <unstable> { };
+  let unstable = import <unstable> { configuration = { allowUnfree = true; }; };
 in {
   imports = [
     ./applications/git.nix
@@ -93,6 +93,8 @@ in {
       (nerdfonts.override { fonts = ["FiraCode"]; })
 
       starship
+      #osu - need I say more?
+      osu-lazer
     ];
 
     fonts.fontconfig = { enable = true; };
