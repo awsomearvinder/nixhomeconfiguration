@@ -13,3 +13,5 @@ keybindings vi
     # setup base16 oceanicnext theme.
     cat "${env::BASE16_SHELL}/scripts/$active_theme.sh" | sh
 #end
+
+eval $(starship init ion)

@@ -10,6 +10,7 @@ in {
     ./applications/alacritty.nix
     ./applications/ion.nix
     ./applications/waybar.nix
+    ./applications/starship.nix
   ];
 
   options = {
@@ -89,6 +90,9 @@ in {
       #fonts
       font-awesome
       fira-code
+      (nerdfonts.override { fonts = ["FiraCode"]; })
+
+      starship
     ];
 
     fonts.fontconfig = { enable = true; };

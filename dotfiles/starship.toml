@@ -1,0 +1,93 @@
+add_newline = false
+
+[line_break]
+disabled = true
+
+[cmd_duration]
+disabled = true
+
+[username]
+show_always = true 
+format = "[$user]($style)"
+
+[aws]
+symbol = " "
+
+[battery]
+disabled = true
+
+[conda]
+symbol = " "
+
+[dart]
+symbol = " "
+
+[directory]
+format = "[$path](bg:#0578fc fg:#141414)"
+
+[docker]
+symbol = " "
+
+[elixir]
+symbol = " "
+disabled = true
+
+[elm]
+symbol = " "
+disabled = true
+
+[git_commit]
+disabled = true 
+
+[git_branch]
+symbol = " "
+format = "[on $branch]($style)"
+
+[golang]
+symbol = " "
+
+[haskell]
+symbol = " "
+
+[hg_branch]
+symbol = " "
+
+[java]
+symbol = " "
+
+[julia]
+symbol = " "
+
+[memory_usage]
+symbol = " "
+
+[nim]
+symbol = " "
+
+[nix_shell]
+symbol = " "
+
+[nodejs]
+symbol = " "
+
+[package]
+symbol = " "
+disabled = true
+
+[perl]
+symbol = " "
+
+[php]
+symbol = " "
+
+[python]
+symbol = " "
+
+[ruby]
+symbol = " "
+
+[rust]
+symbol = " "
+
+[swift]
+symbol = "ﯣ "
