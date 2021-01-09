@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }:
-  with lib;
-  let unstable = import <unstable> { configuration = { allowUnfree = true; }; };
+with lib;
+let
+  unstable = import <unstable> { configuration = { allowUnfree = true; }; };
   has_gui = true;
 in {
   imports = [
@@ -13,7 +14,8 @@ in {
     ./applications/sway.nix
     ./applications/mako.nix
     ./applications/alacritty.nix
-  ] else []);
+  ] else
+    [ ]);
 
   options = {
     dots = mkOption { type = types.path; };
@@ -45,68 +47,71 @@ in {
     home.username = builtins.getEnv "USER";
     home.homeDirectory = builtins.getEnv "HOME";
 
-    home.packages = with pkgs; [
-      #this is making me want to cry, I can't make an overlay with a new version
-      #without a stack overflow for some reason.
-      ion
-      exa
-      git
-      ripgrep
-      bottom # top sucks.
+    home.packages = with pkgs;
+      [
+        #this is making me want to cry, I can't make an overlay with a new version
+        #without a stack overflow for some reason.
+        ion
+        exa
+        git
+        ripgrep
+        bottom # top sucks.
 
-      fzf # this is required for nvim's coc-fzf. not detected as a dep but /shrug
+        fzf # this is required for nvim's coc-fzf. not detected as a dep but /shrug
 
-      #development stuff
-      nixfmt
-      nodejs
-      unstable.deno
-      python3
-      (latest.rustChannels.stable.rust.override { extensions = ["rust-src"]; })
-      texlive.combined.scheme-full
-      gdb
+        #development stuff
+        nixfmt
+        nodejs
+        unstable.deno
+        python3
+        (latest.rustChannels.stable.rust.override {
+          extensions = [ "rust-src" ];
+        })
+        texlive.combined.scheme-full
+        gdb
 
-      starship
-    ] ++ (if has_gui then [
-      #Sway.
-      waybar
-      dolphin
-      breeze-icons
-      mako # notification daemon.
-      grim
-      slurp
-      wl-clipboard
+        starship
+      ] ++ (if has_gui then [
+        #Sway.
+        waybar
+        dolphin
+        breeze-icons
+        mako # notification daemon.
+        grim
+        slurp
+        wl-clipboard
 
-      #CLI stuff.
-      alacritty
-      konsole
+        #CLI stuff.
+        alacritty
+        konsole
 
-      #pdf viewer
-      zathura
+        #pdf viewer
+        zathura
 
-      #chat clients
-      discord
-      element-desktop
+        #chat clients
+        discord
+        element-desktop
 
-      #osu - need I say more?
-      osu-lazer
+        #osu - need I say more?
+        osu-lazer
 
-      #general
-      xournalpp
+        #general
+        xournalpp
 
-      #Audio
-      pulseeffects
+        #Audio
+        pulseeffects
 
-      #until I setup something with pactl.
-      pavucontrol
-      spotify
+        #until I setup something with pactl.
+        pavucontrol
+        spotify
 
-      #fonts
-      font-awesome
-      fira-code
-      (nerdfonts.override { fonts = ["FiraCode"]; })
+        #fonts
+        font-awesome
+        fira-code
+        (nerdfonts.override { fonts = [ "FiraCode" ]; })
 
-    ] else [
-    ]);
+      ] else
+        [ ]);
 
     fonts.fontconfig = { enable = true; };
 
