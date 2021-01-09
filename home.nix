@@ -1,21 +1,14 @@
-{ config, lib, pkgs, ... }:
+{ config , lib, pkgs, ... }:
 with lib;
 let
   unstable = import <unstable> { configuration = { allowUnfree = true; }; };
-  has_gui = true;
+  user_configuration = import ./configuration.nix;
 in {
   imports = [
     ./applications/git.nix
     ./applications/ion.nix
     ./applications/starship.nix
-  ] ++ (if has_gui then [
-    ./applications/waybar.nix
-    ./applications/vscode.nix
-    ./applications/sway.nix
-    ./applications/mako.nix
-    ./applications/alacritty.nix
-  ] else
-    [ ]);
+  ] ++ (if user_configuration.gui_support then [./gui_supported.nix] else []);
 
   options = {
     dots = mkOption { type = types.path; };
@@ -27,20 +20,13 @@ in {
   config = {
     nixpkgs.config = { allowUnfree = true; };
 
-    dots = ./dotfiles;
-    modifier = "Mod4";
-    scripts = /home/bender/.config/scripts;
-
-    gui_support = has_gui;
+    inherit (user_configuration) dots modifier scripts gui_support;
 
     # Let Home Manager install and manage itself.
     programs.home-manager.enable = true;
 
     #This is kinda gross, I know.
     programs.neovim = import ./applications/neovim.nix pkgs;
-
-    #enable these
-    programs.firefox.enable = (if has_gui then true else false);
 
     # Home Manager needs a bit of information about you and the
     # paths it should manage.
@@ -71,49 +57,7 @@ in {
         gdb
 
         starship
-      ] ++ (if has_gui then [
-        #Sway.
-        waybar
-        dolphin
-        breeze-icons
-        mako # notification daemon.
-        grim
-        slurp
-        wl-clipboard
-
-        #CLI stuff.
-        alacritty
-        konsole
-
-        #pdf viewer
-        zathura
-
-        #chat clients
-        discord
-        element-desktop
-
-        #osu - need I say more?
-        osu-lazer
-
-        #general
-        xournalpp
-
-        #Audio
-        pulseeffects
-
-        #until I setup something with pactl.
-        pavucontrol
-        spotify
-
-        #fonts
-        font-awesome
-        fira-code
-        (nerdfonts.override { fonts = [ "FiraCode" ]; })
-
-      ] else
-        [ ]);
-
-    fonts.fontconfig = { enable = true; };
+      ];
 
     # This value determines the Home Manager release that your
     # configuration is compatible with. This helps avoid breakage
