@@ -1,22 +1,25 @@
 { config, lib, pkgs, ... }:
   with lib;
   let unstable = import <unstable> { configuration = { allowUnfree = true; }; };
+  has_gui = true;
 in {
   imports = [
     ./applications/git.nix
+    ./applications/ion.nix
+    ./applications/starship.nix
+  ] ++ (if has_gui then [
+    ./applications/waybar.nix
     ./applications/vscode.nix
     ./applications/sway.nix
     ./applications/mako.nix
     ./applications/alacritty.nix
-    ./applications/ion.nix
-    ./applications/waybar.nix
-    ./applications/starship.nix
-  ];
+  ] else []);
 
   options = {
     dots = mkOption { type = types.path; };
     modifier = mkOption { type = types.str; };
     scripts = mkOption { type = types.path; };
+    gui_support = mkOption { type = types.boolean; };
   };
 
   config = {
@@ -26,6 +29,8 @@ in {
     modifier = "Mod4";
     scripts = /home/bender/.config/scripts;
 
+    gui_support = has_gui;
+
     # Let Home Manager install and manage itself.
     programs.home-manager.enable = true;
 
@@ -33,7 +38,7 @@ in {
     programs.neovim = import ./applications/neovim.nix pkgs;
 
     #enable these
-    programs.firefox.enable = true;
+    programs.firefox.enable = (if has_gui then true else false);
 
     # Home Manager needs a bit of information about you and the
     # paths it should manage.
@@ -41,40 +46,13 @@ in {
     home.homeDirectory = builtins.getEnv "HOME";
 
     home.packages = with pkgs; [
-      #general
-      xournalpp
-
-      #Audio
-      pulseeffects
-
-      #until I setup something with pactl.
-      pavucontrol
-      spotify
-
-      #chat clients
-      discord
-      element-desktop
-
-      #CLI stuff.
-      alacritty
-      konsole
       #this is making me want to cry, I can't make an overlay with a new version
       #without a stack overflow for some reason.
       ion
       exa
       git
       ripgrep
-      zathura
-      ytop # top sucks.
-
-      #Sway stuff. (Should place sway here when sway supports null package)
-      waybar
-      dolphin
-      breeze-icons
-      mako # notification daemon.
-      grim
-      slurp
-      wl-clipboard
+      bottom # top sucks.
 
       fzf # this is required for nvim's coc-fzf. not detected as a dep but /shrug
 
@@ -87,15 +65,48 @@ in {
       texlive.combined.scheme-full
       gdb
 
+      starship
+    ] ++ (if has_gui then [
+      #Sway.
+      waybar
+      dolphin
+      breeze-icons
+      mako # notification daemon.
+      grim
+      slurp
+      wl-clipboard
+
+      #CLI stuff.
+      alacritty
+      konsole
+
+      #pdf viewer
+      zathura
+
+      #chat clients
+      discord
+      element-desktop
+
+      #osu - need I say more?
+      osu-lazer
+
+      #general
+      xournalpp
+
+      #Audio
+      pulseeffects
+
+      #until I setup something with pactl.
+      pavucontrol
+      spotify
+
       #fonts
       font-awesome
       fira-code
       (nerdfonts.override { fonts = ["FiraCode"]; })
 
-      starship
-      #osu - need I say more?
-      osu-lazer
-    ];
+    ] else [
+    ]);
 
     fonts.fontconfig = { enable = true; };
 
