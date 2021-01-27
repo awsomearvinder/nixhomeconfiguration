@@ -8,6 +8,7 @@ in {
     ./applications/git.nix
     ./applications/ion.nix
     ./applications/starship.nix
+    ./applications/neovim.nix
   ] ++ (if user_configuration.gui_support then [./gui_supported.nix] else []);
 
   options = {
@@ -24,9 +25,6 @@ in {
 
     # Let Home Manager install and manage itself.
     programs.home-manager.enable = true;
-
-    #This is kinda gross, I know.
-    programs.neovim = import ./applications/neovim.nix pkgs;
 
     # Home Manager needs a bit of information about you and the
     # paths it should manage.

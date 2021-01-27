@@ -1,178 +1,186 @@
-pkgs: {
-  enable = true;
-  #defaultEditor = true;
-  vimAlias = true;
-  viAlias = true;
-  withPython = true;
-  withNodeJs = true;
-  withRuby = true;
-  /* plugins = with pkgs.vimPlugins; [
-       coc-nvim
-       auto-pairs
-       vim-highlightedyank
-       vim-rooter
-       fzf-vim
-       base16-vim
-       typescript-vim
-       vimtex
-       vim-airline
-       #vim-jsx-typescript
-       #vim-floaterm
-     ];
-  */
-  configure = {
-    packages.myVimPackage = with pkgs.vimPlugins; {
-      #need to setup ion-vim
-      start = [
-        coc-nvim
-        auto-pairs
-        vim-highlightedyank
-        vim-rooter
-        fzf-vim
-        base16-vim
-        yats-vim
-        vim-gitgutter
-        vimtex
-        vim-airline
-        vim-sensible
-        vim-nix
-      ];
-      opt = [ ];
+{ ... }:
+let
+  pkgs = import <nixos> { };
+  unstable = import <unstable> { };
+in {
+  programs.neovim = {
+    enable = true;
+    #defaultEditor = true;
+    vimAlias = true;
+    viAlias = true;
+    withPython = true;
+    withNodeJs = true;
+    withRuby = true;
+    /* plugins = with pkgs.vimPlugins; [
+         coc-nvim
+         auto-pairs
+         vim-highlightedyank
+         vim-rooter
+         fzf-vim
+         base16-vim
+         typescript-vim
+         vimtex
+         vim-airline
+         #vim-jsx-typescript
+         #vim-floaterm
+       ];
+    */
+    configure = {
+      packages.myVimPackage = with pkgs.vimPlugins; {
+        #need to setup ion-vim
+        start = [
+          unstable.vimPlugins.coc-nvim # coc needs to stay up to date.
+          auto-pairs
+          vim-highlightedyank
+          vim-rooter
+          fzf-vim
+          base16-vim
+          yats-vim
+          vim-gitgutter
+          vimtex
+          vim-airline
+          vim-sensible
+          vim-nix
+        ];
+        opt = [ ];
+      };
+      customRC = ''
+        set number relativenumber 
+        set showcmd
+        set updatetime=300
+        set splitbelow
+        set tabstop=4
+        set shiftwidth=4
+        set expandtab
+
+        " javascript and typescript use tabs instead of spaces.
+        autocmd Filetype tsx setlocal noexpandtab
+        autocmd Filetype jsx setlocal noexpandtab
+        autocmd Filetype js setlocal noexpandtab
+        autocmd Filetype ts setlocal noexpandtab
+
+        let g:tex_flavor = 'latex'
+        let g:vimtex_view_general_viewer = 'zathura'
+
+        let g:coc_global_extensions = [ 'coc-omnisharp', 'coc-rust-analyzer', 'coc-go', 'coc-actions', 'coc-emmet', 'coc-css', 'coc-tsserver', 'coc-prettier', 'coc-deno','coc-html', 'coc-eslint']
+
+        function! OpenTerminal()
+          split term://ion
+          resize 10
+        endfunction
+
+        nnoremap <c-n> <silent> :call OpenTerminal()<CR>
+
+        " git stuff.
+        let g:gitgutter_sign_added = '✚'
+        let g:gitgutter_sign_modified = '✹'
+        let g:gitgutter_sign_removed = '-'
+        let g:gitgutter_sign_removed_first_line = '-'
+        let g:gitgutter_sign_modified_removed = '-'
+
+        " use alt+hjkl to move between split/vsplit panels
+        tnoremap <A-h> <C-\><C-n><C-w>h
+        tnoremap <A-j> <C-\><C-n><C-w>j
+        tnoremap <A-k> <C-\><C-n><C-w>k
+        tnoremap <A-l> <C-\><C-n><C-w>l
+        nnoremap <A-h> <C-w>h
+        nnoremap <A-j> <C-w>j
+        nnoremap <A-k> <C-w>k
+        nnoremap <A-l> <C-w>l
+
+        inoremap <silent><expr><c-space> coc#refresh()
+
+        nmap <silent> gd <Plug>(coc-definition)
+        nmap <silent> gy <Plug>(coc-type-definition)
+        nmap <silent> gi <Plug>(coc-implementation)
+        nmap <silent> gr <Plug>(coc-references)
+
+        autocmd BufWritePre * :silent! call CocAction('format')
+
+         "BASE16 themeing stuff
+         let base16colorspace=256  " Access colors present in 256 colorspace
+         colorscheme $BASE16_THEME
+      '';
     };
-    customRC = ''
-      set number relativenumber 
-      set showcmd
-      set updatetime=300
-      set splitbelow
-      set tabstop=4
-      set shiftwidth=4
-      set expandtab
+    /* extraConfig = ''
+         set nocompatible
+         set shell=/bin/bash
+         set hidden
+         set number relativenumber
+         set showcmd
+         set incsearch
+         set hlsearch
+         set shiftwidth=4
+         set tabstop=4
+         let mapleader=" "
 
-      " javascript and typescript use tabs instead of spaces.
-      autocmd Filetype tsx setlocal noexpandtab
-      autocmd Filetype jsx setlocal noexpandtab
-      autocmd Filetype js setlocal noexpandtab
-      autocmd Filetype ts setlocal noexpandtab
+         "COC
+         set cmdheight=2
+         set updatetime=300
+         function! s:check_back_space() abort
+          let col = col('.') - 1
+          return !col || getline('.')[col - 1]  =~# '\s'
+         endfunction
+         inoremap <silent><expr> <TAB>
+                  \ pumvisible() ? "\<C-n>" :
+                  \ <SID>check_back_space() ? "\<TAB>" :
+                  \ coc#refresh()
+         inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+         inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+         nmap <silent> gd <Plug>(coc-definition)
+         " Remap for do codeAction of selected region
+         function! s:cocActionsOpenFromSelected(type) abort
+           execute 'CocCommand actions.open ' . a:type
+         endfunction
 
-      let g:tex_flavor = 'latex'
-      let g:vimtex_view_general_viewer = 'zathura'
+         xmap <leader>a  <Plug>(coc-codeaction-selected)
+         nmap <leader>a  <Plug>(coc-codeaction-selected)
+         xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
+         nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>
 
-      let g:coc_global_extensions = [ 'coc-omnisharp', 'coc-rust-analyzer', 'coc-go', 'coc-actions', 'coc-emmet', 'coc-css', 'coc-tsserver', 'coc-prettier', 'coc-deno','coc-html', 'coc-eslint']
+         command! -nargs=0 Format :call CocAction('format')
+         autocmd BufWritePre * :Format
+         let g:coc_global_extensions=[ 'coc-omnisharp', 'coc-rust-analyzer', 'coc-go', 'coc-actions', 'coc-tsserver', 'coc-emmet', 'coc-css', 'coc-tsserver', 'coc-prettier']
 
-      function! OpenTerminal()
-        split term://ion
-        resize 10
-      endfunction
-      nnoremap <c-n> :call OpenTerminal()<CR>
+         "FZF
+         let $FZF_DEFAULT_COMMAND =  "rg --files"
+         let $FZF_DEFAULT_OPTS=' --color=dark --color=fg:15,bg:-1,hl:1,fg+:#ffffff,bg+:#343D46,hl+:1 --color=info:0,prompt:0,pointer:12,marker:4,spinner:11,header:-1 --layout=reverse  --margin=1,4'
+         let g:fzf_layout = { 'window': 'call FloatingFZF()' }
 
-      " git stuff.
-      let g:gitgutter_sign_added = '✚'
-      let g:gitgutter_sign_modified = '✹'
-      let g:gitgutter_sign_removed = '-'
-      let g:gitgutter_sign_removed_first_line = '-'
-      let g:gitgutter_sign_modified_removed = '-'
+         function! FloatingFZF()
+          let buf = nvim_create_buf(v:false, v:true)
+          call setbufvar(buf, '&signcolumn', 'no')
 
-      " use alt+hjkl to move between split/vsplit panels
-      tnoremap <A-h> <C-\><C-n><C-w>h
-      tnoremap <A-j> <C-\><C-n><C-w>j
-      tnoremap <A-k> <C-\><C-n><C-w>k
-      tnoremap <A-l> <C-\><C-n><C-w>l
-      nnoremap <A-h> <C-w>h
-      nnoremap <A-j> <C-w>j
-      nnoremap <A-k> <C-w>k
-      nnoremap <A-l> <C-w>l
+          let height = float2nr(12)
+          let width = float2nr(80)
+          let horizontal = float2nr((&columns - width) / 2)
+          let vertical = 1
 
-      inoremap <silent><expr><c-space> coc#refresh()
+           let opts = {
+           \ 'relative': 'editor',
+           \ 'row': vertical,
+           \ 'col': horizontal,
+           \ 'width': width,
+           \ 'height': height,
+           \ 'style': 'minimal'
+           \ }
 
-      nmap <silent> gd <Plug>(coc-definition)
-      nmap <silent> gy <Plug>(coc-type-definition)
-      nmap <silent> gi <Plug>(coc-implementation)
-      nmap <silent> gr <Plug>(coc-references)
+         call nvim_open_win(buf, v:true, opts)
+         endfunction
 
-      autocmd BufWritePre * :call CocAction('format')
+         "BASE16
+         let base16colorspace=256  " Access colors present in 256 colorspace
+         if filereadable(expand("~/.vimrc_background"))
+           let base16colorspace=256
+           source ~/.vimrc_background
+         endif
+         set guifont=FiraCode:h12
+         nnoremap <c-t> :FloatermToggle <CR>
+         nnoremap <silent> ; :call fzf#vim#files('.', {'options': '--prompt ""'})<CR> nnoremap <silent> <leader>b :Buffers<CR>
+         noremap <c-c> <esc>
+         let g:vimtex_view_general_viewer = 'zathura'
+       '';
+    */
 
-       "BASE16 themeing stuff
-       let base16colorspace=256  " Access colors present in 256 colorspace
-       colorscheme $BASE16_THEME
-    '';
   };
-  /* extraConfig = ''
-       set nocompatible
-       set shell=/bin/bash
-       set hidden
-       set number relativenumber
-       set showcmd
-       set incsearch
-       set hlsearch
-       set shiftwidth=4
-       set tabstop=4
-       let mapleader=" "
-
-       "COC
-       set cmdheight=2
-       set updatetime=300
-       function! s:check_back_space() abort
-       	let col = col('.') - 1
-       	return !col || getline('.')[col - 1]  =~# '\s'
-       endfunction
-       inoremap <silent><expr> <TAB>
-       			\ pumvisible() ? "\<C-n>" :
-       			\ <SID>check_back_space() ? "\<TAB>" :
-       			\ coc#refresh()
-       inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-       inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-       nmap <silent> gd <Plug>(coc-definition)
-       " Remap for do codeAction of selected region
-       function! s:cocActionsOpenFromSelected(type) abort
-         execute 'CocCommand actions.open ' . a:type
-       endfunction
-
-       xmap <leader>a  <Plug>(coc-codeaction-selected)
-       nmap <leader>a  <Plug>(coc-codeaction-selected)
-       xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
-       nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>
-
-       command! -nargs=0 Format :call CocAction('format')
-       autocmd BufWritePre * :Format
-       let g:coc_global_extensions=[ 'coc-omnisharp', 'coc-rust-analyzer', 'coc-go', 'coc-actions', 'coc-tsserver', 'coc-emmet', 'coc-css', 'coc-tsserver', 'coc-prettier']
-
-       "FZF
-       let $FZF_DEFAULT_COMMAND =  "rg --files"
-       let $FZF_DEFAULT_OPTS=' --color=dark --color=fg:15,bg:-1,hl:1,fg+:#ffffff,bg+:#343D46,hl+:1 --color=info:0,prompt:0,pointer:12,marker:4,spinner:11,header:-1 --layout=reverse  --margin=1,4'
-       let g:fzf_layout = { 'window': 'call FloatingFZF()' }
-
-       function! FloatingFZF()
-       	let buf = nvim_create_buf(v:false, v:true)
-       	call setbufvar(buf, '&signcolumn', 'no')
-
-       	let height = float2nr(12)
-       	let width = float2nr(80)
-       	let horizontal = float2nr((&columns - width) / 2)
-       	let vertical = 1
-
-         let opts = {
-         \ 'relative': 'editor',
-         \ 'row': vertical,
-         \ 'col': horizontal,
-         \ 'width': width,
-         \ 'height': height,
-         \ 'style': 'minimal'
-         \ }
-
-       call nvim_open_win(buf, v:true, opts)
-       endfunction
-
-       "BASE16
-       let base16colorspace=256  " Access colors present in 256 colorspace
-       if filereadable(expand("~/.vimrc_background"))
-         let base16colorspace=256
-         source ~/.vimrc_background
-       endif
-       set guifont=FiraCode:h12
-       nnoremap <c-t> :FloatermToggle <CR>
-       nnoremap <silent> ; :call fzf#vim#files('.', {'options': '--prompt ""'})<CR> nnoremap <silent> <leader>b :Buffers<CR>
-       noremap <c-c> <esc>
-       let g:vimtex_view_general_viewer = 'zathura'
-     '';
-  */
 }
