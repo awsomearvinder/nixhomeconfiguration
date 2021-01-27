@@ -1,4 +1,4 @@
-{ config , lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 with lib;
 let
   unstable = import <unstable> { configuration = { allowUnfree = true; }; };
@@ -9,7 +9,10 @@ in {
     ./applications/ion.nix
     ./applications/starship.nix
     ./applications/neovim.nix
-  ] ++ (if user_configuration.gui_support then [./gui_supported.nix] else []);
+  ] ++ (if user_configuration.gui_support then
+    [ ./gui_supported.nix ]
+  else
+    [ ]);
 
   options = {
     dots = mkOption { type = types.path; };
@@ -31,31 +34,30 @@ in {
     home.username = builtins.getEnv "USER";
     home.homeDirectory = builtins.getEnv "HOME";
 
-    home.packages = with pkgs;
-      [
-        #this is making me want to cry, I can't make an overlay with a new version
-        #without a stack overflow for some reason.
-        ion
-        exa
-        git
-        ripgrep
-        unstable.bottom # top sucks.
+    home.packages = with pkgs; [
+      #this is making me want to cry, I can't make an overlay with a new version
+      #without a stack overflow for some reason.
+      ion
+      exa
+      git
+      ripgrep
+      unstable.bottom # top sucks.
 
-        fzf # this is required for nvim's coc-fzf. not detected as a dep but /shrug
+      fzf # this is required for nvim's coc-fzf. not detected as a dep but /shrug
 
-        #development stuff
-        nixfmt
-        nodejs
-        unstable.deno
-        python3
-        (latest.rustChannels.stable.rust.override {
-          extensions = [ "rust-src" ];
-        })
-        texlive.combined.scheme-full
-        gdb
+      #development stuff
+      nixfmt
+      nodejs
+      unstable.deno
+      python3
+      (latest.rustChannels.stable.rust.override {
+        extensions = [ "rust-src" ];
+      })
+      texlive.combined.scheme-full
+      gdb
 
-        starship
-      ];
+      starship
+    ];
 
     # This value determines the Home Manager release that your
     # configuration is compatible with. This helps avoid breakage
