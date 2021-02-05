@@ -21,35 +21,8 @@ local latexSetUp = function()
 end
 
 local cocSetUp = function() 
-    vim.g.coc_global_extensions = { 'coc-omnisharp', 'coc-rust-analyzer', 'coc-go', 'coc-actions', 'coc-emmet', 'coc-css', 'coc-tsserver', 'coc-prettier', 'coc-deno','coc-html', 'coc-eslint'}
+    vim.g.coc_global_extensions = { 'coc-omnisharp', 'coc-rust-analyzer', 'coc-go', 'coc-actions', 'coc-emmet', 'coc-css', 'coc-tsserver', 'coc-prettier', 'coc-deno','coc-html', 'coc-eslint', 'coc-texlab'}
     vim.api.nvim_command('autocmd BufWritePre * :silent! call CocAction(\'format\')')
-end
-
--- Makes a window and returns it's buffer.
-local make_window = function(width, height, x, y, style, relative)
-    local buf = vim.api.nvim_create_buf(false, true)
-    local opts = {
-        style = style,
-        relative = relative,
-        width = width,
-        height = height,
-        row = x,
-        col = y
-    }
-    local win = vim.api.nvim_open_win(buf, true, opts)
-    return buf
-end
-
---Opens a terminal in a floating window.
-local OpenTerminal = function()
-    local width = vim.api.nvim_get_option("columns")
-    local height = vim.api.nvim_get_option("lines")
-    local win_height = math.ceil(height * 0.8)
-    local win_width = math.ceil(width * 0.8)
-    local col_pos = math.floor(width * 0.1)
-    local row_pos = math.floor(height * 0.1)
-    local buffer = make_window(win_width, win_height, row_pos, col_pos, "minimal", "editor")
-    vim.api.nvim_command('term')
 end
 
 local gitgutterSetUp = function() 
@@ -68,14 +41,15 @@ local setUpAll = function()
 end
 
 local setKeybindings = function() 
-    --keybindings
-    vimp.nnoremap({'silent'}, '<c-n>', OpenTerminal)
-    vimp.bind('ni','<A-h>', function() vim.cmd(':wincmd h') end)
-    vimp.bind('ni','<A-j>', function() vim.cmd(':wincmd j') end)
-    vimp.bind('ni','<A-k>', function() vim.cmd(':wincmd k') end)
-    vimp.bind('ni','<A-l>', function() vim.cmd(':wincmd l') end)
-    vimp.bind('n', 'gd<Plug>', '(coc-definition)' )
-    vimp.bind('n', 'gy<Plug>', '(coc-type-definition)')
+    --keybindings (would love to get vimp working)
+    vim.api.nvim_set_keymap('', '<c-n>', ':lua require(\'plugins/Terminal\').open(0.8, 0.8) <CR>', {silent = true})
+    vim.api.nvim_set_keymap('', '<c-t>', ':lua require(\'plugins/FZF\').open(\'vert new\', 0.8, 0.8) <CR>', {silent = true})
+    vim.api.nvim_set_keymap('', '<c-r>', ':lua require(\'plugins/FZF\').open(\'e\', 0.8, 0.8) <CR>', {silent = true})
+    vim.api.nvim_set_keymap('', '<A-h>', ':wincmd h <CR>', {})
+    vim.api.nvim_set_keymap('', '<A-j>', ':wincmd j <CR>', {})
+    vim.api.nvim_set_keymap('', '<A-k>', ':wincmd k <CR>', {})
+    vim.api.nvim_set_keymap('', '<A-l>', ':wincmd l <CR>', {})
+    vim.api.nvim_set_keymap('n', 'gd', 'CocActionAsync(\'jumpDefinition\')', {})
 end
 
 

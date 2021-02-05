@@ -8,6 +8,10 @@ let
   buildVimPlugin = pkgs.vimUtils.buildVimPlugin;
 in
 {
+  home.packages = with pkgs; [
+    bat # required by my nixconfig
+    fzf # required by my nixconfig
+  ]
   xdg.configFile."nvim".source = (dots + "/nvim");
   programs.neovim = {
     enable = true;
