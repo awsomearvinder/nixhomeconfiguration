@@ -49,7 +49,7 @@ local setKeybindings = function()
     vim.api.nvim_set_keymap('', '<A-j>', ':wincmd j <CR>', {})
     vim.api.nvim_set_keymap('', '<A-k>', ':wincmd k <CR>', {})
     vim.api.nvim_set_keymap('', '<A-l>', ':wincmd l <CR>', {})
-    vim.api.nvim_set_keymap('n', 'gd', 'CocActionAsync(\'jumpDefinition\')', {})
+    vim.api.nvim_set_keymap('n', 'gd', ':CocActionAsync(\'jumpDefinition\') <CR>', {})
 end
 
 
