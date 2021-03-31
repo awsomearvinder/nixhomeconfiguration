@@ -32,12 +32,6 @@ let
         version = "0.0.17";
         sha256 = "11hzjd0gxkq37689rrr2aszxng5l9fwpgs9nnglq3zhfa1msyn08";
       }
-      {
-        name = "Stories";
-        publisher = "benawad";
-        version = "1.3.0";
-        sha256 = "0javr2ivzzbbzyjazrzssjrxv9zmvlb9l9w1pca5fzw2g2xavwlb";
-      }
     ];
   vscode =
     pkgs.vscode-with-extensions.override { vscodeExtensions = extensions; };

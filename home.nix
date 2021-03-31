@@ -41,9 +41,8 @@ in {
       exa
       git
       ripgrep
+      bat
       unstable.bottom # top sucks.
-
-      fzf # this is required for nvim's coc-fzf. not detected as a dep but /shrug
 
       #development stuff
       nixfmt
