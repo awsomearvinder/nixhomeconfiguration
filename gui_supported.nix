@@ -22,6 +22,9 @@ in {
     slurp
     wl-clipboard
 
+    #Gnome
+    gnome3.gnome-tweaks
+
     #CLI stuff.
     alacritty
     konsole
