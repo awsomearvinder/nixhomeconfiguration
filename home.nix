@@ -48,7 +48,7 @@ in {
       nixfmt
       nodejs
       unstable.deno
-      python3
+      python39
       (latest.rustChannels.stable.rust.override {
         extensions = [ "rust-src" ];
       })
