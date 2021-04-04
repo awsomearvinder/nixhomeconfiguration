@@ -8,8 +8,8 @@ in
     src = self.fetchFromGitHub {
       owner = "neovim";
       repo = "neovim";
-      rev = "459a6c845e87662aa9aa0d6a0a68dc8d817a0498";
-      sha256 = "0qs05mq70z7hqqmch7siyng4bry1r2fc36iw0pkyzfiy9rv5fvlq";
+      rev = "0f187700ab1437e949f03d6915df7c76f8287304";
+      sha256 = "1k2dc63bpn3c0d1vi04342mp84ihw22qpy8gk3v77j8ag0cnzibm";
     };
 
     buildInputs = (oldAttrs.buildInputs ++ ([ unstable.tree-sitter ]));
