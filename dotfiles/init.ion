@@ -10,6 +10,7 @@ keybindings vi
     let home = "${env::HOME}"
     export BASE16_SHELL = "$home/.config/base16-shell"
     export BASE16_THEME = "$active_theme"
+    export PATH = "$PATH:/home/$USER/.cargo/bin"
     # setup base16 oceanicnext theme.
     cat "${env::BASE16_SHELL}/scripts/$active_theme.sh" | sh
 #end
