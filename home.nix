@@ -33,6 +33,11 @@ in {
     # paths it should manage.
     home.username = builtins.getEnv "USER";
     home.homeDirectory = builtins.getEnv "HOME";
+    
+    home.sessionVariables = {
+      RUST_SRC_PATH = "${unstable.rust.packages.stable.rustPlatform.rustLibSrc}";
+    };
+
 
     home.packages = with pkgs; [
       #this is making me want to cry, I can't make an overlay with a new version
@@ -49,9 +54,8 @@ in {
       nodejs
       unstable.deno
       python39
-      (latest.rustChannels.stable.rust.override {
-        extensions = [ "rust-src" ];
-      })
+      unstable.cargo
+      unstable.rustc
       texlive.combined.scheme-full
       gdb
 
