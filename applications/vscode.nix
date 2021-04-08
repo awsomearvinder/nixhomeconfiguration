@@ -32,6 +32,12 @@ let
         version = "0.0.17";
         sha256 = "11hzjd0gxkq37689rrr2aszxng5l9fwpgs9nnglq3zhfa1msyn08";
       }
+      {
+        name = "nix-env-selector";
+        publisher = "arrterian";
+        version = "1.0.7";
+        sha256 = "0mralimyzhyp4x9q98x3ck64ifbjqdp8cxcami7clvdvkmf8hxhf";
+      }
     ];
   vscode =
     pkgs.vscode-with-extensions.override { vscodeExtensions = extensions; };
