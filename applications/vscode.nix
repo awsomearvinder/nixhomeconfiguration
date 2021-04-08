@@ -6,6 +6,7 @@ let
       bbenoist.Nix
       #matklad.rust-analyzer
       ms-vscode.cpptools
+      ms-python.python
       vscodevim.vim
     ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
       {
