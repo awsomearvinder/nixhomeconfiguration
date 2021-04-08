@@ -21,7 +21,7 @@ local latexSetUp = function()
 end
 
 local cocSetUp = function() 
-    vim.g.coc_global_extensions = { 'coc-omnisharp', 'coc-rust-analyzer', 'coc-go', 'coc-actions', 'coc-emmet', 'coc-css', 'coc-tsserver', 'coc-prettier', 'coc-deno','coc-html', 'coc-eslint', 'coc-texlab'}
+    vim.g.coc_global_extensions = { 'coc-omnisharp', 'coc-rust-analyzer', 'coc-go', 'coc-actions', 'coc-emmet', 'coc-css', 'coc-tsserver', 'coc-prettier', 'coc-deno','coc-html', 'coc-eslint', 'coc-texlab', 'coc-pyright'}
     vim.api.nvim_command('autocmd BufWritePre * :silent! call CocAction(\'format\')')
 end
 
@@ -49,7 +49,9 @@ local setKeybindings = function()
     vim.api.nvim_set_keymap('', '<A-j>', ':wincmd j <CR>', {})
     vim.api.nvim_set_keymap('', '<A-k>', ':wincmd k <CR>', {})
     vim.api.nvim_set_keymap('', '<A-l>', ':wincmd l <CR>', {})
-    vim.api.nvim_set_keymap('n', 'gd', ':CocActionAsync(\'jumpDefinition\') <CR>', {})
+    vim.api.nvim_set_keymap('n', 'gd', '<Plug>(coc-definition)', {})
+    vim.api.nvim_set_keymap('n', 'gy', '<Plug>(coc-type-definition)', {})
+    vim.api.nvim_set_keymap('n', 'ga', '<Plug>(coc-codeaction)', {})
 end
 
 
