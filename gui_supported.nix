@@ -54,6 +54,9 @@ in {
     fira-code
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
 
+    #Video editing
+    kdenlive
+
   ];
   fonts.fontconfig = { enable = true; };
 }
