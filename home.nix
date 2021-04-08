@@ -54,6 +54,8 @@ in {
       nodejs
       unstable.deno
       python39
+      unstable.black
+      python3.pkgs.pylint
       unstable.cargo
       unstable.rustc
       texlive.combined.scheme-full
