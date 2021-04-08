@@ -4,7 +4,6 @@ let
   extensions = with pkgs.vscode-extensions;
     [
       bbenoist.Nix
-      #matklad.rust-analyzer
       ms-vscode.cpptools
       ms-python.python
       vscodevim.vim
