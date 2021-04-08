@@ -1,0 +1,5 @@
+{
+  "python.linting.pylintEnabled": true,
+  "python.formatting.provider": "black",
+  "python.formatting.blackPath": "/home/bender/.nix-profile/bin/black"
+}
