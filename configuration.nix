@@ -1,5 +1,5 @@
 {
-  gui_support = false;
+  gui_support = true;
   dots = ./dotfiles;
   scripts = ~/.config/scripts;
   modifier = "Mod4";

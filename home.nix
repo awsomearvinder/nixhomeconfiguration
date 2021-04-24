@@ -50,6 +50,7 @@ in {
       unstable.bottom # top sucks.
 
       #development stuff
+      mutt
       nixfmt
       nodejs
       unstable.deno
