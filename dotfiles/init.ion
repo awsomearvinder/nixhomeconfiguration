@@ -1,5 +1,6 @@
 alias ls = exa -a 
 alias lsl = exa -al
+alias fucking = sudo -E 
 let active_theme = "base16-oceanicnext"
 keybindings vi
 
