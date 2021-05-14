@@ -3,6 +3,10 @@ with lib;
 let
   unstable = import <unstable> { configuration = { allowUnfree = true; }; };
   user_configuration = import ./configuration.nix;
+  custom_packages = [
+    (import ./custom_pkgs/buzz.nix pkgs) # buzz for email notifiactions...
+    # note: this dosen't actually work. Compiles though, the package is just borked.
+  ];
 in {
   imports = [
     ./applications/git.nix
@@ -33,37 +37,40 @@ in {
     # paths it should manage.
     home.username = builtins.getEnv "USER";
     home.homeDirectory = builtins.getEnv "HOME";
-    
+
     home.sessionVariables = {
-      RUST_SRC_PATH = "${unstable.rust.packages.stable.rustPlatform.rustLibSrc}";
+      RUST_SRC_PATH =
+        "${unstable.rust.packages.stable.rustPlatform.rustLibSrc}";
     };
 
+    home.packages = with pkgs;
+      [
+        #this is making me want to cry, I can't make an overlay with a new version
+        #without a stack overflow for some reason.
+        ion
+        exa
+        git
+        ripgrep
+        bat
+        unstable.bottom # top sucks.
 
-    home.packages = with pkgs; [
-      #this is making me want to cry, I can't make an overlay with a new version
-      #without a stack overflow for some reason.
-      ion
-      exa
-      git
-      ripgrep
-      bat
-      unstable.bottom # top sucks.
+        #development stuff
+        mutt
+        lynx
+        nixfmt
+        nodejs
+        unstable.deno
+        python39
+        unstable.black
+        python3.pkgs.pylint
+        unstable.cargo
+        unstable.rustc
+        texlive.combined.scheme-full
+        gdb
+        notify-desktop
 
-      #development stuff
-      mutt
-      nixfmt
-      nodejs
-      unstable.deno
-      python39
-      unstable.black
-      python3.pkgs.pylint
-      unstable.cargo
-      unstable.rustc
-      texlive.combined.scheme-full
-      gdb
-
-      starship
-    ];
+        starship
+      ] ++ custom_packages;
 
     # This value determines the Home Manager release that your
     # configuration is compatible with. This helps avoid breakage
