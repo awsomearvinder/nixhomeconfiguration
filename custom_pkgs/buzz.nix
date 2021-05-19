@@ -1,4 +1,5 @@
-{ fetchFromGitHub, pkgconfig, openssl, glib, pango, atk, gdk-pixbuf, gtk3, libappindicator, llvmPackages, clang, cairo, ...}:
+{ fetchFromGitHub, pkgconfig, openssl, glib, pango, atk, gdk-pixbuf, gtk3
+, libappindicator, llvmPackages, clang, cairo, ... }:
 
 let unstable = import <unstable> { };
 

@@ -2,12 +2,8 @@
 { config, pkgs, ... }:
 let
   extensions = with pkgs.vscode-extensions;
-    [
-      bbenoist.Nix
-      ms-vscode.cpptools
-      ms-python.python
-      vscodevim.vim
-    ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+    [ bbenoist.Nix ms-vscode.cpptools ms-python.python vscodevim.vim ]
+    ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
       {
         name = "pretty-formatter";
         publisher = "mblode";

@@ -1,8 +1,7 @@
-self: super: 
-let unstable = import<unstable> {};
-in
-{
-  neovim-unwrapped = super.neovim-unwrapped.overrideAttrs(oldAttrs: {
+self: super:
+let unstable = import <unstable> { };
+in {
+  neovim-unwrapped = super.neovim-unwrapped.overrideAttrs (oldAttrs: {
     version = "01-27-2021";
 
     src = self.fetchFromGitHub {
@@ -13,8 +12,6 @@ in
     };
 
     buildInputs = (oldAttrs.buildInputs ++ ([ unstable.tree-sitter ]));
-    cmakeFlags = oldAttrs.cmakeFlags ++ [
-      "-DUSE_BUNDLED=OFF"
-    ];
+    cmakeFlags = oldAttrs.cmakeFlags ++ [ "-DUSE_BUNDLED=OFF" ];
   });
 }
