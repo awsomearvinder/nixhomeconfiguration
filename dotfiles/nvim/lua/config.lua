@@ -22,7 +22,6 @@ end
 
 local cocSetUp = function() 
     vim.g.coc_global_extensions = { 'coc-omnisharp', 'coc-rust-analyzer', 'coc-go', 'coc-actions', 'coc-emmet', 'coc-css', 'coc-tsserver', 'coc-prettier', 'coc-deno','coc-html', 'coc-eslint', 'coc-texlab', 'coc-pyright'}
-    vim.api.nvim_command('autocmd BufWritePre * :silent! call CocAction(\'format\')')
 end
 
 local gitgutterSetUp = function() 
@@ -52,6 +51,7 @@ local setKeybindings = function()
     vim.api.nvim_set_keymap('n', 'gd', '<Plug>(coc-definition)', {})
     vim.api.nvim_set_keymap('n', 'gy', '<Plug>(coc-type-definition)', {})
     vim.api.nvim_set_keymap('n', 'ga', '<Plug>(coc-codeaction)', {})
+    vim.api.nvim_command('autocmd BufWritePre * :silent! call CocAction(\'format\')')
 end
 
 
