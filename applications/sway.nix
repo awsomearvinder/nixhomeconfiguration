@@ -37,7 +37,6 @@ in {
           childBorder = "#FF0000";
         };
       };
-      fonts = [ "Source Code Pro 9" ];
       output = {
         "*" = { bg = ''"${dots + "/wallpaper.png"}" fill''; };
         "eDP-1" = {

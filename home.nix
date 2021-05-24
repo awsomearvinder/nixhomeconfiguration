@@ -4,8 +4,7 @@ let
   unstable = import <unstable> { configuration = { allowUnfree = true; }; };
   user_configuration = import ./configuration.nix;
   custom_packages = [
-    (import ./custom_pkgs/buzz.nix pkgs) # buzz for email notifiactions...
-    # note: this dosen't actually work. Compiles though, the package is just borked.
+    # (import ./custom_pkgs/buzz.nix pkgs) # buzz for email notifiactions...
   ];
 in {
   imports = [
