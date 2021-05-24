@@ -7,8 +7,8 @@ in {
     src = self.fetchFromGitHub {
       owner = "neovim";
       repo = "neovim";
-      rev = "0f187700ab1437e949f03d6915df7c76f8287304";
-      sha256 = "1k2dc63bpn3c0d1vi04342mp84ihw22qpy8gk3v77j8ag0cnzibm";
+      rev = "52ca7f1a26e4da95f3b3b00670252cfdf788a011";
+      sha256 = "1970c4yrbfcwa2nnf3wjzaic7n6dplz786ns40sf5saj0nkqp7hj";
     };
 
     buildInputs = (oldAttrs.buildInputs ++ ([ unstable.tree-sitter ]));
