@@ -34,6 +34,12 @@ let
         version = "1.0.7";
         sha256 = "0mralimyzhyp4x9q98x3ck64ifbjqdp8cxcami7clvdvkmf8hxhf";
       }
+      {
+        name = "vsliveshare";
+        publisher = "ms-vsliveshare";
+        version = "1.0.4272";
+        sha256 = "0dhs9lkprz2q79kpkj2d22d09lvhl77n38vj0rsz80g9vj41jzwh";
+      }
     ];
   vscode =
     pkgs.vscode-with-extensions.override { vscodeExtensions = extensions; };
