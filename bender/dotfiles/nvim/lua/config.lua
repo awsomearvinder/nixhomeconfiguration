@@ -51,7 +51,7 @@ local setKeybindings = function()
     vim.api.nvim_set_keymap('n', 'gd', '<Plug>(coc-definition)', {})
     vim.api.nvim_set_keymap('n', 'gy', '<Plug>(coc-type-definition)', {})
     vim.api.nvim_set_keymap('n', 'ga', '<Plug>(coc-codeaction)', {})
-    vim.api.nvim_command('autocmd BufWritePre * :silent! call CocAction(\'format\')')
+    vim.api.nvim_command('autocmd BufWritePre * :silent! call CocActionAsync(\'format\')')
 end
 
 
