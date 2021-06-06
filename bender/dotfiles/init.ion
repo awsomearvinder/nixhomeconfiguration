@@ -1,6 +1,9 @@
 alias ls = exa -a 
 alias lsl = exa -al
 alias fucking = sudo -E 
+alias nixd = nix develop --command ion
+alias nixb = nix build
+alias nixr = nix run
 let active_theme = "base16-oceanicnext"
 keybindings vi
 
