@@ -1,5 +1,4 @@
-self: super:
-{
+self: super: {
   neovim-unwrapped = super.neovim-unwrapped.overrideAttrs (oldAttrs: {
     version = "01-27-2021";
 

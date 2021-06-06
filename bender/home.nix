@@ -27,7 +27,6 @@ in {
   config = {
     inherit (user_configuration) dots modifier scripts gui_support;
 
-
     home.packages = with pkgs;
       [
         #this is making me want to cry, I can't make an overlay with a new version

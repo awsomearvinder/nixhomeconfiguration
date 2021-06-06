@@ -4,17 +4,14 @@
 
 { config, pkgs, ... }:
 
-{   
+{
   nix = {
     package = pkgs.nixUnstable;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
   };
-  imports =
-    [
-      ./hardware-configuration.nix
-    ];
+  imports = [ ./hardware-configuration.nix ];
   nixpkgs.config.allowUnfree = true;
 
   #autoupdates
@@ -41,16 +38,13 @@
   #networking.firewall.allowedTCPPorts = [
   #  5000
   #];
-  networking.firewall.allowedUDPPorts = [
-    5000
-  ];
+  networking.firewall.allowedUDPPorts = [ 5000 ];
   services.avahi = {
     enable = true;
     nssmdns = true;
     reflector = true;
   };
   networking.firewall.enable = true;
-
 
   i18n.defaultLocale = "en_US.UTF-8";
 
@@ -67,9 +61,7 @@
   ];
 
   ############### DEFAULT ENVIORNMENT VARIABLES ############### 
-  environment.variables = {
-    EDITOR = "nvim";
-  };
+  environment.variables = { EDITOR = "nvim"; };
 
   # Enable sound.
   sound.enable = true;
@@ -87,7 +79,7 @@
   #scanning
   hardware.sane = {
     enable = true;
-    extraBackends = [pkgs.sane-airscan];
+    extraBackends = [ pkgs.sane-airscan ];
   };
 
   programs.dconf.enable = true;
@@ -97,11 +89,11 @@
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.bender = rec {
-     home = "/home/bender";
-     description = "Arvinder Dhanoa";
-     isNormalUser = true;
-     extraGroups = [ "wheel" "scanner" "lp" ];
-     passwordFile = home + "/.secrets/passwordfile";
+    home = "/home/bender";
+    description = "Arvinder Dhanoa";
+    isNormalUser = true;
+    extraGroups = [ "wheel" "scanner" "lp" ];
+    passwordFile = home + "/.secrets/passwordfile";
   };
   users.mutableUsers = false;
 

@@ -5,9 +5,7 @@
   # of this flake.
   system.configurationRevision = pkgs.lib.mkIf (flake ? rev) flake.rev;
 
-  environment.systemPackages = with pkgs; [
-    wireguard
-  ];
+  environment.systemPackages = with pkgs; [ wireguard ];
 
   # Network configuration.
   networking.useDHCP = false;

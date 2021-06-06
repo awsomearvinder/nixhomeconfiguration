@@ -1,1 +1,1 @@
-{ machine = "laptop"; }
+{ machine = "desktop"; }

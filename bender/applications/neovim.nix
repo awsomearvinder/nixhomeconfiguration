@@ -1,6 +1,5 @@
 { config, pkgs, ... }:
-let
-  inherit (config) dots;
+let inherit (config) dots;
 in let buildVimPlugin = pkgs.vimUtils.buildVimPlugin;
 in {
   home.packages = with pkgs; [
@@ -8,7 +7,8 @@ in {
     fzf # required by my nixconfig
   ];
   home.file.".config/nvim/lua".source = dots + "/nvim/lua";
-  home.file.".config/nvim/coc-settings.json".source = dots + "/nvim/coc-settings.json";
+  home.file.".config/nvim/coc-settings.json".source = dots
+    + "/nvim/coc-settings.json";
   programs.neovim = let
     startupPlugins = with pkgs.vimPlugins; [
       coc-nvim

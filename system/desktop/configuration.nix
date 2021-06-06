@@ -5,17 +5,16 @@
 { config, pkgs, ... }:
 
 {
-   nix = {
+  nix = {
     package = pkgs.nixUnstable;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
   };
 
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Use the GRUB 2 boot loader.
   # boot.loader.grub.enable = true;
@@ -28,7 +27,7 @@
   boot.loader.systemd-boot.enable = true;
 
   networking.hostName = "nixos"; # Define your hostname.
-   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
@@ -54,7 +53,6 @@
   services.xserver.enable = true;
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome3.enable = true;
-  
 
   # Configure keymap in X11
   # services.xserver.layout = "us";
@@ -78,12 +76,9 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-   environment.systemPackages = with pkgs; [
-     wget neovim
-     git
-   ];
+  environment.systemPackages = with pkgs; [ wget neovim git ];
 
-   environment.variables.EDITOR = "nvim";
+  environment.variables.EDITOR = "nvim";
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

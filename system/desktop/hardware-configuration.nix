@@ -4,9 +4,7 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
-    ];
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
@@ -16,18 +14,17 @@
   nixpkgs.config.allowUnfree = true;
   services.xserver.videoDrivers = [ "nvidia" ];
 
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/91c3546a-54d1-4c02-bbf6-21394f4934f1";
-      fsType = "ext4";
-    };
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/91c3546a-54d1-4c02-bbf6-21394f4934f1";
+    fsType = "ext4";
+  };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/1688-EC4D";
-      fsType = "vfat";
-    };
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/1688-EC4D";
+    fsType = "vfat";
+  };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/7a34c74f-aa77-47dc-8e55-be8053268a5b"; }
-    ];
+    [{ device = "/dev/disk/by-uuid/7a34c74f-aa77-47dc-8e55-be8053268a5b"; }];
 
 }
