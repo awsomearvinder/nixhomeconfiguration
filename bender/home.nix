@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 with lib;
 let
-  unstable = import <unstable> { configuration = { allowUnfree = true; }; };
+  # unstable = import <unstable> { configuration = { allowUnfree = true; }; };
   user_configuration = import ./configuration.nix;
   custom_packages = [
     # (import ./custom_pkgs/buzz.nix pkgs) # buzz for email notifiactions...
@@ -25,22 +25,8 @@ in {
   };
 
   config = {
-    nixpkgs.config = { allowUnfree = true; };
-
     inherit (user_configuration) dots modifier scripts gui_support;
 
-    # Let Home Manager install and manage itself.
-    programs.home-manager.enable = true;
-
-    # Home Manager needs a bit of information about you and the
-    # paths it should manage.
-    home.username = builtins.getEnv "USER";
-    home.homeDirectory = builtins.getEnv "HOME";
-
-    home.sessionVariables = {
-      RUST_SRC_PATH =
-        "${unstable.rust.packages.stable.rustPlatform.rustLibSrc}";
-    };
 
     home.packages = with pkgs;
       [
@@ -51,19 +37,17 @@ in {
         git
         ripgrep
         bat
-        unstable.bottom # top sucks.
+        bottom # top sucks.
 
         #development stuff
         mutt
         lynx
         nixfmt
         nodejs
-        unstable.deno
+        deno
         python39
-        unstable.black
+        black
         python3.pkgs.pylint
-        unstable.cargo
-        unstable.rustc
         texlive.combined.scheme-full
         gdb
         notify-desktop

@@ -1,7 +1,5 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 let
-  pkgs = import <nixos> { };
-  unstable = import <unstable> { };
   inherit (config) dots;
 in let buildVimPlugin = pkgs.vimUtils.buildVimPlugin;
 in {
@@ -12,7 +10,7 @@ in {
   home.file.".config/nvim/lua".source = dots + "/nvim/lua";
   programs.neovim = let
     startupPlugins = with pkgs.vimPlugins; [
-      unstable.vimPlugins.coc-nvim # coc needs to stay up to date.
+      coc-nvim
       auto-pairs
       vim-highlightedyank
       vim-rooter

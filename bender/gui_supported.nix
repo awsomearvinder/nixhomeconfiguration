@@ -43,7 +43,7 @@ in {
     xournalpp
 
     #Audio
-    pulseeffects
+    pulseeffects-legacy
 
     #until I setup something with pactl.
     pavucontrol
