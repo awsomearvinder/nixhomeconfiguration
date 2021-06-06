@@ -10,8 +10,7 @@
   let settings = import ./settings.nix; in{
     nixosConfigurations.nixos = (nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      modules = [
-      	./system/laptop/configuration.nix
+      modules = ([
         (home-manager.nixosModules.home-manager)
         {
           config = {
@@ -21,10 +20,12 @@
             nixpkgs.overlays = import ./bender/overlays;
           };
         }
-      ] /*++ (if settings.machine == "laptop" then
+      ] ++ (if settings.machine == "laptop" then
         [ ./system/laptop/configuration.nix ]
-      else
-        [ ./configuration.nix ])*/;
+        else if settings.machine == "desktop" then 
+        [ ./system/desktop/configuration.nix ]
+        else
+        [ ./configuration.nix ]));
     });
   };
 }
