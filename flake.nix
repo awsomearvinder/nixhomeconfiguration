@@ -25,7 +25,7 @@
         else if settings.machine == "desktop" then 
         [ ./system/desktop/configuration.nix ]
         else
-        [ ./configuration.nix ]));
+        throw "Please pass in a machine to settings.nix"));
     });
   };
 }
