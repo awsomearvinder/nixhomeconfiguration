@@ -5,8 +5,8 @@ self: super: {
     src = super.fetchFromGitHub {
       owner = "neovim";
       repo = "neovim";
-      rev = "52ca7f1a26e4da95f3b3b00670252cfdf788a011";
-      sha256 = "1970c4yrbfcwa2nnf3wjzaic7n6dplz786ns40sf5saj0nkqp7hj";
+      rev = "fd7e77b2277d884c51bc6f0bd70c0e6e7a307bc1";
+      sha256 = "1wrvvy85x7yqj4rkgpj93cdnhalyhzpr8pmyca38v59lm5ndh2w4";
     };
 
     buildInputs = (oldAttrs.buildInputs ++ ([ self.tree-sitter ]));
