@@ -1,14 +1,19 @@
 { config, pkgs, ... }:
 let inherit (config) dots;
-in let buildVimPlugin = pkgs.vimUtils.buildVimPlugin;
+in let
+  buildVimPlugin = pkgs.vimUtils.buildVimPlugin;
+  configFiles = (builtins.readDir (dots + "/nvim"));
+  configFileNames =
+    (pkgs.lib.attrsets.mapAttrsToList (key: value: key) configFiles);
 in {
   home.packages = with pkgs; [
     bat # required by my nixconfig
     fzf # required by my nixconfig
   ];
-  home.file.".config/nvim/lua".source = dots + "/nvim/lua";
-  home.file.".config/nvim/coc-settings.json".source = dots
-    + "/nvim/coc-settings.json";
+  xdg.configFile = builtins.listToAttrs (builtins.map (name: {
+    name = "nvim/" + name;
+    value = { source = "${dots}/nvim/${name}"; };
+  }) configFileNames);
   programs.neovim = let
     startupPlugins = with pkgs.vimPlugins; [
       coc-nvim
