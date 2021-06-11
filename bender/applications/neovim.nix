@@ -16,18 +16,21 @@ in {
   }) configFileNames);
   programs.neovim = let
     startupPlugins = with pkgs.vimPlugins; [
-      coc-nvim
       auto-pairs
       vim-highlightedyank
       vim-rooter
       fzf-vim
-      base16-vim
+      gruvbox-nvim
       yats-vim
       vim-gitgutter
       vimtex
-      vim-airline
       vim-sensible
       vim-nix
+      (nvim-treesitter.withPlugins(p: builtins.attrValues p))
+      nvim-lspconfig
+      nvim-compe
+      telescope-nvim
+      rust-tools-nvim
       (buildVimPlugin {
         pname = "vimpeccable";
         version = "10-31-2020";
