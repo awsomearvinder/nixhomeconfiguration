@@ -64,9 +64,9 @@
 --end
 --
 modules = {
-    "lsp_config",
-    "telescope_config",
-    "treesitter_config",
+    "lsp",
+    "telescope",
+    "treesitter",
 }
 
 function main()
@@ -79,7 +79,7 @@ function main()
     vim.cmd'filetype plugin indent on'
     vim.opt.relativenumber = true;
     for _, module in ipairs(modules) do
-        require(module)
+        require("config." .. module)
     end
 end
 

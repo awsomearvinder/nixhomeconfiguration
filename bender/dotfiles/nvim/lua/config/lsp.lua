@@ -1,4 +1,4 @@
-local t = require('utils').t
+local t = require('../utils').t
 
 vim.opt.completeopt = "menuone,noselect";
 vim.opt.inccommand = "nosplit";
@@ -96,7 +96,7 @@ local function on_attach(_client, bufnr)
 end
 
 local nvim_lsp = require'lspconfig';
-local servers = {"rust_analyzer", "pyright", "typescript-language-server"};
+local servers = {"rust_analyzer", "pyright", "tsserver"};
 for _, server in ipairs(servers) do 
     nvim_lsp[server].setup {
 	on_attach =  on_attach;
