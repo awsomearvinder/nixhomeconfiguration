@@ -2,7 +2,9 @@
   programs.alacritty = {
     enable = true;
     settings = {
-      shell = "ion";
+      shell = {
+        program = "tmux";
+      };
       font = {
         size = 12;
         normal = {
