@@ -51,7 +51,20 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_2",
+        "settings": "settings"
+      }
+    },
+    "settings": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-RvJCJqhIQFzqy/TpFEG8dcLeHKRIdAs/MFxnPryvzVk=",
+        "path": "./settings.nix",
+        "type": "path"
+      },
+      "original": {
+        "path": "./settings.nix",
+        "type": "path"
       }
     }
   },
