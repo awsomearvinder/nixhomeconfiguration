@@ -12,6 +12,7 @@ in {
     ./applications/ion.nix
     ./applications/starship.nix
     ./applications/neovim.nix
+    ./applications/tmux.nix
   ] ++ (if user_configuration.gui_support then
     [ ./gui_supported.nix ]
   else
