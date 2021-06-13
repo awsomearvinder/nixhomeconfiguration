@@ -26,7 +26,7 @@ in {
       vimtex
       vim-sensible
       vim-nix
-      (nvim-treesitter.withPlugins(p: builtins.attrValues p))
+      (nvim-treesitter.withPlugins (p: builtins.attrValues p))
       nvim-lspconfig
       nvim-compe
       telescope-nvim
