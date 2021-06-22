@@ -3,7 +3,7 @@
     enable = true;
     settings = {
       shell = {
-        program = "tmux";
+        program = "ion";
       };
       font = {
         size = 12;
