@@ -57,6 +57,8 @@ in {
     #Video editing
     kdenlive
 
+    #art
+    krita
   ];
   fonts.fontconfig = { enable = true; };
 }
