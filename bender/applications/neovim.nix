@@ -19,7 +19,6 @@ in {
       auto-pairs
       vim-highlightedyank
       vim-rooter
-      fzf-vim
       gruvbox-nvim
       yats-vim
       vim-gitgutter
@@ -30,18 +29,18 @@ in {
       nvim-lspconfig
       nvim-compe
       telescope-nvim
-      rust-tools-nvim
-      (buildVimPlugin {
-        pname = "vimpeccable";
-        version = "10-31-2020";
-        src = (pkgs.fetchFromGitHub {
-          owner = "svermeulen";
-          repo = "vimpeccable";
-          rev = "00300b311de64d91b3facc1e4a6fe11463735e68";
-          sha256 = "0mb8a7ypd6pvbjpa46h9hmc8isvxfmn7dq5gcpdg6h2wmkgrv4c4";
-        });
-      })
-    ];
+      nerdtree
+    ] ++ [(buildVimPlugin { # I'm guessing this is temporary, so I don't care about
+    # making an overlay from the flake.nix.
+      pname = "nvim-whichkey";
+      version = "2021-06-20";
+      src = pkgs.fetchFromGitHub{
+        owner = "folke";
+        repo = "which-key.nvim";
+        rev = "bea079f1eb0574ca9fb4bcceab67c3dc2757c5f8";
+        sha256 = "nNBni6I0G6HSI4aV9AUnfJX/LPaRaAOwZUtNhMIYUYM=";
+      };
+    })];
   in {
     enable = true;
     vimAlias = true;

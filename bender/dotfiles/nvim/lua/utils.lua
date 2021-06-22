@@ -1,6 +1,5 @@
-local function t(term)
-    return vim.api.nvim_replace_termcodes(str, true, true, true)
+local out = {}
+function out.t(term)
+    return vim.api.nvim_replace_termcodes(term, true, true, true)
 end
-return {
-  t = t;
-}
+return out

@@ -47,6 +47,3 @@ require'telescope'.setup{
     buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker
   }
 }
-
-vim.api.nvim_set_keymap("n", "<C-F>", "<cmd>Telescope find_files<CR>", {noremap=true;})
-vim.api.nvim_set_keymap("n", "<C-G>", "<cmd>Telescope live_grep<CR>", {noremap=true;})

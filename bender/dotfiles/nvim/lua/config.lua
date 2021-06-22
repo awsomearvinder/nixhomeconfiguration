@@ -67,6 +67,8 @@ modules = {
     "lsp",
     "telescope",
     "treesitter",
+    "nerdtree",
+    "keybindings",
 }
 
 function main()
@@ -78,6 +80,7 @@ function main()
     vim.opt.autoindent = true;
     vim.cmd'filetype plugin indent on'
     vim.opt.relativenumber = true;
+    vim.g.mapleader=" "
     for _, module in ipairs(modules) do
         require("config." .. module)
     end
