@@ -4,11 +4,9 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
-    settings.url = "path:./settings.nix";
-    settings.flake = false;
   };
 
-  outputs = { home-manager, nixpkgs, settings, ... }:
+  outputs = { home-manager, nixpkgs, ... }:
     let
       baseModules = [
         (home-manager.nixosModules.home-manager)
