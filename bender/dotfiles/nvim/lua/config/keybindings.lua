@@ -19,3 +19,4 @@ vim.api.nvim_set_keymap('n', '<A-h>', ':wincmd h<CR>', {noremap = true;});
 vim.api.nvim_set_keymap('n', '<A-j>', ':wincmd j<CR>', {noremap = true;});
 vim.api.nvim_set_keymap('n', '<A-k>', ':wincmd k<CR>', {noremap = true;});
 vim.api.nvim_set_keymap('n', '<A-l>', ':wincmd l<CR>', {noremap = true;});
+vim.api.nvim_set_keymap('t', '<ESC>', '<C-\\><C-n>', {noremap = true;});
