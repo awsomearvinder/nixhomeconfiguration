@@ -8,9 +8,12 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     agenix.url = "github:ryantm/agenix";
     deploy-rs.url = "github:serokell/deploy-rs";
+    flake-compat.url = github:edolstra/flake-compat;
+    flake-compat.flake = false;
+    flake-compat-ci.url = "github:hercules-ci/flake-compat-ci";
   };
 
-  outputs = {self, home-manager, nixpkgs, nixpkgs-master, nixpkgs-unstable, agenix, deploy-rs, ... }:
+  outputs = {self, home-manager, nixpkgs, nixpkgs-master, nixpkgs-unstable, agenix, deploy-rs, flake-compat-ci, ... }:
     let
       baseModules = overlays: system_config: [
         (home-manager.nixosModules.home-manager)
@@ -25,6 +28,14 @@
         agenix.nixosModules.age
       ];
     in {
+      ciNix = flake-compat-ci.lib.recurseIntoFlakeWith {
+        flake = self;
+
+        # Optional. Systems for which to perform CI.
+        # By default, every system attr in the flake will be built.
+        # Example: [ "x86_64-darwin" "aarch64-linux" ];
+        systems = [ "x86_64-linux" ];
+      };
       overlay = final: prev: { 
         nixpkgs-master = import nixpkgs-master {config.allowUnfree = true; system = "x86_64-linux";}; 
         nixpkgs-unstable = nixpkgs-unstable.legacyPackages."x86_64-linux"; 
