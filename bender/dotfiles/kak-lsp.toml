@@ -1,0 +1,244 @@
+snippet_support = false
+verbosity = 2
+
+[semantic_tokens]
+type = "type"
+variable = "variable"
+namespace = "module"
+function = "function"
+string = "string"
+keyword = "keyword"
+operator = "operator"
+comment = "comment"
+
+[semantic_token_modifiers]
+documentation = "documentation"
+readonly = "default+d"
+
+[server]
+# exit session if no requests were received during given period in seconds
+# works only in unix sockets mode (-s/--session)
+# set to 0 to disable
+timeout = 1800 # seconds = 30 minutes
+
+[language.bash]
+filetypes = ["sh"]
+roots = [".git", ".hg"]
+command = "bash-language-server"
+args = ["start"]
+
+[language.c_cpp]
+filetypes = ["c", "cpp"]
+roots = ["compile_commands.json", ".clangd"]
+command = "clangd"
+
+[language.crystal]
+filetypes = ["crystal"]
+roots = ["shard.yml"]
+command = "scry"
+
+[language.css]
+filetypes = ["css"]
+roots = ["package.json", ".git"]
+command = "css-languageserver"
+args = ["--stdio"]
+
+[language.less]
+filetypes = ["less"]
+roots = ["package.json", ".git"]
+command = "css-languageserver"
+args = ["--stdio"]
+
+[language.scss]
+filetypes = ["scss"]
+roots = ["package.json", ".git"]
+command = "css-languageserver"
+args = ["--stdio"]
+
+[language.d]
+filetypes = ["d", "di"]
+roots = [".git", "dub.sdl", "dub.json"]
+command = "dls"
+
+[language.dart]
+# start shell to find path to dart analysis server source
+filetypes = ["dart"]
+roots = ["pubspec.yaml", ".git"]
+command = "sh"
+args = ["-c", "dart $(dirname $(which dart))/snapshots/analysis_server.dart.snapshot --lsp"]
+
+[language.elixir]
+filetypes = ["elixir"]
+roots = ["mix.exs"]
+command = "elixir-ls"
+
+[language.elm]
+filetypes = ["elm"]
+roots = ["elm.json"]
+command = "elm-language-server"
+args = ["--stdio"]
+
+[language.elm.initialization_options]
+runtime = "node"
+elmPath = "elm"
+elmFormatPath = "elm-format"
+elmTestPath = "elm-test"
+
+[language.go]
+filetypes = ["go"]
+roots = ["Gopkg.toml", "go.mod", ".git", ".hg"]
+command = "gopls"
+offset_encoding = "utf-8"
+
+[language.haskell]
+filetypes = ["haskell"]
+roots = ["Setup.hs", "stack.yaml", "*.cabal"]
+# You might also be interested in the newer, but early stage, haskell-language-server
+# https://github.com/haskell/haskell-language-server
+command = "hie-wrapper"
+args = ["--lsp"]
+
+[language.html]
+filetypes = ["html"]
+roots = ["package.json"]
+command = "html-languageserver"
+args = ["--stdio"]
+
+# Commented out by default because you still need to set the paths in the JDT
+# Language Server arguments below before this can become a valid configuration.
+# [language.java]
+# filetypes = ["java"]
+# roots = [".git", "mvnw", "gradlew"]
+# command = "java"
+# args = [
+#     "-Declipse.application=org.eclipse.jdt.ls.core.id1",
+#     "-Dosgi.bundles.defaultStartLevel=4",
+#     "-Declipse.product=org.eclipse.jdt.ls.core.product",
+#     "-Dlog.level=ALL",
+#     "-Dfile.encoding=utf-8",
+#     "--add-modules=ALL-SYSTEM",
+#     "--add-opens",
+#     "java.base/java.util=ALL-UNNAMED",
+#     "--add-opens",
+#     "java.base/java.lang=ALL-UNNAMED",
+#     "-noverify",
+#     "-Xmx1G",
+#     "-jar",
+#     "/path/to/eclipse.jdt.ls/repository/plugins/org.eclipse.equinox.launcher_1.6.100.v20201223-0822.jar",
+#     "-configuration",
+#     "/path/to/eclipse.jdt.ls/repository/config_linux",
+#     "-data",
+#     "/path/to/eclipse-workspace"
+# ]
+
+[language.javascript]
+filetypes = ["javascript"]
+roots = [".flowconfig"]
+command = "flow"
+args = ["lsp"]
+
+[language.json]
+filetypes = ["json"]
+roots = ["package.json"]
+command = "json-languageserver"
+args = ["--stdio"]
+
+# Requires Julia packages "LanguageServer", "StaticLint" and "SymbolServer"
+[language.julia]
+filetypes = ["julia"]
+roots = ["Project.toml", ".git"]
+command = "julia"
+args = [
+    "--startup-file=no",
+    "--history-file=no",
+    "-e",
+    """
+        using LanguageServer;
+        using Pkg;
+        import StaticLint;
+        import SymbolServer;
+        import REPL;
+        env_path = dirname(Pkg.Types.Context().env.project_file);
+        server = LanguageServer.LanguageServerInstance(stdin, stdout, env_path, "");
+        server.runlinter = true;
+        run(server);
+    """,
+]
+
+[language.latex]
+filetypes = ["latex"]
+roots = [".git"]
+command = "texlab"
+
+[language.lua]
+filetypes = ["lua"]
+roots = [".git"]
+command = "lua-language-server"
+
+[language.nim]
+filetypes = ["nim"]
+roots = ["*.nimble", ".git"]
+command = "nimlsp"
+
+[language.nix]
+filetypes = ["nix"]
+roots = ["flake.nix", "shell.nix", ".git"]
+command = "rnix-lsp"
+
+[language.ocaml]
+filetypes = ["ocaml"]
+roots = ["Makefile", "opam", "*.opam", "dune"]
+command = "ocamllsp"
+
+[language.php]
+filetypes = ["php"]
+roots = [".htaccess", "composer.json"]
+command = "intelephense"
+args = ["--stdio"]
+
+[language.php.initialization_options]
+storagePath = "/tmp/intelephense"
+
+[language.python]
+filetypes = ["python"]
+roots = ["requirements.txt", "setup.py", ".git", ".hg"]
+command = "pyls"
+offset_encoding = "utf-8"
+
+[language.reason]
+filetypes = ["reason"]
+roots = ["package.json", "Makefile", ".git", ".hg"]
+command = "ocaml-language-server"
+args = ["--stdio"]
+
+[language.ruby]
+filetypes = ["ruby"]
+roots = ["Gemfile"]
+command = "solargraph"
+args = ["stdio"]
+
+[language.rust]
+filetypes = ["rust"]
+roots = ["Cargo.toml"]
+command = "rust-analyzer"
+
+[language.rust.initialization_options]
+procMacro.enable = true
+cargo.loadOutDirsFromCheck = true
+
+[language.terraform]
+filetypes = ["terraform"]
+roots = ["*.tf"]
+command = "terraform-ls"
+args = ["serve"]
+
+[language.yaml]
+filetypes = ["yaml"]
+roots = [".git"]
+command = "yaml-language-server"
+args = ["--stdio"]
+
+[language.zig]
+filetypes = ["zig"]
+roots = ["build.zig"]
+command = "zls"

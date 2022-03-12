@@ -1,0 +1,7 @@
+{
+  "python.linting.pylintEnabled": true,
+  "python.formatting.provider": "black",
+  "python.formatting.blackPath": "/home/bender/.nix-profile/bin/black",
+  "rust-analyzer.inlayHints.enable": false,
+  "rust-analyzer.server.path": "rust-analyzer"
+}
