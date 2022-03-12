@@ -9,6 +9,7 @@
     settings = {
       clusterJoinTokenPath = config.age.secrets."hydra/cluster-join-token.key".path;
       binaryCachesPath = config.age.secrets."hydra/binary-caches.json".path;
+      concurrentTasks = 4;
     };
   };
 }
