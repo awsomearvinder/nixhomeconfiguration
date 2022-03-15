@@ -66,14 +66,14 @@
         magicRollback = false;
         autoRollback = false;
         nodes.wireguard_server = {
-          hostname = "10.100.0.1";
+          hostname = "wireguard.server.home.arpa";
           profiles.system = {
             user = "root";
             path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.wireguard_server;
           };
         };
         nodes.hydra_server = {
-          hostname = "192.168.1.14";
+          hostname = "hydra.server.home.arpa";
           profiles.system = {
             user = "root";
             path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.hydra_server;
