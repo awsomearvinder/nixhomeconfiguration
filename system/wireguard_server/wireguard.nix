@@ -9,11 +9,11 @@ in {
     forwarders = ["192.168.1.1"];
     cacheNetworks = ["10.100.0.0/16" "127.0.0.0/24"];
       zones = {
-      "server.home.arpa" = {
+      "internal.arvinderd.com" = {
         master = true;
         file = pkgs.writeText "server-zone-conf" ''
               $TTL 1h
-              @        IN  SOA wireguard.server.home.arpa. admin.wireguard.server.home.arpa. (
+              @        IN  SOA internal.arvinderd.com. admin.internal.arvinderd.com. (
                               21121201       ; Serial
                               1H    ; Refresh
                               1H    ; Retry

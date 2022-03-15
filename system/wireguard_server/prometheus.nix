@@ -7,7 +7,7 @@
       address = "10.100.0.1";
     };
     virtualHost = {
-      hostName = "wireguard.server.home.arpa";
+      hostName = "wireguard.internal.arvinderd.com";
       adminAddr = "tmp@tmp.org";
     };
   };
@@ -37,7 +37,7 @@
   services.grafana = {
     enable = true;
     addr = "";
-    domain = "wireguard.server.home.arpa";
+    domain = "wireguard.internal.arvinderd.com";
     port = 3000;
     protocol = "http";
   };
@@ -164,7 +164,7 @@
             labels = {
               server = "${server}";
             };
-            targets = ["${server}.server.home.arpa:9002"];
+            targets = ["${server}.internal.arvinderd.com:9002"];
           }];
         }) servers;
     exporters = {
