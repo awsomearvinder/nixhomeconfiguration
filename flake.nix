@@ -8,12 +8,13 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     agenix.url = "github:ryantm/agenix";
     deploy-rs.url = "github:serokell/deploy-rs";
-    flake-compat.url = github:edolstra/flake-compat;
+    flake-compat.url = "github:edolstra/flake-compat";
     flake-compat.flake = false;
     flake-compat-ci.url = "github:hercules-ci/flake-compat-ci";
   };
 
-  outputs = {self, home-manager, nixpkgs, nixpkgs-master, nixpkgs-unstable, agenix, deploy-rs, flake-compat-ci, ... }:
+  outputs = { self, home-manager, nixpkgs, nixpkgs-master, nixpkgs-unstable
+    , agenix, deploy-rs, flake-compat-ci, ... }:
     let
       baseModules = overlays: system_config: [
         (home-manager.nixosModules.home-manager)
@@ -22,7 +23,7 @@
             home-manager.users.bender = import ./bender/home.nix system_config;
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            nixpkgs.overlays = import ./bender/overlays ++ [overlays] ;
+            nixpkgs.overlays = import ./bender/overlays ++ [ overlays ];
           };
         }
         agenix.nixosModules.age
@@ -36,50 +37,75 @@
         # Example: [ "x86_64-darwin" "aarch64-linux" ];
         systems = [ "x86_64-linux" ];
       };
-      overlay = final: prev: { 
-        nixpkgs-master = import nixpkgs-master {config.allowUnfree = true; system = "x86_64-linux";}; 
-        nixpkgs-unstable = nixpkgs-unstable.legacyPackages."x86_64-linux"; 
+      overlay = final: prev: {
+        nixpkgs-master = import nixpkgs-master {
+          config.allowUnfree = true;
+          system = "x86_64-linux";
+        };
+        nixpkgs-unstable = nixpkgs-unstable.legacyPackages."x86_64-linux";
+        bind = nixpkgs.legacyPackages."x86_64-linux".bind.overrideAttrs (old: {
+            configureFlags =
+              old.configureFlags ++ ["--with-dlz-ldap=${nixpkgs.lib.getDev nixpkgs.legacyPackages."x86_64-linux".ldb}" "--with-dlz-filesystem" "--with-dlopen"];
+            buildInputs = old.buildInputs ++ [(nixpkgs.lib.getDev nixpkgs.legacyPackages."x86_64-linux".ldb) (nixpkgs.lib.getDev nixpkgs.legacyPackages."x86_64-linux".openldap)];
+          });
+
+        samba = nixpkgs.legacyPackages."x86_64-linux".samba.override { enableLDAP = true; enableDomainController = true; enablePam = true; };
       };
-      nixosConfigurations.desktop = let config = { gui_supported = true; }; in (nixpkgs.lib.nixosSystem {
+      nixosConfigurations.desktop = let config = { gui_supported = true; };
+      in (nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = (baseModules self.overlay config) ++ [ ./system/desktop/configuration.nix ];
+        modules = (baseModules self.overlay config)
+          ++ [ ./system/desktop/configuration.nix ];
       });
-      nixosConfigurations.laptop = let config = { gui_supported = true; }; in (nixpkgs.lib.nixosSystem {
+      nixosConfigurations.laptop = let config = { gui_supported = true; };
+      in (nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = (baseModules self.overlay config) ++ [ ./system/laptop/configuration.nix ];
+        modules = (baseModules self.overlay config)
+          ++ [ ./system/laptop/configuration.nix ];
       });
-      nixosConfigurations.work_vm = let config = {gui_supported = true;}; in (nixpkgs.lib.nixosSystem {
+      nixosConfigurations.work_vm = let config = { gui_supported = true; };
+      in (nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = (baseModules self.overlay config) ++ [ ./system/work_vm/configuration.nix ];
+        modules = (baseModules self.overlay config)
+          ++ [ ./system/work_vm/configuration.nix ];
       });
-      nixosConfigurations.wireguard_server = let config = {gui_supported = false; }; in (nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = (baseModules self.overlay config) ++ [ ./system/wireguard_server/configuration.nix ];
-      });
-      nixosConfigurations.hydra_server = let config = {gui_supported = false; }; in (nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = (baseModules self.overlay config) ++ [ ./system/hydra_server/configuration.nix ];
-      });
+      nixosConfigurations.wireguard_server =
+        let config = { gui_supported = false; };
+        in (nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = (baseModules self.overlay config)
+            ++ [ ./system/wireguard_server/configuration.nix ];
+        });
+      nixosConfigurations.hydra_server =
+        let config = { gui_supported = false; };
+        in (nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = (baseModules self.overlay config)
+            ++ [ ./system/hydra_server/configuration.nix ];
+        });
       deploy = {
         sshUser = "root";
         user = "root";
         magicRollback = false;
         autoRollback = false;
         nodes.wireguard_server = {
-          hostname = "wireguard.internal.arvinderd.com";
+          hostname = "10.100.0.1";
           profiles.system = {
             user = "root";
-            path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.wireguard_server;
+            path = deploy-rs.lib.x86_64-linux.activate.nixos
+              self.nixosConfigurations.wireguard_server;
           };
         };
         nodes.hydra_server = {
-          hostname = "hydra.internal.arvinderd.com";
+          hostname = "10.100.0.3";
           profiles.system = {
             user = "root";
-            path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.hydra_server;
+            path = deploy-rs.lib.x86_64-linux.activate.nixos
+              self.nixosConfigurations.hydra_server;
           };
         };
       };
-      checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
+      checks = builtins.mapAttrs
+        (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
     };
 }
