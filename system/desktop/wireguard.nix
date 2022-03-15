@@ -9,7 +9,7 @@
       peers = [
         {
           publicKey = "OdVMF/vEnyFYAOYU8Rfl+0ubW14TVfZUU5HGUV8sGzY=";
-          allowedIPs = ["10.100.0.0/16"];
+          allowedIPs = ["10.100.0.0/16" "192.168.0.0/16"];
           endpoint = "internal.arvinderd.com:51820";
           persistentKeepalive = 25;
         }
