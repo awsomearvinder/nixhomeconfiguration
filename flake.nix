@@ -83,6 +83,13 @@
           modules = (baseModules self.overlay config)
             ++ [ ./system/hydra_server/configuration.nix ];
         });
+      nixosConfigurations.nas =
+        let config = { gui_supported = false; };
+        in (nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = (baseModules self.overlay config)
+            ++ [ ./system/nas/configuration.nix ];
+        });
       deploy = {
         sshUser = "root";
         user = "root";
@@ -102,6 +109,14 @@
             user = "root";
             path = deploy-rs.lib.x86_64-linux.activate.nixos
               self.nixosConfigurations.hydra_server;
+          };
+        };
+        nodes.nas = {
+          hostname = "192.168.1.153";
+          profiles.system = {
+            user = "root";
+            path = deploy-rs.lib.x86_64-linux.activate.nixos 
+              self.nixosConfigurations.nas;
           };
         };
       };

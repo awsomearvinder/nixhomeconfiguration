@@ -23,6 +23,7 @@ in {
     nixpkgs.config.allowUnfree = true;
     boot.loader.systemd-boot.enable = true;
 
+    networking.hostName = config.machine_name;
     # Set your time zone.
     time.timeZone = "America/Chicago";
 
