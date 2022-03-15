@@ -110,5 +110,6 @@ in {
     };
   };
   age.secrets."wireguard/private.key".file = ../../secrets/wireguard/private.key;
-  networking.firewall.allowedUDPPorts = [ 51820 ];
+  networking.firewall.allowedUDPPorts = [ 51820 389 464 53 88 137 138 139 ];
+  networking.firewall.allowedTCPPorts = [ 53 88 135 139 389 464 ];
 }

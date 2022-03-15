@@ -17,6 +17,22 @@ lib.mkIf (config.machine_name != "wireguard") {
       };
     };
 
+    krb5 = {
+      enable = true;
+      config = '' 
+        [libdefaults]
+          dns_lookup_realm = false
+          dns_lookup_kdc = true
+          ticket_lifetime = 24h
+          renew_lifetime = 7d
+          forwardable = true
+          rdns = false
+          default_realm = INTERNAL.ARVINDERD.COM
+          default_ccache_name = KEYRING:persistent:%{uid}
+     '';
+
+    };
+
   networking.nameservers = [
     "10.100.0.1"
     "1.1.1.1"
