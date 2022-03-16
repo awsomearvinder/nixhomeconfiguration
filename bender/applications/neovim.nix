@@ -30,6 +30,7 @@ in {
       telescope-nvim
       nerdtree
       neoformat
+      neorg
       luasnip
       which-key-nvim
       nvim-cmp

@@ -69,6 +69,7 @@ modules = {
     "treesitter",
     "nerdtree",
     "keybindings",
+    "neorg-notes",
 }
 
 function main()
