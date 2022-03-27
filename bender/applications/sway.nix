@@ -5,6 +5,7 @@ in {
   wayland.windowManager.sway = {
     enable = true;
 
+    package = pkgs.nixpkgs-unstable.sway;
     config = {
       bars = [ ];
       colors = {
