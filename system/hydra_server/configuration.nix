@@ -15,11 +15,6 @@
   machine_name = "hydra";
   wireguard_ip_and_mask = "10.100.0.3/24";
 
-  networking.interfaces.ens18.ipv4.addresses = [{
-    address = "192.168.1.151";
-    prefixLength = 32;
-  }];
-
   # Select internationalisation properties.
   # i18n.defaultLocale = "en_US.UTF-8";
   # console = {

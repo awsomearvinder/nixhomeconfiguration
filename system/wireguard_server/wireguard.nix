@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 let server_bindings = [
   {name = "fedora"; pubKey = "5oqbinscH3o9mWBFNYOPdHrMB5NOw1P/AGK4I5exAmY="; ip  = "10.100.0.2";}
-  {name = "hydra"; pubKey = "Ez7hVOSfXK29n7D2LT27XQj3xEA26hlyn7OiHjMxqHU="; ip  = "10.100.0.3";}
+  {name = "hydra"; pubKey = "jJkyhgzMtEfEMVRa7XSRn7FuKZKZ6PppT4iuSkX9JzY="; ip  = "10.100.0.3";}
   {name = "nas"; pubKey = "Pt+7dLlAMeTJbkrYmp7ez1KJK6vmwM4sdGPhHHks1xQ="; ip = "10.100.0.4";}
 ];
 in {

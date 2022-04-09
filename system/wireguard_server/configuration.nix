@@ -19,9 +19,8 @@
 
   networking.interfaces.ens18.ipv4.addresses = [{
     address = "192.168.1.24";
-    prefixLength = 32;
+    prefixLength = 24;
   }];
-
   # Select internationalisation properties.
   # i18n.defaultLocale = "en_US.UTF-8";
   # console = {
