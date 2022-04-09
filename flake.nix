@@ -42,7 +42,7 @@
           config.allowUnfree = true;
           system = "x86_64-linux";
         };
-        nixpkgs-unstable = nixpkgs-unstable.legacyPackages."x86_64-linux";
+        nixpkgs-unstable = import nixpkgs-unstable { system = "x86_64-linux"; config.allowUnfree = true; };
         bind = nixpkgs.legacyPackages."x86_64-linux".bind.overrideAttrs (old: {
             configureFlags =
               old.configureFlags ++ ["--with-dlz-ldap=${nixpkgs.lib.getDev nixpkgs.legacyPackages."x86_64-linux".ldb}" "--with-dlz-filesystem" "--with-dlopen"];
