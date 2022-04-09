@@ -17,6 +17,8 @@
     ./hardware-configuration.nix
   ];
 
+  virtualisation.docker.enable = true;
+
   # Use the GRUB 2 boot loader.
   # boot.loader.grub.enable = true;
   # boot.loader.grub.version = 2;
@@ -111,6 +113,7 @@
     wireguard
     fahviewer
     fahcontrol
+    podman
   ];
 
   hardware.opentabletdriver.enable = true;
