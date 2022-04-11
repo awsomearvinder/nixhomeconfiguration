@@ -43,6 +43,7 @@ in {
     vimAlias = true;
     viAlias = true;
     withNodeJs = true;
+    package = pkgs.nixpkgs-unstable.neovim-unwrapped;
     withRuby = true;
     extraConfig = "lua require('config')";
     plugins = [ ]
