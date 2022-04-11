@@ -11,12 +11,8 @@ keybindings vi
 #fixed upstream a month back, but not updated to a new release.
 #need to make a nix package with new release too (and upstream to nixpkgs?)
 #if status -i 
-    let home = "${env::HOME}"
-    export BASE16_SHELL = "$home/.config/base16-shell"
-    export BASE16_THEME = "$active_theme"
-    export PATH = "$PATH:/home/$USER/.cargo/bin"
     # setup base16 oceanicnext theme.
-    sh "${active_theme}.sh"
+    ${active_theme}.sh
 #end
 
 eval $(starship init ion)
