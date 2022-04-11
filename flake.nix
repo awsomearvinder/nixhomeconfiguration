@@ -90,6 +90,15 @@
           modules = (baseModules self.overlay config)
             ++ [ ./system/nas/configuration.nix ];
         });
+
+      homeConfigurations.bender = home-manager.lib.homeManagerConfiguration {
+        system = "x86_64-linux";
+	configuration = import ./bender/home.nix { gui_supported = false; };
+	homeDirectory = "/home/bender";
+	username = "bender";
+	pkgs = import nixpkgs { overlays = [ self.overlay ]; system = "x86_64-linux"; };
+      };
+
       deploy = {
         sshUser = "root";
         user = "root";
