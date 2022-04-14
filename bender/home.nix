@@ -7,6 +7,7 @@ let
   ];
 in {
   imports = [
+    ./applications/nushell.nix
     ./applications/git.nix
     ./applications/ion.nix
     ./applications/starship.nix
@@ -32,7 +33,6 @@ in {
         #this is making me want to cry, I can't make an overlay with a new version
         #without a stack overflow for some reason.
         ion
-        pkgs.nixpkgs-master.nushell
         exa
         git
         pijul
