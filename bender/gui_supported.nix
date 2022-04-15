@@ -35,7 +35,6 @@
 
     #chat clients
     discord
-    discord-canary-system
     element-desktop
 
     #osu - need I say more?
