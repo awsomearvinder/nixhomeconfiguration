@@ -11,13 +11,15 @@
     flake-compat.url = "github:edolstra/flake-compat";
     flake-compat.flake = false;
     flake-compat-ci.url = "github:hercules-ci/flake-compat-ci";
+    hercules-ci.url = "github:hercules-ci/hercules-ci-agent";
   };
 
   outputs = { self, home-manager, nixpkgs, nixpkgs-master, nixpkgs-unstable
-    , agenix, deploy-rs, flake-compat-ci, ... }:
+    , agenix, deploy-rs, flake-compat-ci, hercules-ci, ... }:
     let
       baseModules = overlays: system_config: [
         (home-manager.nixosModules.home-manager)
+        (hercules-ci.nixosModules.multi-agent-service)
         {
           config = {
             home-manager.users.bender = import ./bender/home.nix system_config;

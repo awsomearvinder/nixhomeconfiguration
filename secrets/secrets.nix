@@ -10,5 +10,6 @@ in {
   "hydra/wireguard/private.key".publicKeys = [hydra];
   "hydra/cluster-join-token.key".publicKeys = [hydra];
   "hydra/binary-caches.json".publicKeys = [hydra];
+  "hydra/pcparadise-cluster-join-token.key".publicKeys = [hydra];
   "nas/wireguard/private.key".publicKeys = [nas];
 }
