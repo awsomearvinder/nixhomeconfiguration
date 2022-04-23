@@ -41,10 +41,11 @@
   networking.interfaces.eth0.useDHCP = true;
   networking.nameservers = ["1.1.1.1" "199.16.166.186" "199.17.166.187"];
 
-  networking.interfaces.enp0.ipv4.addresses = [{
+  networking.interfaces.eth1.ipv4.addresses = [{
     address = "192.168.111.11";
     prefixLength = 24;
   }];
+  networking.firewall.trustedInterfaces = ["eth1"];
 
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [
