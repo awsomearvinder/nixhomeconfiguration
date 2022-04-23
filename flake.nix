@@ -53,7 +53,7 @@
 
         samba = nixpkgs.legacyPackages."x86_64-linux".samba.override { enableLDAP = true; enableDomainController = true; enablePam = true; };
       };
-      nixosConfigurations.desktop = let config = { gui_supported = true; };
+      nixosConfigurations.desktop = let config = { gui_supported = false; };
       in (nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = (baseModules self.overlay config)
@@ -65,7 +65,7 @@
         modules = (baseModules self.overlay config)
           ++ [ ./system/laptop/configuration.nix ];
       });
-      nixosConfigurations.work_vm = let config = { gui_supported = true; };
+      nixosConfigurations.work_vm = let config = { gui_supported = false; };
       in (nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = (baseModules self.overlay config)

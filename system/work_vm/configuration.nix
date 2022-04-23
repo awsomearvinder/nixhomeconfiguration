@@ -15,9 +15,6 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      # this sets up the share for the host, Nix, and
-      # anything else I feel like adding to the network.
-      ./samba_share_local.nix
     ];
 
   nixpkgs.config.allowUnfree = true;
@@ -72,14 +69,6 @@
   #   keyMap = "us";
   # };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-
-  # Enable the GNOME Desktop Environment.
-  services.xserver.desktopManager.gnome.enable = true;
-  
-
   # Configure keymap in X11
   # services.xserver.layout = "us";
   # services.xserver.xkbOptions = "eurosign:e";
@@ -107,24 +96,22 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    iperf
-    keepassx
   ];
 
   environment.variables.EDITOR = "nvim";
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+  programs.mtr.enable = true;
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
 
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh.enable = true;
 
 
   # This value determines the NixOS release from which the default
@@ -133,7 +120,7 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "21.05"; # Did you read the comment?
+  system.stateVersion = "21.11"; # Did you read the comment?
 
 }
 
