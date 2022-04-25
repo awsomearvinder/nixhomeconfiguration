@@ -40,7 +40,7 @@ end
 vim.cmd'nnoremap <silent> gd   <cmd>lua vim.lsp.buf.type_definition()<CR>'
 vim.cmd'nnoremap <silent> g[ <cmd>lua vim.diagnostic.goto_prev()<CR>'
 vim.cmd'nnoremap <silent> g] <cmd>lua vim.diagnostic.goto_next()<CR>'
-vim.cmd'nnoremap <silent> ga <cmd>lua vim.buf.lsp.code_action()<CR>'
+vim.cmd'nnoremap <silent> ga <cmd>lua vim.lsp.buf.code_action()<CR>'
 
 
 vim.cmd'autocmd BufWritePre *.rs lua vim.lsp.buf.formatting()'
