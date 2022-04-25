@@ -33,7 +33,7 @@ in {
       neoformat
       neorg
       luasnip
-      which-key-nvim
+      pkgs.nixpkgs-master.vimPlugins.which-key-nvim
       nvim-cmp
       cmp-nvim-lsp
       cmp-buffer
