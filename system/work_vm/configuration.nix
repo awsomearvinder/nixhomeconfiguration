@@ -22,6 +22,10 @@
     enable = true;
     videoMode = "1680x1050";
   };
+  virtualisation.podman = {
+    enable = true;
+  };
+
   boot.kernelPackages = pkgs.nixpkgs-master.linuxPackages_latest;
 
   # Use the systemd-boot EFI boot loader.
@@ -92,12 +96,14 @@
 
   users.users.bender = {
     isNormalUser = true;
+    group = "bender";
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
   };
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     pinentry
+    pkgs.nixpkgs-master.distrobox
   ];
 
   environment.variables.EDITOR = "nvim";
