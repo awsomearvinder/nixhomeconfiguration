@@ -17,7 +17,7 @@
     ./hardware-configuration.nix
   ];
 
-  virtualisation.docker.enable = true;
+  virtualisation.podman.enable = true;
 
   # Use the GRUB 2 boot loader.
   # boot.loader.grub.enable = true;
@@ -116,6 +116,7 @@
     fahviewer
     fahcontrol
     podman
+    distrobox
   ];
 
   hardware.opentabletdriver.enable = true;
