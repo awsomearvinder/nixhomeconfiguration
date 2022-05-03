@@ -18,5 +18,4 @@
 
   swapDevices = [ ];
 
-  virtualisation.hypervGuest.enable = true;
 }
