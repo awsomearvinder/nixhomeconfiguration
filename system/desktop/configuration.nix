@@ -18,6 +18,12 @@
   ];
 
   virtualisation.podman.enable = true;
+  virtualisation.libvirtd = {
+    enable = true;
+    qemuOvmf = true;
+    qemuSwtpm = true;
+    qemuOvmfPackage = pkgs.OVMFFull;
+  };
 
   # Use the GRUB 2 boot loader.
   # boot.loader.grub.enable = true;
@@ -102,7 +108,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.bender = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "libvirtd" ]; # Enable ‘sudo’ for the user.
   };
 
   # List packages installed in system profile. To search, run:
@@ -116,6 +122,7 @@
     fahviewer
     fahcontrol
     podman
+    virt-manager
     distrobox
   ];
 
