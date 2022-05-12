@@ -1,5 +1,9 @@
-{ config, lib, pkgs, ... }:
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   imports = [
     ./applications/waybar.nix
     ./applications/vscode.nix
@@ -10,7 +14,6 @@
 
   #enable these
   programs.firefox.enable = true;
-
 
   home.packages = with pkgs; [
     #Sway.
@@ -57,7 +60,7 @@
     #fonts
     font-awesome
     fira-code
-    (nerdfonts.override { fonts = [ "FiraCode" ]; })
+    (nerdfonts.override {fonts = ["FiraCode"];})
     font-awesome_5
 
     #latex
@@ -74,5 +77,5 @@
     #art
     krita
   ];
-  fonts.fontconfig = { enable = true; };
+  fonts.fontconfig = {enable = true;};
 }

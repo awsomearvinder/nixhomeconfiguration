@@ -1,26 +1,29 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./wireguard.nix
-      ./prometheus.nix
-      ./dyndns.nix
-      ../base.nix
-    ];
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./wireguard.nix
+    ./prometheus.nix
+    ./dyndns.nix
+    ../base.nix
+  ];
 
   machine_name = "wireguard";
   wireguard_ip_and_mask = "";
 
-  networking.interfaces.ens18.ipv4.addresses = [{
-    address = "192.168.1.24";
-    prefixLength = 24;
-  }];
+  networking.interfaces.ens18.ipv4.addresses = [
+    {
+      address = "192.168.1.24";
+      prefixLength = 24;
+    }
+  ];
   # Select internationalisation properties.
   # i18n.defaultLocale = "en_US.UTF-8";
   # console = {
@@ -32,7 +35,6 @@
   # services.xserver.enable = true;
   # services.xserver.displayManager.gdm.enable = true;
   # services.xserver.desktopManager.gnome3.enable = true;
-  
 
   # Configure keymap in X11
   # services.xserver.layout = "us";
@@ -70,7 +72,7 @@
     53 #DNS
   ];
   networking.firewall.allowedUDPPorts = [
-   53 #DNS
+    53 #DNS
   ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
@@ -83,4 +85,3 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "20.09"; # Did you read the comment?
 }
-

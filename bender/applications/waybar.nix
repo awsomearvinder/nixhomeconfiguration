@@ -1,5 +1,5 @@
-{ config, ... }:
-let inherit (config) dots;
+{config, ...}: let
+  inherit (config) dots;
 in {
   xdg.configFile."waybar/style.css".text =
     builtins.readFile (dots + "/waybar/style.css");

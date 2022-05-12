@@ -1,19 +1,24 @@
-{ config, pkgs, ... }:
-let inherit (config) dots;
+{
+  config,
+  pkgs,
+  ...
+}: let
+  inherit (config) dots;
 in let
   buildVimPlugin = pkgs.vimUtils.buildVimPlugin;
-  configFiles = (builtins.readDir (dots + "/nvim"));
+  configFiles = builtins.readDir (dots + "/nvim");
   configFileNames =
-    (pkgs.lib.attrsets.mapAttrsToList (key: value: key) configFiles);
+    pkgs.lib.attrsets.mapAttrsToList (key: value: key) configFiles;
 in {
   home.packages = with pkgs; [
     bat # required by my nixconfig
     fzf # required by my nixconfig
   ];
   xdg.configFile = builtins.listToAttrs (builtins.map (name: {
-    name = "nvim/" + name;
-    value = { source = "${dots}/nvim/${name}"; };
-  }) configFileNames);
+      name = "nvim/" + name;
+      value = {source = "${dots}/nvim/${name}";};
+    })
+    configFileNames);
   programs.neovim = let
     startupPlugins = with pkgs.vimPlugins; [
       auto-pairs
@@ -46,7 +51,8 @@ in {
     package = pkgs.nixpkgs-unstable.neovim-unwrapped;
     withRuby = true;
     extraConfig = "lua require('config')";
-    plugins = [ ]
-      ++ (builtins.map (plugin: { inherit plugin; }) startupPlugins);
+    plugins =
+      []
+      ++ (builtins.map (plugin: {inherit plugin;}) startupPlugins);
   };
 }

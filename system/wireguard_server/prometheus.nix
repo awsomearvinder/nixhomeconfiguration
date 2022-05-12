@@ -1,4 +1,8 @@
-{ config, pkgs, ... }: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   services.zabbixServer.enable = true;
   services.zabbixWeb = {
     enable = true;
@@ -21,17 +25,19 @@
       server.http_listen_port = 9080;
       server.grpc_listen_port = 0;
       clients = [{url = "http://localhost:3100/loki/api/v1/push";}];
-      scrape_configs = [{
-        job_name = "journal";
-        journal = {
-          max_age = "12h";
-          labels = {
-            job = "systemd-journal";
-            server = "wireguard";
+      scrape_configs = [
+        {
+          job_name = "journal";
+          journal = {
+            max_age = "12h";
+            labels = {
+              job = "systemd-journal";
+              server = "wireguard";
+            };
           };
-        };
-        #relable_configs = [{source_label = "__journal__systemd_unit"; target_label = "unit";}];
-      }];
+          #relable_configs = [{source_label = "__journal__systemd_unit"; target_label = "unit";}];
+        }
+      ];
     };
   };
   services.grafana = {
@@ -152,21 +158,23 @@
     #};
   };
   networking.firewall.allowedTCPPorts = [80 3000 9002 9000 10051];
-  services.prometheus =
-      let servers = ["fedora" "wireguard"];
-      in
-  {
+  services.prometheus = let
+    servers = ["fedora" "wireguard"];
+  in {
     enable = true;
     scrapeConfigs =
       builtins.map (server: {
-          job_name = "${server}";
-          static_configs = [{
+        job_name = "${server}";
+        static_configs = [
+          {
             labels = {
               server = "${server}";
             };
             targets = ["${server}.internal.arvinderd.com:9002"];
-          }];
-        }) servers;
+          }
+        ];
+      })
+      servers;
     exporters = {
       node = {
         enable = true;

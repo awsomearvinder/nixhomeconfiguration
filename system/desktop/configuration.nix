@@ -1,11 +1,13 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
-
 {
-  imports = [ # Include the results of the hardware scan.
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../base.nix
   ];
@@ -58,7 +60,7 @@
 
   # Enable the GNOME 3 Desktop Environment.
   services.xserver.enable = true;
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.videoDrivers = ["nvidia"];
   hardware.opengl.enable = true;
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.beta;
   services.xserver.displayManager.gdm.enable = true;
@@ -77,7 +79,7 @@
   xdg = {
     portal = {
       enable = true;
-      extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
+      extraPortals = [pkgs.xdg-desktop-portal-wlr];
     };
   };
 
@@ -104,7 +106,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.bender = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "libvirtd" ]; # Enable ‘sudo’ for the user.
+    extraGroups = ["wheel" "libvirtd"]; # Enable ‘sudo’ for the user.
   };
 
   # List packages installed in system profile. To search, run:
@@ -134,7 +136,6 @@
     enable = true;
     #enableSSHSupport = true;
   };
-
 
   # some development thing I made on the spot.
   services.postgresql = {
@@ -166,5 +167,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "20.09"; # Did you read the comment?
-
 }

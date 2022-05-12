@@ -1,13 +1,18 @@
 # A lot of this is gotten from https://github.com/alexarice/dotfiles/blob/18557c8e0bdd1c564ea68f8bb25a1894973d254d/dotfiles/sway.nix
-{ config, pkgs, lib, ... }:
-let inherit (config) dots scripts modifier;
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
+  inherit (config) dots scripts modifier;
 in {
   wayland.windowManager.sway = {
     enable = true;
 
     package = pkgs.nixpkgs-unstable.sway;
     config = {
-      bars = [ ];
+      bars = [];
       colors = {
         focused = {
           border = "#2b2b2b";
@@ -45,10 +50,10 @@ in {
         };
       };
       output = {
-          "DP-1" = {
-              mode = "1920x1080@143Hz";
-              background = "/etc/nixos/bender/dotfiles/wallpaper.png fill";
-          };
+        "DP-1" = {
+          mode = "1920x1080@143Hz";
+          background = "/etc/nixos/bender/dotfiles/wallpaper.png fill";
+        };
       };
       gaps = {
         inner = 5;
@@ -60,8 +65,7 @@ in {
       workspaceAutoBackAndForth = true;
       keybindings = lib.mkOptionDefault {
         "${modifier}+p" = "exec grim -g \"$(slurp)\" - | wl-copy";
-        "${modifier}+Shift+p" =
-          "exec grim -o $(swaymsg --pretty -t get_outputs | awk '/focused/ {print $2}') - | wl-copy";
+        "${modifier}+Shift+p" = "exec grim -o $(swaymsg --pretty -t get_outputs | awk '/focused/ {print $2}') - | wl-copy";
         "${modifier}+Ctrl+d" = ''exec "shutdown -h now"'';
       };
       window = {

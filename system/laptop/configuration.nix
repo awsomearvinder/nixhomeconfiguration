@@ -1,17 +1,18 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   nix = {
     package = pkgs.nixUnstable;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
   };
-  imports = [ ./hardware-configuration.nix ];
+  imports = [./hardware-configuration.nix];
   nixpkgs.config.allowUnfree = true;
 
   #autoupdates
@@ -38,7 +39,7 @@
   #networking.firewall.allowedTCPPorts = [
   #  5000
   #];
-  networking.firewall.allowedUDPPorts = [ 5000 ];
+  networking.firewall.allowedUDPPorts = [5000];
   services.avahi = {
     enable = true;
     nssmdns = true;
@@ -51,7 +52,7 @@
   # Set your time zone.
   time.timeZone = "US/Central";
 
-  ############## List of Packages Without much configuration ############### 
+  ############## List of Packages Without much configuration ###############
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -60,8 +61,8 @@
     gnome3.gnome-tweaks
   ];
 
-  ############### DEFAULT ENVIORNMENT VARIABLES ############### 
-  environment.variables = { EDITOR = "nvim"; };
+  ############### DEFAULT ENVIORNMENT VARIABLES ###############
+  environment.variables = {EDITOR = "nvim";};
 
   # Enable sound.
   sound.enable = true;
@@ -75,11 +76,11 @@
 
   #printing
   services.printing.enable = true;
-  services.printing.drivers = [ pkgs.brlaser ];
+  services.printing.drivers = [pkgs.brlaser];
   #scanning
   hardware.sane = {
     enable = true;
-    extraBackends = [ pkgs.sane-airscan ];
+    extraBackends = [pkgs.sane-airscan];
   };
 
   programs.dconf.enable = true;
@@ -92,7 +93,7 @@
     home = "/home/bender";
     description = "Arvinder Dhanoa";
     isNormalUser = true;
-    extraGroups = [ "wheel" "scanner" "lp" ];
+    extraGroups = ["wheel" "scanner" "lp"];
     passwordFile = home + "/.secrets/passwordfile";
   };
   users.mutableUsers = false;

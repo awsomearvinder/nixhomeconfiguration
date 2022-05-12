@@ -1,5 +1,9 @@
-{ pkgs, config, lib, ... }:
 {
+  pkgs,
+  config,
+  lib,
+  ...
+}: {
   age.secrets."hercules/cluster-join-token.key".file = ../../secrets/hercules/cluster-join-token.key;
   age.secrets."hercules/cluster-join-token.key".owner = "hci-personal";
   age.secrets."hercules/binary-caches.json".file = ../../secrets/hercules/binary-caches.json;

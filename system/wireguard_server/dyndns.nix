@@ -1,5 +1,8 @@
-{config, pkgs, ...}:
 {
+  config,
+  pkgs,
+  ...
+}: {
   services.ddclient = {
     enable = true;
     protocol = "namecheap";

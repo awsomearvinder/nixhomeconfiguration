@@ -1,4 +1,8 @@
-{ fetchFromGitHub, stdenv, bash }:
+{
+  fetchFromGitHub,
+  stdenv,
+  bash,
+}:
 stdenv.mkDerivation rec {
   pname = "base16-shell";
   version = "11-28-2021";
@@ -15,8 +19,8 @@ stdenv.mkDerivation rec {
   };
 
   installPhase = ''
-  chmod -R 555 scripts/*
-  mkdir -p $out/bin
-  cp  scripts/* $out/bin
+    chmod -R 555 scripts/*
+    mkdir -p $out/bin
+    cp  scripts/* $out/bin
   '';
 }

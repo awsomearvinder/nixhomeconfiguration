@@ -1,4 +1,8 @@
-{ config, pkgs, ... }: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   home.packages = with pkgs; [
     bat
     fzf
@@ -12,7 +16,7 @@
     config = {
       colorScheme = "gruvbox";
       tabStop = 4;
-      autoInfo = [ "command" "onkey" ];
+      autoInfo = ["command" "onkey"];
       scrollOff = {
         lines = 1;
       };
@@ -21,7 +25,6 @@
         assistant = "none";
       };
       showMatching = true;
-
     };
     extraConfig = ''
 
@@ -37,7 +40,6 @@
       }
       eval %sh{kak-lsp --kakoune -s $kak_session}
       lsp-enable
-   '';
+    '';
   };
-
 }

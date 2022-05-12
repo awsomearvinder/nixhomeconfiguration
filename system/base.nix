@@ -1,9 +1,11 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
 {
+  config,
+  pkgs,
+  ...
+}: {
   imports = [./options.nix ./not_wireguard.nix];
   config = {
     nix.trustedUsers = ["@wheel" "root"];
@@ -25,7 +27,7 @@
 
     users.users.bender = {
       isNormalUser = true;
-      extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+      extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
     };
 
     # The global useDHCP flag is deprecated, therefore explicitly set to false here.

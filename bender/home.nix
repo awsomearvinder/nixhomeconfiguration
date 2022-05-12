@@ -1,28 +1,35 @@
-system_config: { config, lib, pkgs, ... }:
-with lib;
-let
+system_config: {
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
   user_configuration = import ./configuration.nix;
   custom_packages = [
     (pkgs.callPackage ./custom_pkgs/base16-shell.nix {})
   ];
 in {
-  imports = [
-    ./applications/nushell.nix
-    ./applications/git.nix
-    ./applications/ion.nix
-    ./applications/starship.nix
-    ./applications/neovim.nix
-    ./applications/tmux.nix
-    ./applications/kakoune.nix
-  ] ++ (if system_config.gui_supported then
-    [ ./gui_supported.nix ]
-  else
-    [ ]);
+  imports =
+    [
+      ./applications/nushell.nix
+      ./applications/git.nix
+      ./applications/ion.nix
+      ./applications/starship.nix
+      ./applications/neovim.nix
+      ./applications/tmux.nix
+      ./applications/kakoune.nix
+    ]
+    ++ (
+      if system_config.gui_supported
+      then [./gui_supported.nix]
+      else []
+    );
 
   options = {
-    dots = mkOption { type = types.path; };
-    modifier = mkOption { type = types.str; };
-    scripts = mkOption { type = types.path; };
+    dots = mkOption {type = types.path;};
+    modifier = mkOption {type = types.str;};
+    scripts = mkOption {type = types.path;};
   };
 
   config = {
@@ -52,7 +59,8 @@ in {
         rnix-lsp
 
         starship
-      ] ++ custom_packages;
+      ]
+      ++ custom_packages;
 
     programs.direnv.enable = true;
     programs.direnv.nix-direnv.enable = true;
