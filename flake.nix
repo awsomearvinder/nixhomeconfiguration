@@ -43,7 +43,7 @@
 
       mkSystem = system: config: system_config: nixpkgs-unstable.lib.nixosSystem {
         inherit system;
-        modules = (baseModules self.overlay config)
+        modules = (baseModules (self._overlay "x86_64-linux") config)
           ++ [ system_config ];
       };
 
@@ -59,21 +59,25 @@
         systems = [ "x86_64-linux" ];
       };
 
-      overlay = final: prev: {
+      _overlay = system: final: prev: {
         nixpkgs-master = import nixpkgs-master {
           config.allowUnfree = true;
-          system = "x86_64-linux";
+          inherit system;
         };
 
-        nixpkgs-unstable = import nixpkgs-unstable { system = "x86_64-linux"; config.allowUnfree = true; };
+        nixpkgs-unstable = import nixpkgs-unstable {
+          inherit system;
+          config.allowUnfree = true;
+        };
 
-        bind = nixpkgs.legacyPackages."x86_64-linux".bind.overrideAttrs (old: {
+        bind = nixpkgs.legacyPackages.${system}.bind.overrideAttrs (old: {
           configureFlags =
-            old.configureFlags ++ [ "--with-dlz-ldap=${nixpkgs.lib.getDev nixpkgs.legacyPackages."x86_64-linux".ldb}" "--with-dlz-filesystem" "--with-dlopen" ];
-          buildInputs = old.buildInputs ++ [ (nixpkgs.lib.getDev nixpkgs.legacyPackages."x86_64-linux".ldb) (nixpkgs.lib.getDev nixpkgs.legacyPackages."x86_64-linux".openldap) ];
+            old.configureFlags
+            ++ [ "--with-dlz-ldap=${nixpkgs.lib.getDev nixpkgs.legacyPackages.${system}.ldb}" "--with-dlz-filesystem" "--with-dlopen" ];
+          buildInputs = old.buildInputs ++ [ (nixpkgs.lib.getDev nixpkgs.legacyPackages.${system}.ldb) (nixpkgs.lib.getDev nixpkgs.legacyPackages.${system}.openldap) ];
         });
 
-        samba = nixpkgs.legacyPackages."x86_64-linux".samba.override { enableLDAP = true; enableDomainController = true; enablePam = true; };
+        samba = nixpkgs.legacyPackages.${system}.samba.override { enableLDAP = true; enableDomainController = true; enablePam = true; };
       };
 
       nixosConfigurations.desktop =
@@ -100,7 +104,7 @@
         configuration = import ./bender/home.nix { gui_supported = false; };
         homeDirectory = "/home/bender";
         username = "bender";
-        pkgs = import nixpkgs-unstable { overlays = [ self.overlay ]; system = "x86_64-linux"; };
+        pkgs = import nixpkgs-unstable { overlays = [ (self._overlay "x86_64-linux") ]; system = "x86_64-linux"; };
       };
 
       deploy =
