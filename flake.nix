@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-21.11";
-    home-manager.url = "github:nix-community/home-manager/release-21.11";
+    home-manager.url = "github:nix-community/home-manager/";
     nixpkgs-master.url = "github:nixos/nixpkgs/master";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     agenix.url = "github:ryantm/agenix";
@@ -54,7 +54,7 @@
         samba = nixpkgs.legacyPackages."x86_64-linux".samba.override { enableLDAP = true; enableDomainController = true; enablePam = true; };
       };
       nixosConfigurations.desktop = let config = { gui_supported = true; };
-      in (nixpkgs.lib.nixosSystem {
+      in (nixpkgs-unstable.lib.nixosSystem {
         system = "x86_64-linux";
         modules = (baseModules self.overlay config)
           ++ [ ./system/desktop/configuration.nix ];

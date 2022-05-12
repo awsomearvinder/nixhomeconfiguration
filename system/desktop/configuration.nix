@@ -74,7 +74,7 @@
   # services.xserver.xkbOptions = "eurosign:e";
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  # services.printing.enable = true;
 
   services.foldingathome.enable = true;
 
@@ -118,7 +118,7 @@
     neovim
     git
     linuxPackages.v4l2loopback
-    wireguard
+    wireguard-tools
     fahviewer
     fahcontrol
     podman
