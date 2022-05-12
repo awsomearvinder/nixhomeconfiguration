@@ -22,7 +22,7 @@
     }
   ];
 in {
-  imports = [./samba.nix];
+  imports = [];
   services.bind = {
     enable = true;
     forwarders = ["192.168.1.1"];
@@ -89,12 +89,6 @@ in {
         none;
       };
       minimal-responses yes;
-      tkey-gssapi-keytab "/var/lib/samba/bind-dns/dns.keytab";
-    '';
-    extraConfig = ''
-      dlz "AD DNS ZONE" {
-        database "dlopen ${pkgs.samba}/lib/samba/bind9/dlz_bind9_16.so";
-      };
     '';
   };
   networking.nat = {
