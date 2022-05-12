@@ -20,9 +20,9 @@
   virtualisation.podman.enable = true;
   virtualisation.libvirtd = {
     enable = true;
-    qemuOvmf = true;
-    qemuSwtpm = true;
-    qemuOvmfPackage = pkgs.OVMFFull;
+    qemu.ovmf.enable = true;
+    qemu.ovmf.package = pkgs.OVMFFull;
+    qemu.swtpm = true;
   };
 
   # Use the GRUB 2 boot loader.
