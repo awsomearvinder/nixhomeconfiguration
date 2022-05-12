@@ -29,7 +29,7 @@ cmp.setup({
 })
 
 local nvim_lsp = require'lspconfig';
-local servers = {"rust_analyzer", "pyright", "tsserver", "elmls", "hls", "purescriptls"};
+local servers = {"rust_analyzer", "pyright", "tsserver", "elmls", "hls", "purescriptls", "rnix"};
 for _, server in ipairs(servers) do 
   nvim_lsp[server].setup {
     capabilities = require('cmp_nvim_lsp')

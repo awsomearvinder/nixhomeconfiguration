@@ -49,9 +49,14 @@ in {
         python39
         gdb
         nodePackages.pyright
+        rnix-lsp
 
         starship
       ] ++ custom_packages;
+
+    programs.direnv.enable = true;
+    programs.direnv.nix-direnv.enable = true;
+    # optional for nix flakes support in home-manager 21.11, not required in home-manager unstable or 22.05
 
     # This value determines the Home Manager release that your
     # configuration is compatible with. This helps avoid breakage
