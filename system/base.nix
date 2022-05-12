@@ -3,16 +3,12 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-
-let u = { ... }: 
-    {
-  };
-in {
+{
   imports = [./options.nix ./not_wireguard.nix];
   config = {
     nix.trustedUsers = ["@wheel" "root"];
     nix = {
-      package = pkgs.nixFlakes;
+      package = pkgs.nixUnstable;
       extraOptions = "experimental-features  = nix-command flakes";
       gc = {
         automatic = true;

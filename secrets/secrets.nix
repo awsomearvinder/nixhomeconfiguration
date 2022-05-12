@@ -6,7 +6,7 @@ let
 in {
   "wireguard/private.key".publicKeys = [coding_server];
   "dyndns/password.priv".publicKeys = [coding_server];
-  "wireguard_desktop/private.key".publicKeys = [desktop];
+  "desktop/wireguard/private.key".publicKeys = [desktop];
   "hydra/wireguard/private.key".publicKeys = [hydra];
   "hydra/cluster-join-token.key".publicKeys = [hydra];
   "hydra/binary-caches.json".publicKeys = [hydra];

@@ -5,24 +5,20 @@
 { config, pkgs, ... }:
 
 {
-  nix = {
-    package = pkgs.nixUnstable;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-  };
-
   imports = [ # Include the results of the hardware scan.
-    ./wireguard.nix
     ./hardware-configuration.nix
+    ../base.nix
   ];
+
+  machine_name = "desktop";
+  wireguard_ip_and_mask = "10.100.1.2/16";
 
   virtualisation.podman.enable = true;
   virtualisation.libvirtd = {
     enable = true;
     qemu.ovmf.enable = true;
     qemu.ovmf.package = pkgs.OVMFFull;
-    qemu.swtpm = true;
+    qemu.swtpm.enable = true;
   };
 
   # Use the GRUB 2 boot loader.
