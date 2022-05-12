@@ -95,9 +95,6 @@
       nixosConfigurations.hydra_server =
         let config = { gui_supported = false; };
         in (mkSystemx86_64Linux config ./system/hydra_server/configuration.nix);
-      nixosConfigurations.nas =
-        let config = { gui_supported = false; };
-        in (mkSystemx86_64Linux config ./system/nas/configuration.nix);
 
       homeConfigurations.bender = home-manager.lib.homeManagerConfiguration {
         system = "x86_64-linux";
@@ -123,7 +120,6 @@
           autoRollback = false;
           nodes.wireguard_server = mkSystemNode "10.100.0.1" "wireguard_server";
           nodes.hydra_server = mkSystemNode "10.100.0.1" "hydra_server";
-          nodes.nas = mkSystemNode "192.168.1.153" "nas";
         };
       checks = builtins.mapAttrs
         (system: deployLib: deployLib.deployChecks self.deploy)
