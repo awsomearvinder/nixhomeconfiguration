@@ -14,8 +14,18 @@
     hercules-ci.url = "github:hercules-ci/hercules-ci-agent";
   };
 
-  outputs = { self, home-manager, nixpkgs, nixpkgs-master, nixpkgs-unstable
-    , agenix, deploy-rs, flake-compat-ci, hercules-ci, ... }:
+  outputs =
+    { self
+    , home-manager
+    , nixpkgs
+    , nixpkgs-master
+    , nixpkgs-unstable
+    , agenix
+    , deploy-rs
+    , flake-compat-ci
+    , hercules-ci
+    , ...
+    }:
     let
       baseModules = overlays: system_config: [
         (home-manager.nixosModules.home-manager)
@@ -30,13 +40,16 @@
         }
         agenix.nixosModules.age
       ];
+
       mkSystem = system: config: system_config: nixpkgs-unstable.lib.nixosSystem {
         inherit system;
         modules = (baseModules self.overlay config)
           ++ [ system_config ];
       };
+
       mkSystemx86_64Linux = mkSystem "x86_64-linux";
-    in {
+    in
+    {
       ciNix = flake-compat-ci.lib.recurseIntoFlakeWith {
         flake = self;
 
@@ -45,32 +58,39 @@
         # Example: [ "x86_64-darwin" "aarch64-linux" ];
         systems = [ "x86_64-linux" ];
       };
+
       overlay = final: prev: {
         nixpkgs-master = import nixpkgs-master {
           config.allowUnfree = true;
           system = "x86_64-linux";
         };
+
         nixpkgs-unstable = import nixpkgs-unstable { system = "x86_64-linux"; config.allowUnfree = true; };
+
         bind = nixpkgs.legacyPackages."x86_64-linux".bind.overrideAttrs (old: {
-            configureFlags =
-              old.configureFlags ++ ["--with-dlz-ldap=${nixpkgs.lib.getDev nixpkgs.legacyPackages."x86_64-linux".ldb}" "--with-dlz-filesystem" "--with-dlopen"];
-            buildInputs = old.buildInputs ++ [(nixpkgs.lib.getDev nixpkgs.legacyPackages."x86_64-linux".ldb) (nixpkgs.lib.getDev nixpkgs.legacyPackages."x86_64-linux".openldap)];
-          });
+          configureFlags =
+            old.configureFlags ++ [ "--with-dlz-ldap=${nixpkgs.lib.getDev nixpkgs.legacyPackages."x86_64-linux".ldb}" "--with-dlz-filesystem" "--with-dlopen" ];
+          buildInputs = old.buildInputs ++ [ (nixpkgs.lib.getDev nixpkgs.legacyPackages."x86_64-linux".ldb) (nixpkgs.lib.getDev nixpkgs.legacyPackages."x86_64-linux".openldap) ];
+        });
 
         samba = nixpkgs.legacyPackages."x86_64-linux".samba.override { enableLDAP = true; enableDomainController = true; enablePam = true; };
       };
-      nixosConfigurations.desktop = let config = { gui_supported = true; };
-      in (mkSystemx86_64Linux config ./system/desktop/configuration.nix);
-      nixosConfigurations.laptop = let config = { gui_supported = true; };
-      in (mkSystemx86_64Linux config ./system/laptop/configuration.nix);
-      nixosConfigurations.work_vm = let config = { gui_supported = false; };
-      in (mkSystemx86_64Linux config ./system/work_vm/configuration.nix);
+
+      nixosConfigurations.desktop =
+        let config = { gui_supported = true; };
+        in (mkSystemx86_64Linux config ./system/desktop/configuration.nix);
+      nixosConfigurations.laptop =
+        let config = { gui_supported = true; };
+        in (mkSystemx86_64Linux config ./system/laptop/configuration.nix);
+      nixosConfigurations.work_vm =
+        let config = { gui_supported = false; };
+        in (mkSystemx86_64Linux config ./system/work_vm/configuration.nix);
       nixosConfigurations.wireguard_server =
         let config = { gui_supported = false; };
         in (mkSystemx86_64Linux config ./system/wireguard_server/configuration.nix);
       nixosConfigurations.hydra_server =
         let config = { gui_supported = false; };
-        in (mkSystemx86_64Linux config ./system/hydra_server/configuration);
+        in (mkSystemx86_64Linux config ./system/hydra_server/configuration.nix);
       nixosConfigurations.nas =
         let config = { gui_supported = false; };
         in (mkSystemx86_64Linux config ./system/nas/configuration.nix);
@@ -83,23 +103,26 @@
         pkgs = import nixpkgs-unstable { overlays = [ self.overlay ]; system = "x86_64-linux"; };
       };
 
-      deploy = let mkSystemNode = host: systemConfigName: 
-      { 
-        hostname = host; 
-        profiles.system = {
+      deploy =
+        let mkSystemNode = host: systemConfigName:
+          {
+            hostname = host;
+            profiles.system = {
+              user = "root";
+              path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.${systemConfigName};
+            };
+          }; in
+        {
+          sshUser = "root";
           user = "root";
-          path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.${systemConfigName}; 
+          magicRollback = false;
+          autoRollback = false;
+          nodes.wireguard_server = mkSystemNode "10.100.0.1" "wireguard_server";
+          nodes.hydra_server = mkSystemNode "10.100.0.1" "hydra_server";
+          nodes.nas = mkSystemNode "192.168.1.153" "nas";
         };
-      }; in {
-        sshUser = "root";
-        user = "root";
-        magicRollback = false;
-        autoRollback = false;
-        nodes.wireguard_server = mkSystemNode "10.100.0.1" wireguard_server;
-        nodes.hydra_server = mkSystemNode "10.100.0.1" hydra_server;
-        nodes.nas = mkSystemNode "192.168.1.153" nas;
-      };
       checks = builtins.mapAttrs
-        (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
+        (system: deployLib: deployLib.deployChecks self.deploy)
+        deploy-rs.lib;
     };
 }
