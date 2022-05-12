@@ -8,11 +8,11 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./hydra.nix
+      ./hercules.nix
       ../base.nix
     ];
 
-  machine_name = "hydra";
+  machine_name = "hercules";
   wireguard_ip_and_mask = "10.100.0.3/24";
 
   # Select internationalisation properties.

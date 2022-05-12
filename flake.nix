@@ -92,9 +92,9 @@
       nixosConfigurations.wireguard_server =
         let config = { gui_supported = false; };
         in (mkSystemx86_64Linux config ./system/wireguard_server/configuration.nix);
-      nixosConfigurations.hydra_server =
+      nixosConfigurations.hercules_server =
         let config = { gui_supported = false; };
-        in (mkSystemx86_64Linux config ./system/hydra_server/configuration.nix);
+        in (mkSystemx86_64Linux config ./system/hercules_server/configuration.nix);
 
       homeConfigurations.bender = home-manager.lib.homeManagerConfiguration {
         system = "x86_64-linux";
@@ -119,7 +119,7 @@
           magicRollback = false;
           autoRollback = false;
           nodes.wireguard_server = mkSystemNode "10.100.0.1" "wireguard_server";
-          nodes.hydra_server = mkSystemNode "10.100.0.1" "hydra_server";
+          nodes.hercules_server = mkSystemNode "10.100.0.1" "hercules_server";
         };
       checks = builtins.mapAttrs
         (system: deployLib: deployLib.deployChecks self.deploy)
