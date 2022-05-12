@@ -30,6 +30,12 @@
         }
         agenix.nixosModules.age
       ];
+      mkSystem = system: config: system_config: nixpkgs-unstable.lib.nixosSystem {
+        inherit system;
+        modules = (baseModules self.overlay config)
+          ++ [ system_config ];
+      };
+      mkSystemx86_64Linux = mkSystem "x86_64-linux";
     in {
       ciNix = flake-compat-ci.lib.recurseIntoFlakeWith {
         flake = self;
@@ -54,44 +60,20 @@
         samba = nixpkgs.legacyPackages."x86_64-linux".samba.override { enableLDAP = true; enableDomainController = true; enablePam = true; };
       };
       nixosConfigurations.desktop = let config = { gui_supported = true; };
-      in (nixpkgs-unstable.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = (baseModules self.overlay config)
-          ++ [ ./system/desktop/configuration.nix ];
-      });
+      in (mkSystemx86_64Linux config ./system/desktop/configuration.nix);
       nixosConfigurations.laptop = let config = { gui_supported = true; };
-      in (nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = (baseModules self.overlay config)
-          ++ [ ./system/laptop/configuration.nix ];
-      });
+      in (mkSystemx86_64Linux config ./system/laptop/configuration.nix);
       nixosConfigurations.work_vm = let config = { gui_supported = false; };
-      in (nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = (baseModules self.overlay config)
-          ++ [ ./system/work_vm/configuration.nix ];
-      });
+      in (mkSystemx86_64Linux config ./system/work_vm/configuration.nix);
       nixosConfigurations.wireguard_server =
         let config = { gui_supported = false; };
-        in (nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = (baseModules self.overlay config)
-            ++ [ ./system/wireguard_server/configuration.nix ];
-        });
+        in (mkSystemx86_64Linux config ./system/wireguard_server/configuration.nix);
       nixosConfigurations.hydra_server =
         let config = { gui_supported = false; };
-        in (nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = (baseModules self.overlay config)
-            ++ [ ./system/hydra_server/configuration.nix ];
-        });
+        in (mkSystemx86_64Linux config ./system/hydra_server/configuration);
       nixosConfigurations.nas =
         let config = { gui_supported = false; };
-        in (nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = (baseModules self.overlay config)
-            ++ [ ./system/nas/configuration.nix ];
-        });
+        in (mkSystemx86_64Linux config ./system/nas/configuration.nix);
 
       homeConfigurations.bender = home-manager.lib.homeManagerConfiguration {
         system = "x86_64-linux";
