@@ -80,38 +80,24 @@
         configuration = import ./bender/home.nix { gui_supported = false; };
         homeDirectory = "/home/bender";
         username = "bender";
-        pkgs = import nixpkgs { overlays = [ self.overlay ]; system = "x86_64-linux"; };
+        pkgs = import nixpkgs-unstable { overlays = [ self.overlay ]; system = "x86_64-linux"; };
       };
 
-      deploy = {
+      deploy = let mkSystemNode = host: systemConfigName: 
+      { 
+        hostname = host; 
+        profiles.system = {
+          user = "root";
+          path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.${systemConfigName}; 
+        };
+      }; in {
         sshUser = "root";
         user = "root";
         magicRollback = false;
         autoRollback = false;
-        nodes.wireguard_server = {
-          hostname = "10.100.0.1";
-          profiles.system = {
-            user = "root";
-            path = deploy-rs.lib.x86_64-linux.activate.nixos
-              self.nixosConfigurations.wireguard_server;
-          };
-        };
-        nodes.hydra_server = {
-          hostname = "10.100.0.3";
-          profiles.system = {
-            user = "root";
-            path = deploy-rs.lib.x86_64-linux.activate.nixos
-              self.nixosConfigurations.hydra_server;
-          };
-        };
-        nodes.nas = {
-          hostname = "192.168.1.153";
-          profiles.system = {
-            user = "root";
-            path = deploy-rs.lib.x86_64-linux.activate.nixos 
-              self.nixosConfigurations.nas;
-          };
-        };
+        nodes.wireguard_server = mkSystemNode "10.100.0.1" wireguard_server;
+        nodes.hydra_server = mkSystemNode "10.100.0.1" hydra_server;
+        nodes.nas = mkSystemNode "192.168.1.153" nas;
       };
       checks = builtins.mapAttrs
         (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
