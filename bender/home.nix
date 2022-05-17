@@ -19,6 +19,7 @@ in {
       ./applications/neovim.nix
       ./applications/tmux.nix
       ./applications/kakoune.nix
+      ./applications/zellij.nix
     ]
     ++ (
       if system_config.gui_supported
