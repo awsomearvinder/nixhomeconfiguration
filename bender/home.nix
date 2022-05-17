@@ -57,6 +57,7 @@ in {
         gdb
         nodePackages.pyright
         rnix-lsp
+        insomnia
 
         starship
       ]
