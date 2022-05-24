@@ -39,6 +39,18 @@
     lighthouses = [
       "192.168.100.1"
     ];
+    firewall = {
+      inbound = [{
+        port = "any";
+        proto = "any";
+        host = "any";
+      }];
+      outbound = [{
+        port = "any";
+        proto = "any";
+        host = "any";
+      }];
+    };
   };
 
   # Use the GRUB 2 boot loader.

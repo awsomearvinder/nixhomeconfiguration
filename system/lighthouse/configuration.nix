@@ -16,6 +16,18 @@
       {name = "lighthouse.crt"; text = (builtins.readFile ../../public/lighthouse/lighthouse.crt);};
     ca = pkgs.writeTextFile 
       {name = "lighthouse_ca.crt"; text = (builtins.readFile ../../public/lighthouse/ca.crt);};
+    firewall = {
+      inbound = [{
+        host = "any";
+        port = "any";
+        proto = "any";
+      }];
+      outbound = [{
+        host = "any";
+        port = "any";
+        proto = "any";
+      }];
+    };
   };
   networking.interfaces.ens3.useDHCP = true;
 
