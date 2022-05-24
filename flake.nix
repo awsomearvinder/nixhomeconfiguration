@@ -100,6 +100,10 @@
       config = {gui_supported = false;};
     in (mkSystemx86_64Linux config ./system/hercules_server/configuration.nix);
 
+    nixosConfigurations.lighthouse = let
+      config = {gui_supported = false;};
+    in (mkSystemx86_64Linux config ./system/lighthouse/configuration.nix);
+
     homeConfigurations.bender = home-manager.lib.homeManagerConfiguration {
       system = "x86_64-linux";
       configuration = import ./bender/home.nix {gui_supported = false;};
@@ -125,8 +129,10 @@
       magicRollback = false;
       autoRollback = false;
       nodes.wireguard_server = mkSystemNode "10.100.0.1" "wireguard_server";
-      nodes.hercules_server = mkSystemNode "10.100.0.1" "hercules_server";
+      # nodes.hercules_server = mkSystemNode "10.100.0.1" "hercules_server";
+      nodes.lighthouse = mkSystemNode  "152.67.248.214" "lighthouse";
     };
+
     checks =
       builtins.mapAttrs
       (system: deployLib: deployLib.deployChecks self.deploy)

@@ -154,6 +154,8 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
+  networking.interfaces.ens18.useDHCP = true;
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];

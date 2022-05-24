@@ -4,7 +4,7 @@
   lib,
   ...
 }:
-lib.mkIf (config.machine_name != "wireguard") {
+lib.mkIf (config.machine_name != "wireguard" && config.machine_name != "lighthouse") {
   age.secrets."${config.machine_name}/wireguard/private.key".file = ../secrets/${config.machine_name}/wireguard/private.key;
 
   networking.wireguard.interfaces = {
