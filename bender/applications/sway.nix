@@ -61,7 +61,7 @@ in {
         smartBorders = "on";
       };
       inherit modifier;
-      terminal = "alacritty";
+      terminal = "alacritty msg create-window || alacritty";
       workspaceAutoBackAndForth = true;
       keybindings = lib.mkOptionDefault {
         "${modifier}+p" = "exec grim -g \"$(slurp)\" - | wl-copy";
