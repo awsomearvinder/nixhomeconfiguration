@@ -152,6 +152,7 @@
     podman
     virt-manager
     distrobox
+    pinentry-curses
   ];
 
   hardware.opentabletdriver.enable = true;
@@ -164,6 +165,7 @@
   programs.mtr.enable = true;
   programs.gnupg.agent = {
     enable = true;
+    pinentryFlavor = "curses";
     #enableSSHSupport = true;
   };
 
