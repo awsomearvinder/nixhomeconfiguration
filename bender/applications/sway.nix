@@ -55,11 +55,6 @@ in {
           background = "/etc/nixos/bender/dotfiles/wallpaper.png fill";
         };
       };
-      gaps = {
-        inner = 5;
-        outer = 5;
-        smartBorders = "on";
-      };
       inherit modifier;
       terminal = "alacritty msg create-window || alacritty";
       workspaceAutoBackAndForth = true;
