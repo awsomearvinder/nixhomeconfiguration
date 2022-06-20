@@ -59,6 +59,7 @@ in {
         nodePackages.pyright
         rnix-lsp
         insomnia
+        pandoc
 
         starship
       ]
