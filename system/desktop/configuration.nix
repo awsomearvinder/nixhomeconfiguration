@@ -168,6 +168,7 @@
     pinentryFlavor = "curses";
     #enableSSHSupport = true;
   };
+  services.pcscd.enable = true;
 
   # some development thing I made on the spot.
   services.postgresql = {
