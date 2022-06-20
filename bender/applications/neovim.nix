@@ -36,7 +36,7 @@ in {
       pkgs.nixpkgs-master.vimPlugins.telescope-ui-select-nvim
       nerdtree
       neoformat
-      neorg
+      orgmode
       luasnip
       pkgs.nixpkgs-master.vimPlugins.which-key-nvim
       nvim-cmp
