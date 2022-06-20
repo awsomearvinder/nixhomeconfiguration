@@ -8,7 +8,7 @@
     }
     {
       name = "rust-analyzer";
-      publisher = "matklad";
+      publisher = "rust-lang";
       version = "0.3.901";
       sha256 = "EQgkP4OSMnxImUmRkN4do9kGv3bcwZb/4DQjTXkxvVA=";
     }
