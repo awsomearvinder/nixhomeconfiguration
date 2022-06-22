@@ -6,9 +6,6 @@
   inherit (config) dots;
 in let
   buildVimPlugin = pkgs.vimUtils.buildVimPlugin;
-  configFiles = builtins.readDir (dots + "/nvim");
-  configFileNames =
-    pkgs.lib.attrsets.mapAttrsToList (key: value: key) configFiles;
   configured-neovim = pkgs.wrapNeovim pkgs.neovim-unwrapped {
     vimAlias = true;
     viAlias = true;
