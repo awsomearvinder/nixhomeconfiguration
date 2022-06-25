@@ -23,7 +23,7 @@ require('orgmode').setup({
     j = {
         description = "journal",
         template = "* %U %?",
-        target = "~/org/journal/%<%Y-%M-%D %A>.org",
+        target = "~/org/journal.org",
     },
   },
 })
