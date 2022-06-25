@@ -163,12 +163,6 @@
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   programs.mtr.enable = true;
-  programs.gnupg.agent = {
-    enable = true;
-    pinentryFlavor = "curses";
-    #enableSSHSupport = true;
-  };
-  services.pcscd.enable = true;
 
   # some development thing I made on the spot.
   services.postgresql = {

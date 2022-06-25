@@ -14,6 +14,7 @@ in {
     [
       ./applications/nushell.nix
       ./applications/git.nix
+      ./applications/gnupg.nix
       ./applications/ion.nix
       ./applications/starship.nix
       ./applications/neovim.nix
