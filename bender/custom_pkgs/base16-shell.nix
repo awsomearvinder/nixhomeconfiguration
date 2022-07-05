@@ -5,17 +5,17 @@
 }:
 stdenv.mkDerivation rec {
   pname = "base16-shell";
-  version = "11-28-2021";
+  version = "07-05-2022";
 
   buildInputs = [
     bash
   ];
 
   src = fetchFromGitHub {
-    owner = "chriskempson";
+    owner = "base16-project";
     repo = pname;
-    rev = "ce8e1e540367ea83cc3e01eec7b2a11783b3f9e1";
-    sha256 = "OMhC6paqEOQUnxyb33u0kfKpy8plLSRgp8X8T8w0Q/o=";
+    rev = "1af738dbb8fb6dbfd0402502ed47937ef4ebd461";
+    sha256 = "ZlZpMvoljpfeTuOfTrF9qEnoGnkpxGjznd54y+deYwA=";
   };
 
   installPhase = ''
