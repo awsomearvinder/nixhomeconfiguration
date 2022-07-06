@@ -9,10 +9,9 @@
       commit.gpgSign = true;
       gpg.program = "${pkgs.gnupg}/bin/gpg";
       rerere.enabled = true;
-    };
+    } // (if config.work_account then { user.signingkey = "D938E040245154F8"; } else {});
   } // (if config.work_account then {
     userEmail = "Arvinder.Dhanoa@winona.edu";
-    extraConfig = { user.signingkey = "D938E040245154F8"; };
   } else
     { });
 }
