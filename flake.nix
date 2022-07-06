@@ -77,11 +77,11 @@
         buildInputs = old.buildInputs ++ [(nixpkgs.lib.getDev nixpkgs.legacyPackages.${system}.ldb) (nixpkgs.lib.getDev nixpkgs.legacyPackages.${system}.openldap)];
       });
 
-      samba = nixpkgs.legacyPackages.${system}.samba.override {
-        enableLDAP = true;
-        enableDomainController = true;
-        enablePam = true;
-      };
+      #samba = nixpkgs.legacyPackages.${system}.samba.override {
+      #  enableLDAP = true;
+      #  enableDomainController = true;
+      #  enablePam = true;
+      #};
     };
 
     nixosConfigurations.desktop = let
@@ -110,6 +110,22 @@
       homeDirectory = "/home/bender";
       username = "bender";
       pkgs = import nixpkgs-unstable {
+        config.allowUnfree = true;
+        overlays = [(self._overlay "x86_64-linux")];
+        system = "x86_64-linux";
+      };
+    };
+
+    homeConfigurations.benderWork = home-manager.lib.homeManagerConfiguration {
+      system = "x86_64-linux";
+      configuration = import ./bender/home.nix {
+        gui_supported = true;
+        work_account = true;
+      };
+      homeDirectory = "/home/bender";
+      username = "bender";
+      pkgs = import nixpkgs-unstable {
+        config.allowUnfree = true;
         overlays = [(self._overlay "x86_64-linux")];
         system = "x86_64-linux";
       };

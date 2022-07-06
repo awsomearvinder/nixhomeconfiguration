@@ -36,27 +36,6 @@
     #pdf viewer
     zathura
 
-    #chat clients
-    discord
-    element-desktop
-
-    #osu - need I say more?
-    nixpkgs-master.osu-lazer
-
-    #general
-    xournalpp
-    calibre
-
-    #Audio
-    nixpkgs-master.easyeffects
-
-    #until I setup something with pactl.
-    pavucontrol
-    spotify
-
-    #stuff.
-    obs-studio
-
     #fonts
     font-awesome
     fira-code
@@ -66,16 +45,38 @@
     #latex
     texlive.combined.scheme-full
 
-    dbeaver
+  ] ++ (if !config.work_account then [
+    #osu - need I say more?
+    nixpkgs-master.osu-lazer
+
+    #until I setup something with pactl.
+    pavucontrol
+    spotify
 
     #Video editing
     kdenlive
+
+    #chat clients
+    discord
+    element-desktop
+
+    #stuff.
+    obs-studio
 
     #Video Viewer
     vlc
 
     #art
     krita
-  ];
+
+    #general
+    xournalpp
+    calibre
+
+    #Audio
+    nixpkgs-master.easyeffects
+
+    dbeaver
+  ] else []);
   fonts.fontconfig = {enable = true;};
 }

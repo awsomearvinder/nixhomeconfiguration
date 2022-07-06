@@ -1,4 +1,4 @@
-system_config: {
+{gui_supported ? false, work_account ? false}: {
   config,
   lib,
   pkgs,
@@ -23,7 +23,7 @@ in {
       ./applications/zellij.nix
     ]
     ++ (
-      if system_config.gui_supported
+      if gui_supported
       then [./gui_supported.nix]
       else []
     );
@@ -32,10 +32,14 @@ in {
     dots = mkOption {type = types.path;};
     modifier = mkOption {type = types.str;};
     scripts = mkOption {type = types.path;};
+    gui_supported = mkOption {type = types.bool;};
+    work_account = mkOption {type = types.bool;};
   };
 
   config = {
     inherit (user_configuration) dots modifier scripts;
+    inherit gui_supported;
+    inherit work_account;
 
     home.packages = with pkgs;
       [
@@ -51,20 +55,22 @@ in {
 
         #development stuff
         mutt
-        lynx
         nixfmt
-        nodejs
-        deno
         python39
         gdb
-        nodePackages.pyright
         rnix-lsp
         insomnia
         pandoc
 
         starship
       ]
-      ++ custom_packages;
+      ++ custom_packages
+      ++ (if !work_account then [
+        lynx
+        nodejs
+        deno
+        nodePackages.pyright
+      ] else []);
 
     programs.direnv.enable = true;
     programs.direnv.nix-direnv.enable = true;

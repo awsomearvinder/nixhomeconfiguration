@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{ config, pkgs, ... }: {
   programs.git = {
     enable = true;
     userName = "Arvinder";
@@ -14,5 +10,9 @@
       gpg.program = "${pkgs.gnupg}/bin/gpg";
       rerere.enabled = true;
     };
-  };
+  } // (if config.work_account then {
+    userEmail = "Arvinder.Dhanoa@winona.edu";
+    extraConfig = { user.signingkey = "D938E040245154F8"; };
+  } else
+    { });
 }
