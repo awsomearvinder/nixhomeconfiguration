@@ -52,7 +52,7 @@ in {
       output = {
         "DP-1" = {
           mode = "1920x1080@143Hz";
-          background = "/etc/nixos/bender/dotfiles/wallpaper.png fill";
+          background = "${dots}/wallpaper.png fill";
         };
       };
       inherit modifier;
