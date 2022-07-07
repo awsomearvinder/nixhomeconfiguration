@@ -77,6 +77,8 @@
     nixpkgs-master.easyeffects
 
     dbeaver
+  ] else []) ++ (if config.work_account then [
+    pkgs.wayvnc
   ] else []);
   fonts.fontconfig = {enable = true;};
 }
