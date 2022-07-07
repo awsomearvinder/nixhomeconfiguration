@@ -70,7 +70,9 @@ in {
         nodejs
         deno
         nodePackages.pyright
-      ] else []);
+      ] else [
+        home-manager
+      ]);
 
     programs.direnv.enable = true;
     programs.direnv.nix-direnv.enable = true;
