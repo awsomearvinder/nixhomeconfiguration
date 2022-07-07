@@ -75,11 +75,11 @@ in {
         #{ command = "dropbox start"; always = true; }
         {
           command = "mako";
-          always = true;
+          always = false;
         }
         {
           command = "waybar";
-          always = true;
+          always = false;
         }
         {
           command = "foot --server";
