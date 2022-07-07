@@ -29,8 +29,6 @@
     #Gnome
     gnome3.gnome-tweaks
 
-    #CLI stuff.
-    alacritty
     konsole
 
     #pdf viewer
@@ -79,6 +77,10 @@
     dbeaver
   ] else []) ++ (if config.work_account then [
     pkgs.wayvnc
-  ] else []);
+    pkgs.foot
+  ] else [
+    #CLI stuff.
+    alacritty
+  ]);
   fonts.fontconfig = {enable = true;};
 }

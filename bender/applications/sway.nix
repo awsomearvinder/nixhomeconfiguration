@@ -60,7 +60,7 @@ in {
         };
       };
       inherit modifier;
-      terminal = "alacritty msg create-window || alacritty";
+      terminal = if !config.work_account then "alacritty msg create-window || alacritty" else "footclient";
       workspaceAutoBackAndForth = true;
       keybindings = lib.mkOptionDefault {
         "${modifier}+p" = "exec grim -g \"$(slurp)\" - | wl-copy";
@@ -80,6 +80,10 @@ in {
         {
           command = "waybar";
           always = true;
+        }
+        {
+          command = "foot --server";
+          always = false;
         }
       ];
     };
