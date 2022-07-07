@@ -1,5 +1,5 @@
-{
+{work_account, ...}: {
   dots = ./dotfiles;
   scripts = ~/.config/scripts;
-  modifier = "Mod4";
+  modifier = if !work_account then "Mod4" else "Control";
 }

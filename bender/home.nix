@@ -5,7 +5,7 @@
   ...
 }:
 with lib; let
-  user_configuration = import ./configuration.nix;
+  user_configuration = import ./configuration.nix {inherit work_account;};
   custom_packages = [
     (pkgs.callPackage ./custom_pkgs/base16-shell.nix {})
   ];

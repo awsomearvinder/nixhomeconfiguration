@@ -65,7 +65,7 @@ in {
       keybindings = lib.mkOptionDefault {
         "${modifier}+p" = "exec grim -g \"$(slurp)\" - | wl-copy";
         "${modifier}+Shift+p" = "exec grim -o $(swaymsg --pretty -t get_outputs | awk '/focused/ {print $2}') - | wl-copy";
-        "${modifier}+Ctrl+d" = ''exec "shutdown -h now"'';
+        "${modifier}+Shift+d" = ''exec "shutdown -h now"'';
       };
       window = {
         border = 1;
