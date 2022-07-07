@@ -54,6 +54,10 @@ in {
           mode = "1920x1080@143Hz";
           background = "${dots}/wallpaper.png fill";
         };
+        "HEADLESS-1" = {
+          mode = "1680x1050";
+          background = "${dots}/wallpaper.png fill";
+        };
       };
       inherit modifier;
       terminal = "alacritty msg create-window || alacritty";
