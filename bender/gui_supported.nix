@@ -10,6 +10,7 @@
     ./applications/sway.nix
     ./applications/mako.nix
     ./applications/alacritty.nix
+    ./applications/foot.nix
   ];
 
   #enable these

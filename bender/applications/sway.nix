@@ -81,10 +81,6 @@ in {
           command = "waybar";
           always = false;
         }
-        {
-          command = "foot --server";
-          always = false;
-        }
       ];
     };
   };
