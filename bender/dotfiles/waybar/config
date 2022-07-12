@@ -1,108 +1,115 @@
 {
-	"layer": "top",
-    "height": 5,
-	"position": "bottom",
-
-	"modules-left": [
-		"sway/workspaces",
-		"custom/right-arrow-dark"
-	],
+	"position": "top",
+	"layer": "bottom",
+	"margin-top": 0,
+	"margin-right": 0,
+	"margin-left": 0,
 	"modules-center": [
-		"custom/left-arrow-dark",
-		"clock#1",
-		"custom/left-arrow-light",
-		"custom/left-arrow-dark",
-		"clock#2",
-		"custom/right-arrow-dark",
-		"custom/right-arrow-light",
-		"clock#3",
-		"custom/right-arrow-dark"
+		"sway/workspaces"
+	],
+	"modules-left": [
+		"clock",
+		"custom/separator",
+		"battery",
+		"disk#1",
+		"disk#2",
+		"memory",
+		"cpu",
+		"idle_inhibitor",
+		"sway/mode"
 	],
 	"modules-right": [
-		"custom/left-arrow-dark",
+		"custom/separator",
+		"backlight",
 		"pulseaudio",
-		"custom/left-arrow-light",
-		"custom/left-arrow-dark",
-		"memory",
-		"custom/left-arrow-light",
-		"custom/left-arrow-dark",
-		"cpu",
-		"custom/left-arrow-light",
-		"custom/left-arrow-dark",
-		"battery",
-		"custom/left-arrow-light",
-		"custom/left-arrow-dark",
-		"disk",
-		"custom/left-arrow-light",
-		"custom/left-arrow-dark",
-		"tray"
+		"custom/separator",
+		"tray",
+		"custom/separator",
+		"custom/powermenu"
 	],
-
-	"custom/left-arrow-dark": {
-		"format": "",
-		"tooltip": false
-	},
-	"custom/left-arrow-light": {
-		"format": "",
-		"tooltip": false
-	},
-	"custom/right-arrow-dark": {
-		"format": "",
-		"tooltip": false
-	},
-	"custom/right-arrow-light": {
-		"format": "",
-		"tooltip": false
-	},
-
 	"sway/workspaces": {
 		"disable-scroll": true,
-		"format": "{name}"
-	},
-
-	"clock#1": {
-		"format": "{:%a}",
-		"tooltip": false
-	},
-	"clock#2": {
-		"format": "{:%H:%M}",
-		"tooltip": false
-	},
-	"clock#3": {
-		"format": "{:%m-%d}",
-		"tooltip": false
-	},
-
-	"pulseaudio": {
-		"format": "{icon} {volume:2}%",
-		"format-bluetooth": "{icon}  {volume}%",
-		"format-muted": "MUTE",
+		"all-outputs": false,
+		"format": "{name} {icon}",
 		"format-icons": {
-			"headphones": "",
+			"1": "",
+			"2": "",
+			"3": "",
+			"4": "",
+			"urgent": "",
+			"focused": "",
+			"default": ""
+		}
+	},
+	"idle_inhibitor": {
+		"format": "{icon}",
+		"format-icons": {
+			"activated": "",
+			"deactivated": ""
+		}
+	},
+	"backlight": {
+		"format": " {percent}%",
+		"format-icons": [
+			"",
+			""
+		],
+		"on-scroll-up": "brightnessctl set +5%",
+		"on-scroll-down": "brightnessctl set 5%-"
+	},
+	"clock": {
+		"format": "{:%a %d %b %H:%M}",
+		"tooltip": false
+	},
+	"pulseaudio": {
+		"format": "{icon} {volume}%  {format_source}",
+		"format-bluetooth": "{icon} {volume}%  {format_source}",
+		"format-bluetooth-muted": " {icon}  {format_source}",
+		"format-muted": " {format_source}",
+		"format-source": " {volume}%",
+		"format-source-muted": "",
+		"format-icons": {
+			"headphone": "",
+			"hands-free": "",
+			"headset": "",
+			"phone": "",
+			"portable": "",
+			"car": "",
 			"default": [
+				"",
 				"",
 				""
 			]
 		},
-		"scroll-step": 5,
-		"on-click": "pamixer -t",
-		"on-click-right": "pavucontrol"
+		"on-click": "pavucontrol"
 	},
 	"memory": {
+		"states": {
+			"good": 0,
+			"warning": 60,
+			"critical": 80
+		},
 		"interval": 5,
-		"format": "Mem {}%"
+		"format": "",
+		"on-click": "kitty bpytop"
 	},
 	"cpu": {
-		"interval": 5,
-		"format": "CPU {usage:2}%"
+		"states": {
+			"good": 0,
+			"warning": 70,
+			"critical": 95
+		},
+		"interval": 1,
+		"format": "",
+		"on-click": "kitty bpytop"
 	},
 	"battery": {
 		"states": {
-			"good": 95,
+			"good": 100,
 			"warning": 30,
 			"critical": 15
 		},
-		"format": "{icon} {capacity}%",
+		"format": "{icon}",
 		"format-icons": [
 			"",
 			"",
@@ -111,12 +118,53 @@
 			""
 		]
 	},
-	"disk": {
+	"disk#1": {
+		"states": {
+			"good": 0,
+			"warning": 70,
+			"critical": 95
+		},
 		"interval": 5,
-		"format": "Disk {percentage_used:2}%",
+		"format": "",
 		"path": "/"
 	},
+	"disk#2": {
+		"states": {
+			"good": 0,
+			"warning": 70,
+			"critical": 95
+		},
+		"interval": 5,
+		"format": "",
+		"path": "/home"
+	},
+	"sway/mode": {
+		"format": "{}"
+	},
+	"wlr/taskbar": {
+		"all-outputs": false,
+		"format": "{icon} {title:.15}",
+		"icon-theme": "Tela-circle-blue-dark",
+		"icon-size": 14,
+		"on-click": "activate",
+		"on-middle-click": "close",
+		"on-right-click": "minimize"
+	},
 	"tray": {
-		"icon-size": 20
-	}
+		"icon-size": 12,
+		"spacing": 10
+	},
+	"custom/separator": {
+		"format": "|",
+		"tooltip": false
+	},
+	"custom/separator": {
+		"format": "|",
+		"tooltip": false
+	},
+	"custom/powermenu": {
+		"format": "",
+		"on-click": "nwgbar",
+		"tooltip": false
+	},
 }
