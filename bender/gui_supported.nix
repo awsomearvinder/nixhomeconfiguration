@@ -76,6 +76,7 @@
     nixpkgs-master.easyeffects
 
     dbeaver
+    kicad
   ] else []) ++ (if config.work_account then [
     pkgs.wayvnc
     pkgs.foot
