@@ -61,6 +61,7 @@ in {
         rnix-lsp
         insomnia
         pandoc
+        kicad
 
         starship
       ]
