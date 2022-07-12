@@ -76,7 +76,7 @@ in {
         "${modifier}+Shift+d" = ''exec "shutdown -h now"'';
       };
       window = {
-        border = 4;
+        border = 3;
         titlebar = false;
       };
       startup = [
