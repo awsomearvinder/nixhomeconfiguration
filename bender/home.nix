@@ -21,6 +21,7 @@ in {
       ./applications/tmux.nix
       ./applications/kakoune.nix
       ./applications/zellij.nix
+      ./applications/kicad.nix
     ]
     ++ (
       if gui_supported
@@ -61,6 +62,10 @@ in {
         rnix-lsp
         insomnia
         pandoc
+
+        #cad
+        kicad
+        freecad
 
         starship
       ]
