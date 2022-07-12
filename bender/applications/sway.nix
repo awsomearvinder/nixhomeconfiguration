@@ -6,6 +6,7 @@
   ...
 }: let
   inherit (config) dots scripts modifier;
+  mkWallpaper = path: path + " fill";
 in {
   wayland.windowManager.sway = {
     enable = true;
@@ -52,11 +53,11 @@ in {
       output = {
         "DP-1" = {
           mode = "1920x1080@143Hz";
-          background = "${dots}/wallpaper.png fill";
+          background = mkWallpaper "${dots}/darling-in-the-franxx-zero-two-wallpaper-2880x1800_8.jpg";
         };
         "HEADLESS-1" = {
           mode = "1680x1050";
-          background = "${dots}/wallpaper.png fill";
+          background = mkWallpaper "${dots}/wallpaper.png";
         };
       };
       inherit modifier;
