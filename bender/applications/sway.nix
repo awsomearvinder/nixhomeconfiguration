@@ -18,6 +18,9 @@ in {
     config = {
       bars = [];
       # stolen from https://github.com/ziap/dotfiles/blob/master/.config/sway/config
+      gaps = {
+        inner = 8;
+      };
       colors = {
         focused = {
           border = accent;
@@ -57,11 +60,11 @@ in {
       output = {
         "DP-1" = {
           mode = "1920x1080@143Hz";
-          background = mkWallpaper "${dots}/darling-in-the-franxx-zero-two-wallpaper-2880x1800_8.jpg";
+          background = mkWallpaper "${dots}/home_wallpaper.jpg";
         };
         "HEADLESS-1" = {
           mode = "1680x1050";
-          background = mkWallpaper "${dots}/wallpaper.png";
+          background = mkWallpaper "${dots}/work_wallpaper.png";
         };
       };
       inherit modifier;
@@ -73,7 +76,7 @@ in {
         "${modifier}+Shift+d" = ''exec "shutdown -h now"'';
       };
       window = {
-        border = 1;
+        border = 4;
         titlebar = false;
       };
       startup = [
