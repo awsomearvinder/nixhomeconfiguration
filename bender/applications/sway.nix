@@ -7,6 +7,9 @@
 }: let
   inherit (config) dots scripts modifier;
   mkWallpaper = path: path + " fill";
+  dark-grey = "#1d2021";
+  red = "#cc241d";
+  accent = "#ebdbb2";
 in {
   wayland.windowManager.sway = {
     enable = true;
@@ -14,34 +17,35 @@ in {
     package = pkgs.nixpkgs-unstable.sway;
     config = {
       bars = [];
+      # stolen from https://github.com/ziap/dotfiles/blob/master/.config/sway/config
       colors = {
         focused = {
-          border = "#2b2b2b";
-          background = "#2b2b2b";
-          text = "#FFFFFF";
-          indicator = "#2b2b2b";
-          childBorder = "#e8e8e8";
+          border = accent;
+          background = accent;
+          text = dark-grey;
+          indicator = accent;
+          childBorder = accent;
         };
         focusedInactive = {
-          border = "#282a36";
-          background = "#282a36";
-          text = "#999999";
-          indicator = "#484e50";
-          childBorder = "#282a36";
+          border = dark-grey;
+          background = dark-grey;
+          text = accent;
+          indicator = dark-grey;
+          childBorder = dark-grey;
         };
         unfocused = {
-          border = "#282a36";
-          background = "#282a36";
-          text = "#999999";
-          indicator = "#282a36";
-          childBorder = "#282a36";
+          border = dark-grey;
+          background = dark-grey;
+          text = accent;
+          indicator = dark-grey;
+          childBorder = dark-grey;
         };
         urgent = {
-          border = "#FF0000";
-          background = "#8C5665";
-          text = "#FF0000";
-          indicator = "#900000";
-          childBorder = "#FF0000";
+          border = red;
+          background = red;
+          text = accent;
+          indicator = red;
+          childBorder = red;
         };
       };
       input = {
