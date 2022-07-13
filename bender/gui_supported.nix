@@ -77,6 +77,8 @@
     nixpkgs-master.easyeffects
 
     dbeaver
+
+    freecad
     kicad
   ] else []) ++ (if config.work_account then [
     pkgs.wayvnc

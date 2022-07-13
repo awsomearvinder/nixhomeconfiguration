@@ -63,10 +63,6 @@ in {
         insomnia
         pandoc
 
-        #cad
-        kicad
-        freecad
-
         starship
       ]
       ++ custom_packages
