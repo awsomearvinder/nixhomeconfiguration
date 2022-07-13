@@ -105,10 +105,19 @@
     in (mkSystemx86_64Linux config ./system/lighthouse/configuration.nix);
 
     homeConfigurations.bender = home-manager.lib.homeManagerConfiguration {
-      system = "x86_64-linux";
-      configuration = import ./bender/home.nix {gui_supported = false;};
-      homeDirectory = "/home/bender";
-      username = "bender";
+      modules = [
+        (import ./bender/home.nix {
+          gui_supported = true;
+          work_account = false;
+        })
+        {
+          home = {
+            username = "bender";
+            homeDirectory = "/home/bender";
+            stateVersion = "20.09";
+          };
+        }
+      ];
       pkgs = import nixpkgs-unstable {
         config.allowUnfree = true;
         overlays = [(self._overlay "x86_64-linux")];
@@ -117,13 +126,19 @@
     };
 
     homeConfigurations.benderWork = home-manager.lib.homeManagerConfiguration {
-      system = "x86_64-linux";
-      configuration = import ./bender/home.nix {
-        gui_supported = true;
-        work_account = true;
-      };
-      homeDirectory = "/home/bender";
-      username = "bender";
+      modules = [
+        (import ./bender/home.nix {
+          gui_supported = true;
+          work_account = true;
+        })
+        {
+          home = {
+            username = "bender";
+            homeDirectory = "/home/bender";
+            stateVersion = "20.09";
+          };
+        }
+      ];
       pkgs = import nixpkgs-unstable {
         config.allowUnfree = true;
         overlays = [(self._overlay "x86_64-linux")];
