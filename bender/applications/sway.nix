@@ -89,7 +89,10 @@ in {
           command = "waybar";
           always = false;
         }
-      ];
+      ] ++ (if config.work_account then [{
+        command = "foot --server";
+        always = false;
+      }] else []);
     };
   };
 }
