@@ -11,6 +11,7 @@
     ./applications/mako.nix
     ./applications/alacritty.nix
     ./applications/foot.nix
+    ./applications/gtk.nix
   ];
 
   #enable these
