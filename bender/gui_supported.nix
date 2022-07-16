@@ -75,6 +75,7 @@
 
     #Audio
     nixpkgs-master.easyeffects
+    tidal-hifi
 
     dbeaver
 
