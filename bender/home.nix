@@ -16,6 +16,7 @@ in {
       ./applications/git.nix
       ./applications/gnupg.nix
       ./applications/ion.nix
+      ./applications/elvish.nix
       ./applications/starship.nix
       ./applications/neovim.nix
       ./applications/tmux.nix
