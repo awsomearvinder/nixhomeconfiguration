@@ -82,6 +82,7 @@
     kicad
   ] else []) ++ (if config.work_account then [
     pkgs.wayvnc
+    pkgs.remmina
     pkgs.foot
   ] else [
     #CLI stuff.
