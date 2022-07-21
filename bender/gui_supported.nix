@@ -80,13 +80,13 @@
 
     freecad
     kicad
-  ] else []) ++ (if config.work_account then [
+
+    #CLI stuff.
+    alacritty
+  ] else [
     pkgs.wayvnc
     pkgs.remmina
     pkgs.foot
-  ] else [
-    #CLI stuff.
-    alacritty
   ]);
   fonts.fontconfig = {enable = true;};
 }
