@@ -3,7 +3,7 @@
     enable = true;
     settings = {
       shell = {
-        program = "ion";
+        program = "elvish";
       };
       font = {
         size = 12;

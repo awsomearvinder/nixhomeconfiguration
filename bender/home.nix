@@ -16,6 +16,7 @@ in {
       ./applications/git.nix
       ./applications/gnupg.nix
       ./applications/ion.nix
+      ./applications/elvish.nix
       ./applications/starship.nix
       ./applications/neovim.nix
       ./applications/tmux.nix
@@ -47,6 +48,7 @@ in {
         #this is making me want to cry, I can't make an overlay with a new version
         #without a stack overflow for some reason.
         ion
+        elvish
         exa
         git
         pijul
