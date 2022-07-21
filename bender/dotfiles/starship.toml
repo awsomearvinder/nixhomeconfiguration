@@ -25,7 +25,7 @@ symbol = " "
 [directory]
 format = "[$path](bg:#0578fc fg:#141414)"
 
-[docker]
+[docker_context]
 symbol = " "
 
 [elixir]
