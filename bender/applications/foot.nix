@@ -6,7 +6,7 @@
         term = "xterm-256color";
         font = "FiraCode:size=11";
         dpi-aware = "yes";
-        shell = "ion";
+        shell = "elvish";
       };
     };
   } else {};
