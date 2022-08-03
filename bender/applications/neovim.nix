@@ -19,6 +19,7 @@ in let
     (nvim-treesitter.withPlugins (p: builtins.attrValues p))
     nvim-lspconfig
     telescope-nvim
+    plenary-nvim
     pkgs.nixpkgs-master.vimPlugins.telescope-ui-select-nvim
     nerdtree
     neoformat
