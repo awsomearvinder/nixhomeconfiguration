@@ -37,7 +37,7 @@ for item $bash_env_vars {
     if (eq $item[0] "PATH") {
         var bash_path = (str:split ':' $item[1] | each {|i| put [$i $true]} | make-map)
         var own_path = (str:split ':' $E:PATH | each {|i| put [$i $true]} | make-map)
-        var combined_path = (keys (combine-maps $bash_path $own_path) | str:join ':')
+        var combined_path = (keys (combine-maps $own_path $bash_path) | str:join ':')
         set-env "PATH" $combined_path
     }
 }
