@@ -6,6 +6,15 @@
   inherit (config) dots;
 in let
   buildVimPlugin = pkgs.vimUtils.buildVimPlugin;
+  gh-local = pkgs.stdenv.mkDerivation {
+    name = "local-gh";
+    buildInputs = [pkgs.makeWrapper];
+    buildCommand = ''
+      mkdir -p $out/bin
+      ln -s ${pkgs.gh}/bin/gh $out/bin/gh
+      wrapProgram $out/bin/gh --set GH_CONFIG_DIR '/home/bender/.config/gh'
+    '';
+  };
   plugins = with pkgs.vimPlugins; [
     auto-pairs
     vim-highlightedyank
@@ -41,7 +50,7 @@ in let
   custom-neovim = pkgs.stdenv.mkDerivation {
     name = "custom-neovim";
     unpackPhase = "true";
-    buildInputs = [pkgs.makeWrapper pkgs.fzf pkgs.bat pkgs.gh];
+    buildInputs = [pkgs.makeWrapper pkgs.fzf gh-local];
     buildPhase = "";
     installPhase = ''
       mkdir -p $out/bin
@@ -54,6 +63,6 @@ in let
 in {
   home.packages = with pkgs; [
     custom-neovim
-    pkgs.fzf pkgs.bat pkgs.gh
+    pkgs.fzf pkgs.bat gh-local
   ];
 }
