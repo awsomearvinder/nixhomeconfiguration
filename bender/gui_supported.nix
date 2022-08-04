@@ -42,9 +42,6 @@
     (nerdfonts.override {fonts = ["FiraCode"];})
     font-awesome_5
 
-    #latex
-    texlive.combined.scheme-full
-
   ] ++ (if !config.work_account then [
     #osu - need I say more?
     nixpkgs-master.osu-lazer
