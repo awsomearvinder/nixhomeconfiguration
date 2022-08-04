@@ -41,19 +41,19 @@ in let
   custom-neovim = pkgs.stdenv.mkDerivation {
     name = "custom-neovim";
     unpackPhase = "true";
-    buildInputs = [pkgs.makeWrapper];
+    buildInputs = [pkgs.makeWrapper pkgs.fzf pkgs.bat pkgs.gh];
     buildPhase = "";
     installPhase = ''
       mkdir -p $out/bin
       ln -s ${pkgs.neovim}/bin/nvim $out/bin/nvim
       wrapProgram $out/bin/nvim --set XDG_CONFIG_HOME ${dots} \
-        --set XDG_DATA_DIRS ${plugins-folder} \
-        --prefix PATH ${pkgs.lib.makeBinPath [pkgs.fzf pkgs.bat]}
+        --set XDG_DATA_DIRS ${plugins-folder}
     '';
   };
 
 in {
   home.packages = with pkgs; [
     custom-neovim
+    pkgs.fzf pkgs.bat pkgs.gh
   ];
 }
