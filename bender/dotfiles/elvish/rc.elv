@@ -1,6 +1,7 @@
 fn ls {|@arg| exa -a $@arg }
 fn lsl {|@arg| exa -al $@arg }
 fn fucking {|@arg| sudo -E $@arg }
+fn sodu {|@arg| sudo -E --preserve-env=PATH $@arg }
 fn nixd {|@arg| nix develop --command elvish @arg }
 fn nixb {|@arg| nix build $@arg }
 fn nixr {|@arg| nix run $@arg }
