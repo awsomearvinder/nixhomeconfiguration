@@ -31,7 +31,7 @@ in let
     cmp-buffer
   ];
   plugins-folder = pkgs.stdenv.mkDerivation {
-    name = "hugos-neovim-plugins";
+    name = "neovim-plugins";
     buildCommand = ''
       mkdir -p $out/nvim/site/pack/plugins/start/
       ${pkgs.lib.concatMapStringsSep "\n" (path: "ln -s ${path} $out/nvim/site/pack/plugins/start/")  plugins }
