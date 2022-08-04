@@ -40,7 +40,7 @@ in let
   custom-neovim = pkgs.stdenv.mkDerivation {
     name = "custom-neovim";
     unpackPhase = "true";
-    buildInputs = [configured-neovim pkgs.makeWrapper];
+    buildInputs = [pkgs.makeWrapper];
     buildPhase = "";
     installPhase = ''
       mkdir -p $out/bin
