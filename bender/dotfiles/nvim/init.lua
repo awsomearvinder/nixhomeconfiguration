@@ -69,7 +69,8 @@ modules = {
     "treesitter",
     "nerdtree",
     "keybindings",
-    "orgmode-notes"
+    "orgmode-notes",
+    "octo"
 }
 
 function main()

@@ -6,6 +6,15 @@
   inherit (config) dots;
 in let
   buildVimPlugin = pkgs.vimUtils.buildVimPlugin;
+  gh-local = pkgs.stdenv.mkDerivation {
+    name = "local-gh";
+    buildInputs = [pkgs.makeWrapper];
+    buildCommand = ''
+      mkdir -p $out/bin
+      ln -s ${pkgs.gh}/bin/gh $out/bin/gh
+      wrapProgram $out/bin/gh --set GH_CONFIG_DIR '/home/bender/.config/gh'
+    '';
+  };
   plugins = with pkgs.vimPlugins; [
     auto-pairs
     vim-highlightedyank
@@ -29,6 +38,8 @@ in let
     nvim-cmp
     cmp-nvim-lsp
     cmp-buffer
+    octo-nvim
+    nvim-web-devicons
   ];
   plugins-folder = pkgs.stdenv.mkDerivation {
     name = "neovim-plugins";
@@ -40,19 +51,19 @@ in let
   custom-neovim = pkgs.stdenv.mkDerivation {
     name = "custom-neovim";
     unpackPhase = "true";
-    buildInputs = [pkgs.makeWrapper];
+    buildInputs = [pkgs.makeWrapper pkgs.fzf gh-local];
     buildPhase = "";
     installPhase = ''
       mkdir -p $out/bin
       ln -s ${pkgs.neovim}/bin/nvim $out/bin/nvim
       wrapProgram $out/bin/nvim --set XDG_CONFIG_HOME ${dots} \
-        --set XDG_DATA_DIRS ${plugins-folder} \
-        --prefix PATH ${pkgs.lib.makeBinPath [pkgs.fzf pkgs.bat]}
+        --set XDG_DATA_DIRS ${plugins-folder}
     '';
   };
 
 in {
   home.packages = with pkgs; [
     custom-neovim
+    pkgs.fzf pkgs.bat gh-local
   ];
 }
