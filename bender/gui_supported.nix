@@ -48,7 +48,6 @@
 
     #until I setup something with pactl.
     pavucontrol
-    spotify
 
     #Video editing
     kdenlive
