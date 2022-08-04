@@ -29,6 +29,7 @@ in let
     nvim-cmp
     cmp-nvim-lsp
     cmp-buffer
+    octo-nvim
   ];
   plugins-folder = pkgs.stdenv.mkDerivation {
     name = "neovim-plugins";
