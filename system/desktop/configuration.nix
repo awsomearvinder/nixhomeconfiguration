@@ -106,7 +106,6 @@
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
-  services.foldingathome.enable = true;
 
   xdg = {
     portal = {
