@@ -7,6 +7,8 @@
     nixpkgs-master.url = "github:nixos/nixpkgs/master";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     agenix.url = "github:ryantm/agenix";
+    webcord-flake.url = "github:fufexan/webcord-flake";
+    webcord-flake.inputs.nixpkgs.follows = "nixpkgs-unstable";
     deploy-rs.url = "github:serokell/deploy-rs";
     flake-compat.url = "github:edolstra/flake-compat";
     flake-compat.flake = false;
@@ -24,6 +26,7 @@
     deploy-rs,
     flake-compat-ci,
     hercules-ci,
+    webcord-flake,
     ...
   }: let
     baseModules = overlays: system_config: [
@@ -76,6 +79,8 @@
           ++ ["--with-dlz-ldap=${nixpkgs.lib.getDev nixpkgs.legacyPackages.${system}.ldb}" "--with-dlz-filesystem" "--with-dlopen"];
         buildInputs = old.buildInputs ++ [(nixpkgs.lib.getDev nixpkgs.legacyPackages.${system}.ldb) (nixpkgs.lib.getDev nixpkgs.legacyPackages.${system}.openldap)];
       });
+
+      webcord = webcord-flake.packages.${system}.webcord;
 
       #samba = nixpkgs.legacyPackages.${system}.samba.override {
       #  enableLDAP = true;

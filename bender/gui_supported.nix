@@ -53,7 +53,7 @@
     kdenlive
 
     #chat clients
-    discord
+    webcord
     element-desktop
 
     #stuff.
