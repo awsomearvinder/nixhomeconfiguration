@@ -36,4 +36,5 @@ for item $bash_env_vars {
     }
 }
 
+set-env MOZ_ENABLE_WAYLAND 1
 eval (starship init elvish)
