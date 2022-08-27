@@ -14,10 +14,9 @@
     ./applications/gtk.nix
   ];
 
-  #enable these
-  programs.firefox.enable = true;
 
   home.packages = with pkgs; [
+    firefox-wayland
     #Sway.
     notify-desktop
     waybar
