@@ -71,8 +71,8 @@ in {
       terminal = if !config.work_account then "alacritty msg create-window || alacritty" else "footclient";
       workspaceAutoBackAndForth = true;
       keybindings = lib.mkOptionDefault {
-        "${modifier}+p" = "exec grim -g \"$(slurp)\" - | wl-copy";
-        "${modifier}+Shift+p" = "exec grim -o $(swaymsg --pretty -t get_outputs | awk '/focused/ {print $2}') - | wl-copy";
+        "${modifier}+p" = "exec grim -g \"$(slurp -d)\" - | wl-copy -t 'image/png'";
+        "${modifier}+Shift+p" = "exec grim -o \"$(swaymsg --pretty -t get_outputs | awk '/focused/ {print $2}')\" - | wl-copy -t 'image/png'";
         "${modifier}+Shift+d" = ''exec "shutdown -h now"'';
       };
       window = {
