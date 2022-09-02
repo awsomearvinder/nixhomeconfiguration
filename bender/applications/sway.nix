@@ -58,7 +58,7 @@ in {
         };
       };
       output = {
-        "DP-1" = {
+        "DP-3" = {
           mode = "1920x1080@143Hz";
           background = mkWallpaper "${dots}/home_wallpaper.jpg";
         };
