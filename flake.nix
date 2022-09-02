@@ -7,6 +7,8 @@
     nixpkgs-master.url = "github:nixos/nixpkgs/master";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     agenix.url = "github:ryantm/agenix";
+    custom-neovim.url = "github:awsomearvinder/custom-neovim-flake";
+    custom-neovim.inputs.nixpkgs.follows = "nixpkgs-unstable";
     webcord-flake.url = "github:fufexan/webcord-flake";
     webcord-flake.inputs.nixpkgs.follows = "nixpkgs-unstable";
     deploy-rs.url = "github:serokell/deploy-rs";
@@ -27,6 +29,7 @@
     flake-compat-ci,
     hercules-ci,
     webcord-flake,
+    custom-neovim,
     ...
   }: let
     baseModules = overlays: system_config: [
@@ -37,7 +40,7 @@
           home-manager.users.bender = import ./bender/home.nix system_config;
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          nixpkgs.overlays = import ./bender/overlays ++ [overlays];
+          nixpkgs.overlays = import ./bender/overlays ++ [overlays] ++ [(prev: final: {custom-neovim = custom-neovim.defaultPackage."x86_64-linux";})];
         };
       }
       agenix.nixosModules.age

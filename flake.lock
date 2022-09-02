@@ -58,6 +58,27 @@
         "type": "github"
       }
     },
+    "custom-neovim": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1662087991,
+        "narHash": "sha256-QIycU+eaJgj9F1lX3vGo1SMT7piuXqOQRaNV8kr4W1Q=",
+        "owner": "awsomearvinder",
+        "repo": "custom-neovim-flake",
+        "rev": "79a6c8f7581cc8b4ebc18a1ff3adbbbda101f823",
+        "type": "github"
+      },
+      "original": {
+        "owner": "awsomearvinder",
+        "repo": "custom-neovim-flake",
+        "type": "github"
+      }
+    },
     "deploy-rs": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -217,11 +238,11 @@
     },
     "flake-utils": {
       "locked": {
-        "lastModified": 1619345332,
-        "narHash": "sha256-qHnQkEp1uklKTpx3MvKtY6xzgcqXDsz5nLilbbuL+3A=",
+        "lastModified": 1659877975,
+        "narHash": "sha256-zllb8aq3YO3h8B/U0/J1WBgAL8EX5yWf5pMj3G0NAmc=",
         "owner": "numtide",
         "repo": "flake-utils",
-        "rev": "2ebf2558e5bf978c7fb8ea927dfaed8fefab2e28",
+        "rev": "c0e246b9b83f637f4681389ecabcb2681b4f3af0",
         "type": "github"
       },
       "original": {
@@ -237,6 +258,21 @@
         "owner": "numtide",
         "repo": "flake-utils",
         "rev": "3cecb5b042f7f209c56ffd8371b2711a290ec797",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "flake-utils_2": {
+      "locked": {
+        "lastModified": 1619345332,
+        "narHash": "sha256-qHnQkEp1uklKTpx3MvKtY6xzgcqXDsz5nLilbbuL+3A=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "2ebf2558e5bf978c7fb8ea927dfaed8fefab2e28",
         "type": "github"
       },
       "original": {
@@ -511,7 +547,7 @@
     },
     "pre-commit-hooks-nix": {
       "inputs": {
-        "flake-utils": "flake-utils",
+        "flake-utils": "flake-utils_2",
         "nixpkgs": [
           "hercules-ci",
           "nixpkgs"
@@ -535,6 +571,7 @@
     "root": {
       "inputs": {
         "agenix": "agenix",
+        "custom-neovim": "custom-neovim",
         "deploy-rs": "deploy-rs",
         "flake-compat": "flake-compat_2",
         "flake-compat-ci": "flake-compat-ci",

@@ -18,7 +18,6 @@ in {
       ./applications/ion.nix
       ./applications/elvish.nix
       ./applications/starship.nix
-      ./applications/neovim.nix
       ./applications/tmux.nix
       ./applications/kakoune.nix
       ./applications/zellij.nix
@@ -55,6 +54,7 @@ in {
         ripgrep
         bat
         bottom # top sucks.
+        custom-neovim
 
         #development stuff
         mutt
