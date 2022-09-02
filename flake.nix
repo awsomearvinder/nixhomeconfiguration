@@ -32,7 +32,30 @@
     custom-neovim,
     ...
   }: let
-    baseModules = overlays: system_config: [
+    system = "x86_64-linux";
+    overlays = import ./bender/overlays ++ [
+      (prev: final: { 
+        custom-neovim = custom-neovim.defaultPackage."x86_64-linux";
+        nixpkgs-master = import nixpkgs-master {
+          config.allowUnfree = true;
+          inherit system;
+        };
+
+        webcord = webcord-flake.packages.${system}.webcord;
+
+        nixpkgs-unstable = import nixpkgs-unstable {
+          inherit system;
+          config.allowUnfree = true;
+        };
+
+        bind = nixpkgs.legacyPackages.${system}.bind.overrideAttrs (old: {
+          configureFlags =
+            old.configureFlags
+            ++ ["--with-dlz-ldap=${nixpkgs.lib.getDev nixpkgs.legacyPackages.${system}.ldb}" "--with-dlz-filesystem" "--with-dlopen"];
+          buildInputs = old.buildInputs ++ [(nixpkgs.lib.getDev nixpkgs.legacyPackages.${system}.ldb) (nixpkgs.lib.getDev nixpkgs.legacyPackages.${system}.openldap)]; });
+      })
+    ];
+    baseModules = system_config: [
       (home-manager.nixosModules.home-manager)
       (hercules-ci.nixosModules.multi-agent-service)
       {
@@ -40,7 +63,7 @@
           home-manager.users.bender = import ./bender/home.nix system_config;
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          nixpkgs.overlays = import ./bender/overlays ++ [overlays] ++ [(prev: final: {custom-neovim = custom-neovim.defaultPackage."x86_64-linux";})];
+          overlays = overlays;
         };
       }
       agenix.nixosModules.age
@@ -50,7 +73,7 @@
       nixpkgs-unstable.lib.nixosSystem {
         inherit system;
         modules =
-          (baseModules (self._overlay "x86_64-linux") config)
+          (baseModules config)
           ++ [system_config];
       };
 
@@ -63,33 +86,6 @@
       # By default, every system attr in the flake will be built.
       # Example: [ "x86_64-darwin" "aarch64-linux" ];
       systems = ["x86_64-linux"];
-    };
-
-    _overlay = system: final: prev: {
-      nixpkgs-master = import nixpkgs-master {
-        config.allowUnfree = true;
-        inherit system;
-      };
-
-      nixpkgs-unstable = import nixpkgs-unstable {
-        inherit system;
-        config.allowUnfree = true;
-      };
-
-      bind = nixpkgs.legacyPackages.${system}.bind.overrideAttrs (old: {
-        configureFlags =
-          old.configureFlags
-          ++ ["--with-dlz-ldap=${nixpkgs.lib.getDev nixpkgs.legacyPackages.${system}.ldb}" "--with-dlz-filesystem" "--with-dlopen"];
-        buildInputs = old.buildInputs ++ [(nixpkgs.lib.getDev nixpkgs.legacyPackages.${system}.ldb) (nixpkgs.lib.getDev nixpkgs.legacyPackages.${system}.openldap)];
-      });
-
-      webcord = webcord-flake.packages.${system}.webcord;
-
-      #samba = nixpkgs.legacyPackages.${system}.samba.override {
-      #  enableLDAP = true;
-      #  enableDomainController = true;
-      #  enablePam = true;
-      #};
     };
 
     nixosConfigurations.desktop = let
@@ -122,7 +118,7 @@
       ];
       pkgs = import nixpkgs-unstable {
         config.allowUnfree = true;
-        overlays = [(self._overlay "x86_64-linux")];
+        inherit overlays;
         system = "x86_64-linux";
       };
     };
@@ -143,7 +139,7 @@
       ];
       pkgs = import nixpkgs-unstable {
         config.allowUnfree = true;
-        overlays = [(self._overlay "x86_64-linux")];
+        inherit overlays;
         system = "x86_64-linux";
       };
     };
