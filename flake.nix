@@ -63,7 +63,7 @@
           home-manager.users.bender = import ./bender/home.nix system_config;
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          overlays = overlays;
+          nixpkgs.overlays = overlays;
         };
       }
       agenix.nixosModules.age
