@@ -19,7 +19,10 @@
     enable = true;
     qemu.ovmf.enable = true;
     qemu.ovmf.packages = [pkgs.OVMFFull];
+    qemu.runAsRoot = true;
     qemu.swtpm.enable = true;
+    onBoot = "ignore";
+    onShutdown = "shutdown";
   };
 
   home-manager.users.bender = import ../../bender/desktop.nix;
