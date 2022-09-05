@@ -23,35 +23,6 @@
     qemu.swtpm.enable = true;
   };
 
-  age.secrets."desktop/nebula/desktop.key".file = ../../secrets/desktop/nebula/desktop.key;
-  services.nebula.networks.main = {
-    enable = true;
-    key = config.age.secrets."desktop/nebula/desktop.key".path;
-    cert = pkgs.writeTextFile 
-      {name = "desktop.crt"; text = (builtins.readFile ../../public/desktop/desktop.crt);};
-    ca = pkgs.writeTextFile 
-      {name = "lighthouse_ca.crt"; text = (builtins.readFile ../../public/lighthouse/ca.crt);};
-    staticHostMap = {
-      "192.168.100.1" = [
-        "152.67.248.214:4242"
-      ];
-    };
-    lighthouses = [
-      "192.168.100.1"
-    ];
-    firewall = {
-      inbound = [{
-        port = "any";
-        proto = "any";
-        host = "any";
-      }];
-      outbound = [{
-        port = "any";
-        proto = "any";
-        host = "any";
-      }];
-    };
-  };
 
   # Use the GRUB 2 boot loader.
   # boot.loader.grub.enable = true;
