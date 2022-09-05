@@ -34,7 +34,7 @@
   }: let
     system = "x86_64-linux";
     overlays = import ./bender/overlays ++ [
-      (prev: final: { 
+      (final: prev: {
         custom-neovim = custom-neovim.defaultPackage."x86_64-linux";
         nixpkgs-master = import nixpkgs-master {
           config.allowUnfree = true;
