@@ -27,9 +27,6 @@
     slurp
     wl-clipboard
 
-    #Gnome
-    gnome3.gnome-tweaks
-
     konsole
 
     #pdf viewer
