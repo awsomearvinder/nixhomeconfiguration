@@ -12,6 +12,7 @@
     ./applications/alacritty.nix
     ./applications/foot.nix
     ./applications/gtk.nix
+    ./applications/eww.nix
   ];
 
 
