@@ -5,11 +5,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1662046976,
-        "narHash": "sha256-BrTReGRhkVm/Kmmf4zQrL+oYWy0sds/BDBgXNX1CL3c=",
+        "lastModified": 1662241716,
+        "narHash": "sha256-urqPvSvvGUhkwzTDxUI8N1nsdMysbAfjmBNZaTYBZRU=",
         "owner": "ryantm",
         "repo": "agenix",
-        "rev": "9f136ecfa5bf954538aed3245e4408cf87c85097",
+        "rev": "c96da5835b76d3d8e8d99a0fec6fe32f8539ee2e",
         "type": "github"
       },
       "original": {
@@ -340,11 +340,11 @@
         "utils": "utils_2"
       },
       "locked": {
-        "lastModified": 1661824092,
-        "narHash": "sha256-nSWLWytlXbeLrx5A+r5Pso7CvVrX5EgmIIXW/EXvPHQ=",
+        "lastModified": 1662472236,
+        "narHash": "sha256-epA5KzVUxw9ZV+st2aU4oFfJGyIcYleTpX28wsCQQP4=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "5bd66dc6cd967033489c69d486402b75d338eeb6",
+        "rev": "de94878b6b83f7f2cfda9cdff005417a6d7ac82c",
         "type": "github"
       },
       "original": {
@@ -407,11 +407,11 @@
     },
     "nixpkgs-master": {
       "locked": {
-        "lastModified": 1662156587,
-        "narHash": "sha256-kp/4CWqK+1ezqnzTbOX9++x0y0LcZD++zxrDIBmyfQM=",
+        "lastModified": 1662481747,
+        "narHash": "sha256-RDSj+GXaCZY15CVJ3+O/uyN3pRIgBNUIdtLvAh866FY=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "b0e9b6d3014be35d010e42659d7cad95a8f77dd1",
+        "rev": "cdf21b5885c6e7a9745dd8e3c9733a61849818bb",
         "type": "github"
       },
       "original": {
@@ -487,11 +487,11 @@
     },
     "nixpkgs_5": {
       "locked": {
-        "lastModified": 1662025319,
-        "narHash": "sha256-ZJlBQ7jXynq4+Jg9+DgOe8FJG8sDIeFFYP3V3K98KUs=",
+        "lastModified": 1662099760,
+        "narHash": "sha256-MdZLCTJPeHi/9fg6R9fiunyDwP3XHJqDd51zWWz9px0=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "b82ccafb54163ab9024e893e578d840577785fea",
+        "rev": "67e45078141102f45eff1589a831aeaa3182b41e",
         "type": "github"
       },
       "original": {
@@ -655,11 +655,11 @@
         "webcord": "webcord"
       },
       "locked": {
-        "lastModified": 1661975448,
-        "narHash": "sha256-6LPYRkgeTmTcFJvKL5TIysqPYT/JPJfWdJViXOKkOrM=",
+        "lastModified": 1662387088,
+        "narHash": "sha256-eB9O9UIkeKHKyCF5oNw3a+wukeaLQMNl4OvJIeR5hRo=",
         "owner": "fufexan",
         "repo": "webcord-flake",
-        "rev": "f41d41e5f736e1d366d36d79bab04e031f9d3d6d",
+        "rev": "6a2a625df8a607c4a42aa921877ad65be73a2eb0",
         "type": "github"
       },
       "original": {
