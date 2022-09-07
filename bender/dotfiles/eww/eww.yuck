@@ -1,0 +1,57 @@
+(defwindow example
+           :monitor 0
+           :geometry (geometry  :x 0
+                                :y 0
+                                :height "20px"
+                                :width "100%"
+                                :anchor "top center")
+           :stacking "fg"
+           :exclusive true
+  (bar))
+
+(defwidget bar []
+  (centerbox :orientation "horizontal"
+   (left-bar)
+   (center-bar)
+   (right-bar)))
+
+
+(defwidget left-bar []
+  (box :orientation "horizontal"
+       :class "left-bar"
+       :halign "start"
+       :valign "center"
+       :style "padding: 2px 10px;"
+    time))
+
+(defpoll time :interval "1s"
+ "date '+%a %d %b %H:%M'")
+
+(defwidget center-bar []
+  (box :orientation "horizontal"
+       :class "center-bar"
+       :halign "start"
+       :valign "center"
+   (for entry in workspaces
+         (button :class '${entry.focused ? "active-workspace" : "inactive-workspace"}'
+                 :onclick "swaymsg workspace ${entry['name']}"
+          '${entry.name}'))))
+
+
+(defpoll workspaces :interval "50ms"
+  "swaymsg -r -t get_workspaces")
+ 
+
+(defwidget right-bar []
+  (box :orientation "horizontal"
+       :halign "end"
+       :class "right-bar"
+       :valign "center"
+   " ${audio-level}%"
+   " ${mic-level}%"))
+
+(defpoll audio-level :interval "50ms"
+ "pamixer --get-volume")
+
+(defpoll mic-level :interval "50ms"
+ "pamixer --default-source --get-volume")

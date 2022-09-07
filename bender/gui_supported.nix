@@ -5,13 +5,13 @@
   ...
 }: {
   imports = [
-    ./applications/waybar.nix
     ./applications/vscode.nix
     ./applications/sway.nix
     ./applications/mako.nix
     ./applications/alacritty.nix
     ./applications/foot.nix
     ./applications/gtk.nix
+    ./applications/eww.nix
   ];
 
 
@@ -19,7 +19,6 @@
     firefox-wayland
     #Sway.
     notify-desktop
-    waybar
     dolphin
     breeze-icons
     mako # notification daemon.
@@ -44,6 +43,7 @@
 
     #until I setup something with pactl.
     pavucontrol
+    pamixer
 
     #Video editing
     kdenlive
