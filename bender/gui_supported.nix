@@ -45,6 +45,7 @@
 
     #until I setup something with pactl.
     pavucontrol
+    pamixer
 
     #Video editing
     kdenlive
