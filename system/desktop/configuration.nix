@@ -36,7 +36,6 @@
 
   networking.firewall.allowPing = true;
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.nameservers = ["10.100.0.1" "1.1.1.1" "8.8.8.8"];
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
