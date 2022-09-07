@@ -22,7 +22,7 @@
        :halign "start"
        :valign "center"
        :style "padding: 2px 10px;"
-   time))
+    time))
 
 (defpoll time :interval "1s"
  "date '+%a %d %b %H:%M'")
@@ -32,25 +32,26 @@
        :class "center-bar"
        :halign "start"
        :valign "center"
-       (for entry in workspaces
-             (button :onclick "swaymsg workspace ${entry['name']}"
-                     :class {entry.focused ? "active-workspace" : "inactive-workspace"}
-              '${entry.name}'))))
+   (for entry in workspaces
+         (button :class '${entry.focused ? "active-workspace" : "inactive-workspace"}'
+                 :onclick "swaymsg workspace ${entry['name']}"
+          '${entry.name}'))))
 
-(defpoll workspaces :interval "1s"
+
+(defpoll workspaces :interval "50ms"
   "swaymsg -r -t get_workspaces")
  
 
 (defwidget right-bar []
   (box :orientation "horizontal"
-       :halign "start"
+       :halign "end"
        :class "right-bar"
        :valign "center"
-   "< ${audio-level}%"
-   "| ${mic-level}%"))
+   " ${audio-level}%"
+   " ${mic-level}%"))
 
-(defpoll audio-level :interval "0.1s"
+(defpoll audio-level :interval "50ms"
  "pamixer --get-volume")
 
-(defpoll mic-level :interval "0.1s"
+(defpoll mic-level :interval "50ms"
  "pamixer --default-source --get-volume")

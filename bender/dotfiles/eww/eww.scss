@@ -2,23 +2,28 @@ $background: #1d2021;
 $text: #ebdbb2;
 $accent: #504945;
 
-* {
-    font-size: 12px;
-    font-family: "Fira Code", "Font Awesome 5 Free";
-    color: $text;
-}
-
 button {
     background: transparent;
     border: none;
     border-radius: 0px;
     box-shadow: none;
+    color: $text;
+    text-shadow: none;
 }
 
 .active-workspace {
     color: $accent;
 }
 
+.right-bar {
+    label {
+       padding: 0px 15px 0px 0px;
+    }
+}
+
 window {
+    font-size: 12px;
+    font-family: "Fira Code", "Font Awesome 5 Free";
+    color: $text;
     background-color: $background;
 }
