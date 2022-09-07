@@ -1,0 +1,24 @@
+$background: #1d2021;
+$text: #ebdbb2;
+$accent: #504945;
+
+* {
+    font-size: 12px;
+    font-family: "Fira Code", "Font Awesome 5 Free";
+    color: $text;
+}
+
+button {
+    background: transparent;
+    border: none;
+    border-radius: 0px;
+    box-shadow: none;
+}
+
+.active-workspace {
+    color: $accent;
+}
+
+window {
+    background-color: $background;
+}
