@@ -86,7 +86,7 @@ in {
           always = false;
         }
         {
-          command = "waybar";
+          command = "eww open example";
           always = false;
         }
       ] ++ (if config.work_account then [{

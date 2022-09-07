@@ -5,7 +5,6 @@
   ...
 }: {
   imports = [
-    ./applications/waybar.nix
     ./applications/vscode.nix
     ./applications/sway.nix
     ./applications/mako.nix
@@ -20,7 +19,6 @@
     firefox-wayland
     #Sway.
     notify-desktop
-    waybar
     dolphin
     breeze-icons
     mako # notification daemon.
