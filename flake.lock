@@ -68,11 +68,11 @@
         "yuck-vim": "yuck-vim"
       },
       "locked": {
-        "lastModified": 1662500557,
-        "narHash": "sha256-648Gw2/emkRyNXhVPEdelKQhvqzUvXuT1mqdnG7qHUY=",
+        "lastModified": 1662751162,
+        "narHash": "sha256-sZVb0y9VCuFPCnkTSYk2XXEf5m8z8e1b0cN+jAQ0f8E=",
         "owner": "awsomearvinder",
         "repo": "custom-neovim-flake",
-        "rev": "de025cdb8888868395b1e960169782038bb3104c",
+        "rev": "d4a89d34ef590e89d132752b5fddd7636baff7d3",
         "type": "github"
       },
       "original": {
