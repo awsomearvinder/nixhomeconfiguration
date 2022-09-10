@@ -58,7 +58,7 @@ in {
         };
       };
       output = {
-        "DP-4" = {
+        "Unknown ASUS VG249 0x00005F38" = {
           mode = "1920x1080@143Hz";
           background = mkWallpaper "${dots}/home_wallpaper.jpg";
         };
