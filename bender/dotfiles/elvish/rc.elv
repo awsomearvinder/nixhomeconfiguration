@@ -3,6 +3,7 @@ fn lsl {|@arg| exa -al $@arg }
 fn fucking {|@arg| sudo -E $@arg }
 fn sodu {|@arg| sudo -E --preserve-env=PATH $@arg }
 fn nixd {|@arg| nix develop --command elvish $@arg }
+fn nixs {|@arg| nix shell --command elvish $@arg }
 fn nixb {|@arg| nix build $@arg }
 fn nixr {|@arg| nix run $@arg }
 fn gitl {|@arg| git log --graph --decorate $@arg }
