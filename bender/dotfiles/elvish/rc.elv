@@ -8,6 +8,7 @@ fn nixb {|@arg| nix build $@arg }
 fn nixr {|@arg| nix run $@arg }
 fn gitl {|@arg| git log --graph --decorate $@arg }
 fn gitll {|@arg| git log --graph --decorate --oneline $@arg }
+fn gits {|@arg| git show --ext-diff $@arg }
 
 # utility combine map function
 fn combine-arrays-dedup {|arr1 arr2|
