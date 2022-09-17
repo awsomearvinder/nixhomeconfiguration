@@ -32,14 +32,11 @@
        :class "center-bar"
        :halign "start"
        :valign "center"
-   (for entry in workspaces
-         (button :class '${entry.focused ? "active-workspace" : "inactive-workspace"}'
-                 :onclick "swaymsg workspace ${entry['name']}"
-          '${entry.name}'))))
+   (literal :content workspaces)))
 
 
-(defpoll workspaces :interval "50ms"
-  "swaymsg -r -t get_workspaces")
+(deflisten workspaces :initial "(box)"
+  "./scripts/workspace.sh")
  
 
 (defwidget right-bar []
