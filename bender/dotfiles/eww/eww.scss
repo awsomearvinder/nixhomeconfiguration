@@ -2,6 +2,14 @@ $background: #1d2021;
 $text: #ebdbb2;
 $accent: #504945;
 
+* {
+    font-size: 12px;
+}
+
+.right-bar {
+    font-size: 15px;
+}
+
 button {
     background: transparent;
     border: none;
@@ -17,8 +25,12 @@ button {
 
 .right-bar {
     label {
-       padding: 0px 15px 0px 0px;
+       padding: 0px 10px 0px 0px;
     }
+}
+
+.left-bar {
+    margin: 0px 0px 0px 5px;
 }
 
 window {

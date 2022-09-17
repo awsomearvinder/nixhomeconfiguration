@@ -22,17 +22,20 @@
        :halign "start"
        :valign "center"
        :style "padding: 2px 10px;"
-    time))
+   (literal :content workspaces)))
+    
 
 (defpoll time :interval "1s"
- "date '+%a %d %b %H:%M'")
+ "date '+%H:%M'")
 
+(defwidget music-player []
+  "")
 (defwidget center-bar []
   (box :orientation "horizontal"
        :class "center-bar"
        :halign "start"
        :valign "center"
-   (literal :content workspaces)))
+       (music-player)))
 
 
 (deflisten workspaces :initial "(box)"
@@ -40,10 +43,11 @@
  
 
 (defwidget right-bar []
-  (box :orientation "horizontal"
-       :halign "end"
-       :class "right-bar"
-       :valign "center"
+ (box :orientation "horizontal"
+      :halign "end"
+      :class "right-bar"
+      :valign "center"
+   "${time}"
    " ${audio-level}%"
    " ${mic-level}%"))
 
