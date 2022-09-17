@@ -72,7 +72,7 @@
     dbeaver
 
     freecad
-    kicad
+    #kicad
 
     #CLI stuff.
     alacritty
