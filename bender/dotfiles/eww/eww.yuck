@@ -28,14 +28,18 @@
 (defpoll time :interval "1s"
  "date '+%H:%M'")
 
+(deflisten current-song :initial ""
+  "./scripts/music.sh current-song")
+
 (defwidget music-player []
-  "")
+  "${current-song}")
+
 (defwidget center-bar []
   (box :orientation "horizontal"
        :class "center-bar"
        :halign "start"
        :valign "center"
-       (music-player)))
+   (music-player)))
 
 
 (deflisten workspaces :initial "(box)"

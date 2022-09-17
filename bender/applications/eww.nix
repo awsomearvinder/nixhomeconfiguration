@@ -6,5 +6,6 @@
   home.packages = [
     pkgs.jq
     pkgs.pamixer
+    pkgs.playerctl
   ];
 }
