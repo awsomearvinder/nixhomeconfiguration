@@ -86,7 +86,7 @@ in {
           always = false;
         }
         {
-          command = "eww open example";
+          command = "eww -c ${dots}/eww_bar open bar";
           always = false;
         }
       ] ++ (if config.work_account then [{
