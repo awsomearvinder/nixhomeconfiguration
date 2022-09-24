@@ -10,7 +10,20 @@
   dark-grey = "#1d2021";
   red = "#cc241d";
   accent = "#ebdbb2";
+  dbus-sway-environment = pkgs.writeTextFile {
+    name = "dbus-sway-environment";
+    destination = "/bin/dbus-sway-environment";
+    executable = true;
+
+    text = ''
+  dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+  systemctl --user restart pipewire xdg-desktop-portal xdg-desktop-portal-wlr
+      '';
+  };
 in {
+  home.packages = [
+    dbus-sway-environment
+  ];
   wayland.windowManager.sway = {
     enable = true;
 
@@ -87,6 +100,10 @@ in {
         }
         {
           command = "eww -c ${dots}/eww_bar open bar";
+          always = false;
+        }
+        {
+          command = "${dbus-sway-environment}";
           always = false;
         }
       ] ++ (if config.work_account then [{
