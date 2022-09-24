@@ -77,12 +77,14 @@
       :valign "center"
       :space-evenly false
    (eventbox :onhover "eww update show-vol-scale=true"
+             :class "volume"
              :onhoverlost "eww update show-vol-scale=false"
      (scaler-change :label ""
                     :value audio-level
                     :onchange "pamixer --set-volume {}"
                     :visibility show-vol-scale))
    (eventbox :onhover "eww update show-input-vol-scale=true"
+             :class "mic"
              :onhoverlost "eww update show-input-vol-scale=false"
        (scaler-change :label ""
                       :value mic-level

@@ -32,6 +32,27 @@ button {
     border-radius: 100px;
 }
 
+scale trough {
+    all: unset;
+    background-color: $background;
+    border-radius: 5px;
+    min-height: 3px;
+    min-width: 10px;
+    margin: 0 1px;
+}
+
+scale trough slider {
+    background: transparent;
+    outline-color: transparent;
+    border-color: transparent;
+    color: transparent;
+    box-shadow: none;
+}
+
+scale trough highlight {
+    background-color: $text;
+}
+
 .right-bar {
     label {
        padding: 0px 10px 0px 0px;
