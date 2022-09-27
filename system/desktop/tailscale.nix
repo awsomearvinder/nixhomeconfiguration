@@ -33,7 +33,7 @@
       fi
 
       # otherwise authenticate with tailscale
-      ${pkgs.tailscale}/bin/tailscale up -authkey $(cat ${config.age.secrets."desktop/tailscale/key".path}) --login-server 'https://headscale.arvinderd.com'
+      ${pkgs.tailscale}/bin/tailscale up -authkey $(cat ${config.age.secrets."desktop/tailscale/key".path}) --login-server 'https://headscale.arvinderd.com' --hostname=bender-desktop
     '';
   };
 }
