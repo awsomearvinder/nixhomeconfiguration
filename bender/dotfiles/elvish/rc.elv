@@ -1,5 +1,8 @@
+use builtin
+
 fn ls {|@arg| exa -a $@arg }
 fn lsl {|@arg| exa -al $@arg }
+fn cd {|@arg| builtin:cd $@arg; exa -a . }
 fn fucking {|@arg| sudo -E $@arg }
 fn sodu {|@arg| sudo -E --preserve-env=PATH $@arg }
 fn nixd {|@arg| nix develop --command elvish $@arg }
