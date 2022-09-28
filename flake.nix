@@ -91,6 +91,9 @@
     nixosConfigurations.desktop = let
       config = {gui_supported = true;};
     in (mkSystemx86_64Linux config ./system/desktop/configuration.nix);
+    nixosConfigurations.work_vm = let
+      config = {gui_supported = true; work_account = true;};
+    in (mkSystemx86_64Linux config ./system/work_vm/configuration.nix);
     nixosConfigurations.wireguard_server = let
       config = {gui_supported = false;};
     in (mkSystemx86_64Linux config ./system/wireguard_server/configuration.nix);
