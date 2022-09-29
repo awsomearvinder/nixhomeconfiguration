@@ -8,7 +8,7 @@
 }: {
   imports = [./options.nix ./not_wireguard.nix];
   config = {
-    nix.trustedUsers = ["@wheel" "root"];
+    nix.settings.trusted-users = ["@wheel" "root"];
     nix = {
       package = pkgs.nixUnstable;
       extraOptions = ''
