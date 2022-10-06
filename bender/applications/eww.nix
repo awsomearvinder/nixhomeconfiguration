@@ -11,4 +11,5 @@
     pkgs.pamixer
     pkgs.playerctl
   ];
+  services.playerctld.enable = true;
 }
