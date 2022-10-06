@@ -16,6 +16,7 @@
     executable = true;
 
     text = ''
+  #!/usr/bin/env bash
   dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
   systemctl --user restart pipewire xdg-desktop-portal xdg-desktop-portal-wlr
       '';
