@@ -20,9 +20,25 @@
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.interfaces.eth0 = {
+    ipv4 = {
+      addresses = [{
+        address  = "10.168.44.3";
+        prefixLength = 28;
+      }];
+    };
+  };
+  networking.defaultGateway = {
+    address = "10.168.44.1";
+    interface = "eth0";
+  };
+  networking.nameservers = [
+    "199.17.166.186"
+    "199.17.166.187"
+  ];
 
   # Set your time zone.
-  time.timeZone = "US/Chicago";
+  machine_name = "work_vm";
   programs.dconf.enable = true;
 
   # Configure network proxy if necessary
