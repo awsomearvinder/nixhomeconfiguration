@@ -16,4 +16,5 @@
     userEmail = "Arvinder.Dhanoa@winona.edu";
   } else
     { });
+  programs.lazygit.enable = true;
 }
