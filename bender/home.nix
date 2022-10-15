@@ -55,6 +55,7 @@ in {
         bat
         bottom # top sucks.
         custom-neovim
+        xdg-utils
 
         #development stuff
         mutt
