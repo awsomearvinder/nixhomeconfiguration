@@ -169,6 +169,12 @@
   services.openssh.enable = true;
   programs.ssh.startAgent = true;
 
+  # mariadb for school
+  services.mysql = {
+    enable = true;
+    package = pkgs.mariadb;
+  };
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
