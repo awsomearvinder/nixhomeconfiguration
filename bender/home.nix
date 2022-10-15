@@ -56,6 +56,7 @@ in {
         bottom # top sucks.
         custom-neovim
         xdg-utils
+        sqls
 
         #development stuff
         mutt
