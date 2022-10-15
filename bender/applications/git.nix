@@ -17,4 +17,11 @@
   } else
     { });
   programs.lazygit.enable = true;
+  programs.lazygit.settings = {
+    git = {
+      merging = {
+        args = "--no-ff";
+      };
+    };
+  };
 }
