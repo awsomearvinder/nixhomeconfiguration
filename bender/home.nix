@@ -17,7 +17,6 @@ in {
       ./applications/elvish.nix
       ./applications/starship.nix
       ./applications/tmux.nix
-      ./applications/kakoune.nix
       ./applications/zellij.nix
       ./applications/kicad.nix
     ]
