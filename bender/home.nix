@@ -12,7 +12,6 @@ with lib; let
 in {
   imports =
     [
-      ./applications/nushell.nix
       ./applications/git.nix
       ./applications/gnupg.nix
       ./applications/elvish.nix
