@@ -16,7 +16,6 @@ in {
       ./applications/gnupg.nix
       ./applications/elvish.nix
       ./applications/starship.nix
-      ./applications/tmux.nix
       ./applications/kicad.nix
     ]
     ++ (
