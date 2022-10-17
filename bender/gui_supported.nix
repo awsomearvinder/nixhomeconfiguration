@@ -39,7 +39,7 @@
 
   ] ++ (if !config.work_account then [
     #osu - need I say more?
-    nixpkgs-master.osu-lazer
+    osu-lazer
 
     #until I setup something with pactl.
     pavucontrol
@@ -66,7 +66,7 @@
     calibre
 
     #Audio
-    nixpkgs-master.easyeffects
+    easyeffects
     tidal-hifi
 
     dbeaver
