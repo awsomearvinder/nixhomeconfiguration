@@ -12,15 +12,10 @@ with lib; let
 in {
   imports =
     [
-      ./applications/nushell.nix
       ./applications/git.nix
       ./applications/gnupg.nix
-      ./applications/ion.nix
       ./applications/elvish.nix
       ./applications/starship.nix
-      ./applications/tmux.nix
-      ./applications/kakoune.nix
-      ./applications/zellij.nix
       ./applications/kicad.nix
     ]
     ++ (
