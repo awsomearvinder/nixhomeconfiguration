@@ -6,7 +6,7 @@
   pkgs,
   ...
 }: {
-  imports = [./options.nix ./not_wireguard.nix];
+  imports = [./options.nix];
   config = {
     nix.settings.trusted-users = ["@wheel" "root"];
     nix = {
