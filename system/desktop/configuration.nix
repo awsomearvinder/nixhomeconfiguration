@@ -14,7 +14,6 @@
   ];
 
   machine_name = "desktop";
-  wireguard_ip_and_mask = "10.100.1.2/16";
 
   virtualisation.podman.enable = true;
   virtualisation.libvirtd = {
