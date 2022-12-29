@@ -9,7 +9,6 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ./tailscale.nix
     ../base.nix
   ];
 
@@ -34,13 +33,7 @@
   # boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
   boot.loader.systemd-boot.enable = true;
 
-  networking.firewall = {
-    allowPing = true;
-    # always allow traffic from your Tailscale network
-    trustedInterfaces = [ "lab-tailnet" ];
-    allowedUDPPorts = [ config.services.tailscale.port ];
-    checkReversePath = "loose";
-  };
+  networking.firewall.allowPing = true;
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Set your time zone.
@@ -168,7 +161,6 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
-  programs.ssh.startAgent = true;
 
   # mariadb for school
   services.mysql = {
