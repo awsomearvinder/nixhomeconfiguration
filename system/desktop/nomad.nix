@@ -17,6 +17,9 @@
       };
       client = {
         enabled = true;
+        host_volume = [{
+          nomad = { path = "/nomad"; read_only = false; };
+        }];
       };
       plugin = [{docker = {
         config = {allow_privileged = true;};
