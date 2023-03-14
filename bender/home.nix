@@ -12,6 +12,7 @@ with lib; let
 in {
   imports =
     [
+      ./applications/helix.nix
       ./applications/git.nix
       ./applications/gnupg.nix
       ./applications/elvish.nix
