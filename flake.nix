@@ -9,8 +9,6 @@
     agenix.url = "github:ryantm/agenix";
     custom-neovim.url = "github:awsomearvinder/custom-neovim-flake";
     custom-neovim.inputs.nixpkgs.follows = "nixpkgs-unstable";
-    webcord-flake.url = "github:fufexan/webcord-flake";
-    webcord-flake.inputs.nixpkgs.follows = "nixpkgs-unstable";
     deploy-rs.url = "github:serokell/deploy-rs";
     flake-compat.url = "github:edolstra/flake-compat";
     flake-compat.flake = false;
@@ -28,7 +26,6 @@
     deploy-rs,
     flake-compat-ci,
     hercules-ci,
-    webcord-flake,
     custom-neovim,
     ...
   }: let
@@ -40,8 +37,6 @@
           config.allowUnfree = true;
           inherit system;
         };
-
-        webcord = webcord-flake.packages.${system}.webcord;
 
         nixpkgs-unstable = import nixpkgs-unstable {
           inherit system;
