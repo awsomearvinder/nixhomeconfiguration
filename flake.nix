@@ -10,10 +10,6 @@
     custom-neovim.url = "github:awsomearvinder/custom-neovim-flake";
     custom-neovim.inputs.nixpkgs.follows = "nixpkgs-unstable";
     deploy-rs.url = "github:serokell/deploy-rs";
-    flake-compat.url = "github:edolstra/flake-compat";
-    flake-compat.flake = false;
-    flake-compat-ci.url = "github:hercules-ci/flake-compat-ci";
-    hercules-ci.url = "github:hercules-ci/hercules-ci-agent";
   };
 
   outputs = {
@@ -24,8 +20,6 @@
     nixpkgs-unstable,
     agenix,
     deploy-rs,
-    flake-compat-ci,
-    hercules-ci,
     custom-neovim,
     ...
   }: let
@@ -52,7 +46,6 @@
     ];
     baseModules = system_config: [
       (home-manager.nixosModules.home-manager)
-      (hercules-ci.nixosModules.multi-agent-service)
       {
         config = {
           home-manager.users.bender = import ./bender/home.nix system_config;
@@ -74,31 +67,14 @@
 
     mkSystemx86_64Linux = mkSystem "x86_64-linux";
   in {
-    ciNix = flake-compat-ci.lib.recurseIntoFlakeWith {
-      flake = self;
-
-      # Optional. Systems for which to perform CI.
-      # By default, every system attr in the flake will be built.
-      # Example: [ "x86_64-darwin" "aarch64-linux" ];
-      systems = ["x86_64-linux"];
-    };
 
     nixosConfigurations.desktop = let
       config = {gui_supported = true;};
     in (mkSystemx86_64Linux config ./system/desktop/configuration.nix);
+
     nixosConfigurations.work_vm = let
       config = {gui_supported = true; work_account = true;};
     in (mkSystemx86_64Linux config ./system/work_vm/configuration.nix);
-    nixosConfigurations.wireguard_server = let
-      config = {gui_supported = false;};
-    in (mkSystemx86_64Linux config ./system/wireguard_server/configuration.nix);
-    nixosConfigurations.hercules_server = let
-      config = {gui_supported = false;};
-    in (mkSystemx86_64Linux config ./system/hercules_server/configuration.nix);
-
-    nixosConfigurations.lighthouse = let
-      config = {gui_supported = false;};
-    in (mkSystemx86_64Linux config ./system/lighthouse/configuration.nix);
 
     homeConfigurations.bender = home-manager.lib.homeManagerConfiguration {
       modules = [
@@ -155,9 +131,6 @@
       user = "root";
       magicRollback = false;
       autoRollback = false;
-      nodes.wireguard_server = mkSystemNode "10.100.0.1" "wireguard_server";
-      # nodes.hercules_server = mkSystemNode "10.100.0.1" "hercules_server";
-      nodes.lighthouse = mkSystemNode  "152.67.248.214" "lighthouse";
     };
 
     checks =
