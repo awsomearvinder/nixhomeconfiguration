@@ -137,8 +137,6 @@
     git
     linuxPackages.v4l2loopback
     wireguard-tools
-    fahviewer
-    fahcontrol
     podman
     virt-manager
     distrobox
