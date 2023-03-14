@@ -6,6 +6,7 @@
     home-manager.url = "github:nix-community/home-manager/";
     nixpkgs-master.url = "github:nixos/nixpkgs/master";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    hyprland.url = "github:hyprwm/Hyprland";
     agenix.url = "github:ryantm/agenix";
     custom-neovim.url = "github:awsomearvinder/custom-neovim-flake";
     custom-neovim.inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -20,7 +21,9 @@
     nixpkgs-unstable,
     agenix,
     deploy-rs,
+    hyprland,
     custom-neovim,
+    hyprland,
     ...
   }: let
     system = "x86_64-linux";
@@ -82,6 +85,7 @@
           gui_supported = true;
           work_account = false;
         })
+        hyprland.homeManagerModules.default
         {
           home = {
             username = "bender";

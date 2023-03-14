@@ -53,6 +53,7 @@ in {
         custom-neovim
         xdg-utils
         sqls
+        nil
 
         #development stuff
         mutt
