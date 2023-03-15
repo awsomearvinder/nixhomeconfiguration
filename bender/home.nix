@@ -1,4 +1,4 @@
-{gui_supported ? false, work_account ? false}: {
+{gui_supported ? false, work_account ? false}: homeModules: {
   config,
   lib,
   pkgs,
@@ -23,7 +23,7 @@ in {
       if gui_supported
       then [./gui_supported.nix]
       else []
-    );
+    ) ++ homeModules;
 
   options = {
     dots = mkOption {type = types.path;};

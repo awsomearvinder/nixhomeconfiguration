@@ -23,7 +23,6 @@
     deploy-rs,
     hyprland,
     custom-neovim,
-    hyprland,
     ...
   }: let
     system = "x86_64-linux";
@@ -47,11 +46,11 @@
           buildInputs = old.buildInputs ++ [(nixpkgs.lib.getDev nixpkgs.legacyPackages.${system}.ldb) (nixpkgs.lib.getDev nixpkgs.legacyPackages.${system}.openldap)]; });
       })
     ];
-    baseModules = system_config: [
+    baseModules = system_config: homeModules: [
       (home-manager.nixosModules.home-manager)
       {
         config = {
-          home-manager.users.bender = import ./bender/home.nix system_config;
+          home-manager.users.bender = (import ./bender/home.nix system_config homeModules);
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           nixpkgs.overlays = overlays;
@@ -64,7 +63,7 @@
       nixpkgs-unstable.lib.nixosSystem {
         inherit system;
         modules =
-          (baseModules config)
+          (baseModules config [ hyprland.homeManagerModules.default ])
           ++ [system_config];
       };
 
@@ -84,8 +83,7 @@
         (import ./bender/home.nix {
           gui_supported = true;
           work_account = false;
-        })
-        hyprland.homeManagerModules.default
+        } [ hyprland.homeManagerModules.default ]) 
         {
           home = {
             username = "bender";
@@ -106,7 +104,7 @@
         (import ./bender/home.nix {
           gui_supported = true;
           work_account = true;
-        })
+        } [ hyprland.homeManagerModules.default ]) 
         {
           home = {
             username = "bender";

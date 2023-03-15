@@ -7,6 +7,7 @@
   imports = [
     ./applications/vscode.nix
     ./applications/sway.nix
+    ./applications/hyprland.nix
     ./applications/mako.nix
     ./applications/alacritty.nix
     ./applications/foot.nix
