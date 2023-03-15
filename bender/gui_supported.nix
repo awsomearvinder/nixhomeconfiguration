@@ -40,7 +40,7 @@
 
   ] ++ (if !config.work_account then [
     #osu - need I say more?
-    osu-lazer
+    osu-lazer-bin
 
     #until I setup something with pactl.
     pavucontrol
