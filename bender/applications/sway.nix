@@ -16,10 +16,10 @@
     executable = true;
 
     text = ''
-  #!/usr/bin/env bash
-  dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
-  systemctl --user restart pipewire xdg-desktop-portal xdg-desktop-portal-wlr
-      '';
+      #!/usr/bin/env bash
+      dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+      systemctl --user restart pipewire xdg-desktop-portal xdg-desktop-portal-wlr
+    '';
   };
 in {
   home.packages = [
@@ -82,7 +82,10 @@ in {
         };
       };
       inherit modifier;
-      terminal = if !config.work_account then "alacritty msg create-window || alacritty" else "footclient";
+      terminal =
+        if !config.work_account
+        then "alacritty msg create-window || alacritty"
+        else "footclient";
       workspaceAutoBackAndForth = true;
       keybindings = lib.mkOptionDefault {
         "${modifier}+p" = "exec grim -g \"$(slurp -d)\" - | wl-copy -t 'image/png'";
@@ -93,24 +96,32 @@ in {
         border = 3;
         titlebar = false;
       };
-      startup = [
-        #{ command = "dropbox start"; always = true; }
-        {
-          command = "mako";
-          always = false;
-        }
-        {
-          command = "eww -c ${dots}/eww_bar open bar";
-          always = false;
-        }
-        {
-          command = "${dbus-sway-environment}";
-          always = false;
-        }
-      ] ++ (if config.work_account then [{
-        command = "foot --server";
-        always = false;
-      }] else []);
+      startup =
+        [
+          #{ command = "dropbox start"; always = true; }
+          {
+            command = "mako";
+            always = false;
+          }
+          {
+            command = "eww -c ${dots}/eww_bar open bar";
+            always = false;
+          }
+          {
+            command = "${dbus-sway-environment}";
+            always = false;
+          }
+        ]
+        ++ (
+          if config.work_account
+          then [
+            {
+              command = "foot --server";
+              always = false;
+            }
+          ]
+          else []
+        );
     };
   };
 }

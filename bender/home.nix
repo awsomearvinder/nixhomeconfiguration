@@ -1,4 +1,7 @@
-{gui_supported ? false, work_account ? false}: homeModules: {
+{
+  gui_supported ? false,
+  work_account ? false,
+}: homeModules: {
   config,
   lib,
   pkgs,
@@ -23,7 +26,8 @@ in {
       if gui_supported
       then [./gui_supported.nix]
       else []
-    ) ++ homeModules;
+    )
+    ++ homeModules;
 
   options = {
     dots = mkOption {type = types.path;};
@@ -67,14 +71,18 @@ in {
         starship
       ]
       ++ custom_packages
-      ++ (if !work_account then [
-        lynx
-        nodejs
-        deno
-        nodePackages.pyright
-      ] else [
-        home-manager
-      ]);
+      ++ (
+        if !work_account
+        then [
+          lynx
+          nodejs
+          deno
+          nodePackages.pyright
+        ]
+        else [
+          home-manager
+        ]
+      );
 
     programs.direnv.enable = true;
     programs.direnv.nix-direnv.enable = true;

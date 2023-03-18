@@ -1,15 +1,16 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ../base.nix
-    ];
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ../base.nix
+  ];
 
   nixpkgs.config.allowUnfree = true;
   # Use the systemd-boot EFI boot loader.
@@ -22,10 +23,12 @@
   # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
   networking.interfaces.eth0 = {
     ipv4 = {
-      addresses = [{
-        address  = "10.168.44.3";
-        prefixLength = 28;
-      }];
+      addresses = [
+        {
+          address = "10.168.44.3";
+          prefixLength = 28;
+        }
+      ];
     };
   };
   networking.defaultGateway = {
@@ -56,9 +59,6 @@
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
 
-
-  
-
   # Configure keymap in X11
   # services.xserver.layout = "us";
   # services.xserver.xkbOptions = {
@@ -79,7 +79,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.bender = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
     ];
   };
@@ -111,17 +111,17 @@
       noto-fonts-emoji
 
       # nerdfonts
-      (nerdfonts.override { fonts = [ "FiraCode" ]; })
+      (nerdfonts.override {fonts = ["FiraCode"];})
     ];
 
     # use fonts specified by user rather than default ones
     enableDefaultFonts = false;
 
     fontconfig.defaultFonts = {
-      serif = [ "Noto Serif" "Noto Color Emoji" ];
-      sansSerif = [ "Noto Sans" "Noto Color Emoji" ];
-      monospace = [ "FiraCode" ];
-      emoji = [ "Noto Color Emoji" ];
+      serif = ["Noto Serif" "Noto Color Emoji"];
+      sansSerif = ["Noto Sans" "Noto Color Emoji"];
+      monospace = ["FiraCode"];
+      emoji = ["Noto Color Emoji"];
     };
   };
 
@@ -155,13 +155,19 @@
     client = {
       enabled = true;
     };
-    plugin = [{
-      "docker" = [{
-        config = [{
-          allow_privileged = true;
-        }];
-      }];
-    }];
+    plugin = [
+      {
+        "docker" = [
+          {
+            config = [
+              {
+                allow_privileged = true;
+              }
+            ];
+          }
+        ];
+      }
+    ];
   };
   services.consul = {
     enable = true;
@@ -184,10 +190,10 @@
     storageConfig = ''
       address = "10.168.44.3:8500"
       path = "vault/"
-      '';
+    '';
     extraConfig = ''
       ui = true
-      '';
+    '';
   };
   services.nfs.server.enable = true;
   services.nfs.server.exports = ''
@@ -208,4 +214,3 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "22.05"; # Did you read the comment?
 }
-

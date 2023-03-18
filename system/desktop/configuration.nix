@@ -22,7 +22,6 @@
     qemu.swtpm.enable = true;
   };
 
-
   # Use the GRUB 2 boot loader.
   # boot.loader.grub.enable = true;
   # boot.loader.grub.version = 2;
@@ -67,17 +66,17 @@
       noto-fonts-emoji
 
       # nerdfonts
-      (nerdfonts.override { fonts = [ "FiraCode" ]; })
+      (nerdfonts.override {fonts = ["FiraCode"];})
     ];
 
     # use fonts specified by user rather than default ones
     enableDefaultFonts = false;
 
     fontconfig.defaultFonts = {
-      serif = [ "Noto Serif" "Noto Color Emoji" ];
-      sansSerif = [ "Noto Sans" "Noto Color Emoji" ];
-      monospace = [ "FiraCode" ];
-      emoji = [ "Noto Color Emoji" ];
+      serif = ["Noto Serif" "Noto Color Emoji"];
+      sansSerif = ["Noto Sans" "Noto Color Emoji"];
+      monospace = ["FiraCode"];
+      emoji = ["Noto Color Emoji"];
     };
   };
 
@@ -90,7 +89,6 @@
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
-
 
   xdg = {
     portal = {
@@ -153,7 +151,6 @@
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   programs.mtr.enable = true;
-
 
   # List services that you want to enable:
 

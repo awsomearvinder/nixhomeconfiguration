@@ -4,14 +4,13 @@
   lib,
   ...
 }: let
- colors = {
+  colors = {
     dark-grey = "rgb(1d2021)";
     red = "rgb(cc241d)";
     accent = "rgb(ebdbb2)";
   };
- inherit (config) dots scripts modifier;
-in 
-{
+  inherit (config) dots scripts modifier;
+in {
   home.packages = [
     pkgs.bemenu
   ];
@@ -22,15 +21,23 @@ in
     };
     extraConfig = ''
       #variables
-      $term=${ if !config.work_account then "alacritty msg create-window || alacritty" else "footclient"}
+      $term=${
+        if !config.work_account
+        then "alacritty msg create-window || alacritty"
+        else "footclient"
+      }
       $mod=SUPER
       $launcher=${pkgs.bemenu}/bin/bemenu-run -l 10 --prompt ">" -P "" -H 10 -n -W 0.5 -c --nb "##1d2021" --fb "##1d2021" --hb "##1d2021" --ab "##1d2021" --tb "##1d2021"
 
       exec-once=eww daemon && eww open bar
       exec-once=mako
       exec-once=${pkgs.swaybg}/bin/swaybg -i ${dots}/home_wallpaper.jpg
-      ${ if config.work_account then "exec-once=foot --server" else ""}
-      
+      ${
+        if config.work_account
+        then "exec-once=foot --server"
+        else ""
+      }
+
       monitor=,highrr,auto,1
       workspace=,
 
@@ -71,13 +78,15 @@ in
       }
 
       # WORKSPACES
-      ${ builtins.concatStringsSep "\n" 
-          (builtins.map (i: 
-            let s_i = builtins.toString i; in ''
-              bind=$mod,${s_i}, workspace, ${s_i}
-              bind=$mod SHIFT,${s_i}, movetoworkspace, ${s_i}
-            '') (lib.range 1 10))
-       }
+      ${
+        builtins.concatStringsSep "\n"
+        (builtins.map (i: let
+          s_i = builtins.toString i;
+        in ''
+          bind=$mod,${s_i}, workspace, ${s_i}
+          bind=$mod SHIFT,${s_i}, movetoworkspace, ${s_i}
+        '') (lib.range 1 10))
+      }
 
       input {
         accel_profile=flat

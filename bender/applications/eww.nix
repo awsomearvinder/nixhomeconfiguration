@@ -1,5 +1,8 @@
-{ config, pkgs, ... }:
 {
+  config,
+  pkgs,
+  ...
+}: {
   programs.eww = {
     enable = true;
     package = pkgs.eww-wayland;

@@ -15,72 +15,76 @@
     ./applications/eww.nix
   ];
 
+  home.packages = with pkgs;
+    [
+      firefox-wayland
+      #Sway.
+      notify-desktop
+      dolphin
+      breeze-icons
+      mako # notification daemon.
+      grim
+      slurp
+      wl-clipboard
 
-  home.packages = with pkgs; [
-    firefox-wayland
-    #Sway.
-    notify-desktop
-    dolphin
-    breeze-icons
-    mako # notification daemon.
-    grim
-    slurp
-    wl-clipboard
+      konsole
 
-    konsole
+      #pdf viewer
+      zathura
 
-    #pdf viewer
-    zathura
+      #fonts
+      font-awesome
+      fira-code
+      (nerdfonts.override {fonts = ["FiraCode"];})
+      font-awesome_5
+    ]
+    ++ (
+      if !config.work_account
+      then [
+        #osu - need I say more?
+        osu-lazer-bin
 
-    #fonts
-    font-awesome
-    fira-code
-    (nerdfonts.override {fonts = ["FiraCode"];})
-    font-awesome_5
+        #until I setup something with pactl.
+        pavucontrol
+        pamixer
 
-  ] ++ (if !config.work_account then [
-    #osu - need I say more?
-    osu-lazer-bin
+        #Video editing
+        kdenlive
 
-    #until I setup something with pactl.
-    pavucontrol
-    pamixer
+        #chat clients
+        webcord
+        element-desktop
 
-    #Video editing
-    kdenlive
+        #stuff.
+        obs-studio
 
-    #chat clients
-    webcord
-    element-desktop
+        #Video Viewer
+        vlc
 
-    #stuff.
-    obs-studio
+        #art
+        krita
 
-    #Video Viewer
-    vlc
+        #general
+        xournalpp
+        calibre
 
-    #art
-    krita
+        #Audio
+        easyeffects
+        tidal-hifi
 
-    #general
-    xournalpp
-    calibre
+        dbeaver
 
-    #Audio
-    easyeffects
-    tidal-hifi
+        freecad
+        #kicad
 
-    dbeaver
-
-    freecad
-    #kicad
-
-    #CLI stuff.
-    alacritty
-  ] else [
-    pkgs.wayvnc
-    pkgs.remmina
-    pkgs.foot
-  ]);
+        #CLI stuff.
+        alacritty
+      ]
+      else [
+        pkgs.wayvnc
+        pkgs.remmina
+        pkgs.foot
+      ]
+    );
   fonts.fontconfig = {enable = true;};
 }
