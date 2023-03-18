@@ -132,6 +132,7 @@
   environment.systemPackages = with pkgs; [
     wget
     neovim
+    helix
     git
     linuxPackages.v4l2loopback
     wireguard-tools
@@ -144,7 +145,7 @@
   hardware.opentabletdriver.enable = true;
   hardware.opentabletdriver.daemon.enable = true;
 
-  environment.variables.EDITOR = "nvim";
+  environment.variables.EDITOR = "hx";
 
   services.foldingathome.enable = true;
 
