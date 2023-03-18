@@ -4,6 +4,9 @@
   ];
   programs.helix = {
     enable = true;
+    settings = {
+      theme = "gruvbox";
+    };
     languages = [
       {
         name = "nix";
