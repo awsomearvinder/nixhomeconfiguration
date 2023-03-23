@@ -1,13 +1,19 @@
 #!/usr/bin/env bash
 
-while true; do
-    output="(box "
-    IFS="
-"
-    for i in $(swaymsg -r -t get_workspaces | jq -r '.[] | " (button :class " + (if .focused then "\"active-workspace\"" else "\"inactive-workspace\"" end) + " :onclick \" swaymsg workspace " + .name + "\" \"" + .name + "\")"')
-    do
-        output+="$i"
-    done
-    output+=")"
-    echo $output
-done
+function sway_workspaces {
+    swaymsg -r -t get_workspaces | jq -r 'map({name: .name, focused: .focused})'
+}
+
+function hyprland_workspaces {
+    active_workspace=$(hyprctl activewindow -j | jq -r '.workspace.id')
+    hyprctl workspaces -j | jq -r  "map({name: .name, focused: (.name == \"$active_workspace\")}) | sort_by(.name | tonumber)"
+}
+
+swaymsg 2&> /dev/null
+is_sway=$?
+
+if [ "$is_sway" -eq "2" ]; then
+    sway_workspaces
+else
+    hyprland_workspaces
+fi

@@ -22,9 +22,10 @@
        :halign "start"
        :valign "center"
        :style "padding: 2px 10px;"
-   (literal :content workspaces)))
+   (for workspace in workspaces
+      (button :class { workspace.focused ? "active-workspace" : "inactive-workspace"}
+        { workspace.name }))))
     
-
 (defpoll time :interval "1s"
  "date '+%H:%M'")
 
@@ -51,10 +52,10 @@
    (music-image)
    (music-player)))
 
-
-(deflisten workspaces :initial "(box)"
+(defpoll workspaces :interval ".05s"
   "./scripts/workspace.sh")
- 
+
+
 (defwidget scaler-change [label value onchange visibility]
    (box :orientation "horizontal"
         :space-evenly false
