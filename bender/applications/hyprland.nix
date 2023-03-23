@@ -85,7 +85,7 @@ in {
         in ''
           bind=$mod,${s_i}, workspace, ${s_i}
           bind=$mod SHIFT,${s_i}, movetoworkspace, ${s_i}
-        '') (lib.range 1 10))
+        '') (lib.range 1 9))
       }
 
       input {
