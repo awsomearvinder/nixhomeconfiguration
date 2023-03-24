@@ -21,11 +21,11 @@ in {
     };
     extraConfig = ''
       #variables
-      $term=systemd-run --no-ask-password --user --scope --shell "${
+      $term=systemd-run --no-ask-password --user --scope ${
         if !config.work_account
         then "alacritty msg create-window || alacritty"
         else "footclient"
-      }"
+      }
       $mod=SUPER
       $launcher=systemd-run --no-ask-password --user --scope $(${pkgs.bemenu}/bin/bemenu-run -l 10 --prompt ">" -P "" -H 10 -n -W 0.5 -c --nb "##1d2021" --fb "##1d2021" --hb "##1d2021" --ab "##1d2021" --tb "##1d2021" --no-exec)
 
