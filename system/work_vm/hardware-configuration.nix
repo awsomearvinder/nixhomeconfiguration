@@ -51,14 +51,4 @@
 
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   virtualisation.hypervGuest.enable = true;
-  boot.kernelPatches = [
-    {
-      name = "enable-drm-hyperv";
-      patch = null;
-      extraConfig = ''
-        DRM_HYPERV m
-        FB_HYPERV n
-      '';
-    }
-  ];
 }
