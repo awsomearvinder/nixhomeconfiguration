@@ -47,6 +47,13 @@
       SystemMaxUse = 1G
     '';
 
+    systemd.oomd = {
+      enable = true;
+      enableSystemSlice = true;
+      enableRootSlice = true;
+      enableUserServices = true;
+    };
+
     networking.firewall.allowedTCPPorts = [
       22 # ssh
     ];
