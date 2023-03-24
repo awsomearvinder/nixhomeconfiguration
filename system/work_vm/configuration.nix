@@ -138,69 +138,6 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   networking.firewall.enable = false;
-  services.nomad.enable = true;
-  services.nomad.dropPrivileges = false;
-  services.nomad.extraSettingsPaths = ["/etc/nomad-extra.hcl"];
-  services.nomad.settings = {
-    name = "work-vm";
-    vault = {
-      allow_unauthenticated = true;
-      enabled = true;
-      address = "http://10.168.44.3:8200";
-    };
-    server = {
-      enabled = true;
-      bootstrap_expect = "1";
-    };
-    client = {
-      enabled = true;
-    };
-    plugin = [
-      {
-        "docker" = [
-          {
-            config = [
-              {
-                allow_privileged = true;
-              }
-            ];
-          }
-        ];
-      }
-    ];
-  };
-  services.consul = {
-    enable = true;
-    webUi = true;
-    interface.bind = "eth0";
-    interface.advertise = "eth0";
-    extraConfig = {
-      bootstrap = true;
-      bind_addr = "0.0.0.0";
-      client_addr = "0.0.0.0";
-      node_name = "work-vm";
-      server = true;
-    };
-  };
-  services.vault = {
-    enable = true;
-    package = pkgs.vault-bin;
-    address = "10.168.44.3:8200";
-    storageBackend = "consul";
-    storageConfig = ''
-      address = "10.168.44.3:8500"
-      path = "vault/"
-    '';
-    extraConfig = ''
-      ui = true
-    '';
-  };
-  services.nfs.server.enable = true;
-  services.nfs.server.exports = ''
-    /export/nomad          172.17.0.0/16(rw,fsid=0,no_subtree_check,no_root_squash)
-    /export/nomad          10.168.44.0/24(rw,fsid=0,no_subtree_check,no_root_squash)
-  '';
-
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete configuration.nix.
