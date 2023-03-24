@@ -29,7 +29,7 @@ in {
       $mod=SUPER
       $launcher=${pkgs.bemenu}/bin/bemenu-run -l 10 --prompt ">" -P "" -H 10 -n -W 0.5 -c --nb "##1d2021" --fb "##1d2021" --hb "##1d2021" --ab "##1d2021" --tb "##1d2021"
 
-      exec-once=eww daemon && eww open bar
+      exec-once=eww open bar
       exec-once=mako
       exec-once=${pkgs.swaybg}/bin/swaybg -i ${dots}/home_wallpaper.jpg
       ${
