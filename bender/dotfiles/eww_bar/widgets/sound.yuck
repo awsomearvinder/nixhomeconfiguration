@@ -1,0 +1,41 @@
+(defwidget scaler-change [label value onchange visibility]
+   (box :orientation "horizontal"
+        :space-evenly false
+        :class "scaler-change"
+     label
+     (revealer :transition "slideright"
+               :reveal visibility
+           (scale :min 0
+                  :max 100
+                  :width 100
+                  :value value
+                  :onchange onchange))))
+
+(defvar show-input-vol-scale false)
+(defvar show-vol-scale false)
+
+(defpoll audio-level :interval "50ms"
+                     :initial 0
+ "pamixer --get-volume")
+
+(defpoll mic-level :interval "50ms"
+                   :initial 0
+ "pamixer --default-source --get-volume")
+
+(defwidget volume-widget []
+  (eventbox :onhover "eww update show-vol-scale=true"
+            :class "volume"
+            :onhoverlost "eww update show-vol-scale=false"
+    (scaler-change :label ""
+                   :value audio-level
+                   :onchange "pamixer --set-volume {}"
+                   :visibility show-vol-scale)))
+
+(defwidget input-volume-widget []
+  (eventbox :onhover "eww update show-input-vol-scale=true"
+            :class "mic"
+            :onhoverlost "eww update show-input-vol-scale=false"
+      (scaler-change :label ""
+                     :value mic-level
+                     :onchange "pamixer --default-source --set-volume {}"
+                     :visibility show-input-vol-scale)))
