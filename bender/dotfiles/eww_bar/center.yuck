@@ -1,3 +1,4 @@
+(include "./widgets/music-dropdown.yuck")
 (deflisten current-song :initial ""
   "./scripts/music.sh current-song")
 
@@ -10,7 +11,8 @@
        :style "background-image: url('${current-song-image}')"))
 
 (defwidget music-player []
-  "${current-song}")
+  (eventbox :onhover "eww open -c . music-dropdown"
+    "${current-song}"))
 
 (defwidget center-bar []
   (box :orientation "horizontal"

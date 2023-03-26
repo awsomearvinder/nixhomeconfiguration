@@ -1,0 +1,47 @@
+(defwindow music-dropdown
+  :monitor 0
+  :geometry (geometry :x 0
+                      :y "30px"
+                      :height "200px"
+                      :width "500px"
+                      :anchor "top center")
+  :stacking "overlay"
+  :exclusive false
+  :focusable true
+  (eventbox :onhoverlost "eww -c . close music-dropdown"
+    (music-dropdown-container)))
+
+
+(defwidget music-dropdown-container []
+  (box :orientation "horizontal"
+       :space-evenly false
+       :class "music-dropdown"
+    (image :class "music-image"
+         :path current-song-image
+         :image-width "150"
+         :image-height "150")
+    (box :orientation "vertical"
+         :space-evenly true
+         :class "music-info"
+      (label :text current-song
+             :justify "center")
+      (music-controls))))
+
+(defwidget music-controls []
+  (box :orientation "vertical"
+       :class "music-controls"
+    (box :orientation "horizontal"
+         :space-evenly true
+         :class "music-cycler"
+      (button :onclick "playerctl previous"
+              :width 50 
+              :height 50
+        "<|")
+      (button :onclick "playerctl play-pause"
+              :width 50 
+              :height 50
+        "||")
+      (button :onclick "playerctl next"
+              :width 50 
+              :height 50
+        "|>"))))
