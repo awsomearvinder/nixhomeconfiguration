@@ -1,0 +1,22 @@
+(deflisten current-song :initial ""
+  "./scripts/music.sh current-song")
+
+(deflisten current-song-image :initial ""
+  "./scripts/music.sh image")
+
+(defwidget music-image []
+  (box
+       :class "music-image"
+       :style "background-image: url('${current-song-image}')"))
+
+(defwidget music-player []
+  "${current-song}")
+
+(defwidget center-bar []
+  (box :orientation "horizontal"
+       :class "center-bar"
+       :halign "start"
+       :valign "center"
+       :space-evenly false
+   (music-image)
+   (music-player)))

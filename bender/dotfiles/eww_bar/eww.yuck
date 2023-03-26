@@ -1,3 +1,7 @@
+(include "./left.yuck")
+(include "./center.yuck")
+(include "./right.yuck")
+
 (defwindow bar
            :monitor 0
            :geometry (geometry  :x 0
@@ -16,87 +20,4 @@
    (right-bar)))
 
 
-(defwidget left-bar []
-  (box :orientation "horizontal"
-       :class "left-bar"
-       :halign "start"
-       :valign "center"
-       :style "padding: 2px 10px;"
-   (for workspace in workspaces
-      (button :class { workspace.focused ? "active-workspace" : "inactive-workspace"}
-        { workspace.name }))))
     
-(defpoll time :interval "1s"
- "date '+%H:%M'")
-
-(deflisten current-song :initial ""
-  "./scripts/music.sh current-song")
-
-(deflisten current-song-image :initial ""
-  "./scripts/music.sh image")
-
-(defwidget music-image []
-  (box
-       :class "music-image"
-       :style "background-image: url('${current-song-image}')"))
-
-(defwidget music-player []
-  "${current-song}")
-
-(defwidget center-bar []
-  (box :orientation "horizontal"
-       :class "center-bar"
-       :halign "start"
-       :valign "center"
-       :space-evenly false
-   (music-image)
-   (music-player)))
-
-(defpoll workspaces :interval ".05s"
-  "./scripts/workspace.sh")
-
-
-(defwidget scaler-change [label value onchange visibility]
-   (box :orientation "horizontal"
-        :space-evenly false
-        :class "scaler-change"
-     label
-     (revealer :transition "slideright"
-               :reveal visibility
-           (scale :min 0
-                  :max 100
-                  :width 100
-                  :value value
-                  :onchange onchange))))
-
-(defvar show-input-vol-scale false)
-(defvar show-vol-scale false)
-(defwidget right-bar []
- (box :orientation "horizontal"
-      :halign "end"
-      :class "right-bar"
-      :valign "center"
-      :space-evenly false
-   (eventbox :onhover "eww update show-vol-scale=true"
-             :class "volume"
-             :onhoverlost "eww update show-vol-scale=false"
-     (scaler-change :label ""
-                    :value audio-level
-                    :onchange "pamixer --set-volume {}"
-                    :visibility show-vol-scale))
-   (eventbox :onhover "eww update show-input-vol-scale=true"
-             :class "mic"
-             :onhoverlost "eww update show-input-vol-scale=false"
-       (scaler-change :label ""
-                      :value mic-level
-                      :onchange "pamixer --default-source --set-volume {}"
-                      :visibility show-input-vol-scale))
-   "${time}"))
-
-(defpoll audio-level :interval "50ms"
-                     :initial 0
- "pamixer --get-volume")
-
-(defpoll mic-level :interval "50ms"
-                   :initial 0
- "pamixer --default-source --get-volume")
