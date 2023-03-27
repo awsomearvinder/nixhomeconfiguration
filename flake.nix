@@ -7,6 +7,8 @@
     nixpkgs-master.url = "github:nixos/nixpkgs/master";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     hyprland.url = "github:hyprwm/Hyprland";
+    eww-flake.url = "github:elkowar/eww";
+    eww-flake.inputs.nixpkgs.follows = "nixpkgs-unstable";
     helix-flake.url = "github:helix-editor/helix";
     helix-flake.inputs.nixpkgs.follows = "nixpkgs-unstable";
     agenix.url = "github:ryantm/agenix";
@@ -24,6 +26,7 @@
     agenix,
     deploy-rs,
     hyprland,
+    eww-flake,
     helix-flake,
     custom-neovim,
     ...
@@ -38,6 +41,8 @@
             config.allowUnfree = true;
             inherit system;
           };
+
+          eww = eww-flake.packages.${system}.defaultPackage;
 
           nixpkgs-unstable = import nixpkgs-unstable {
             inherit system;
