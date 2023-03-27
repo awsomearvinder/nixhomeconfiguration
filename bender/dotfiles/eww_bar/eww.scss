@@ -19,6 +19,18 @@ button {
     text-shadow: none;
 }
 
+.music-dropdown {
+    padding: 7px 0 7px 10px;
+}
+
+.music-info {
+    padding: 35px 0;
+}
+
+.active-song {
+    font-size: 14px;
+}
+
 .active-workspace {
     color: $accent;
 }

@@ -3,11 +3,11 @@
   :geometry (geometry :x 0
                       :y "30px"
                       :height "200px"
-                      :width "500px"
+                      :width "450px"
                       :anchor "top center")
-  :stacking "overlay"
+  :stacking "fg"
   :exclusive false
-  :focusable true
+  :focusable false
   (eventbox :onhoverlost "eww -c . close music-dropdown"
     (music-dropdown-container)))
 
@@ -23,25 +23,25 @@
     (box :orientation "vertical"
          :space-evenly true
          :class "music-info"
+         :width 290
       (label :text current-song
-             :justify "center")
+             :xalign 0.5
+             :halign "center"
+             :class "active-song"
+             :width 290)
       (music-controls))))
 
 (defwidget music-controls []
   (box :orientation "vertical"
        :class "music-controls"
+       :halign "center"
     (box :orientation "horizontal"
          :space-evenly true
          :class "music-cycler"
+         :width 200
       (button :onclick "playerctl previous"
-              :width 50 
-              :height 50
         "<|")
       (button :onclick "playerctl play-pause"
-              :width 50 
-              :height 50
         "||")
       (button :onclick "playerctl next"
-              :width 50 
-              :height 50
         "|>"))))
