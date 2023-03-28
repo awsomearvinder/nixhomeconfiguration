@@ -21,6 +21,7 @@ in {
       ./applications/elvish.nix
       ./applications/starship.nix
       ./applications/kicad.nix
+      ./applications/systemd.nix
     ]
     ++ (
       if gui_supported

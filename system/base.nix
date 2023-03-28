@@ -53,7 +53,7 @@
       enableRootSlice = true;
       enableUserServices = true;
       extraConfig = {
-        SwapUsedLimitPercent = "50%";
+        DefaultMemoryPressureDurationSec = "5s";
       };
     };
     systemd.extraConfig = ''
