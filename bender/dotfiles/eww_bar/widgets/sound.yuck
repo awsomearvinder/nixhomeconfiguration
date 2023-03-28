@@ -16,10 +16,12 @@
 
 (defpoll audio-level :interval "50ms"
                      :initial 0
+                     :run-while show-vol-scale
  "pamixer --get-volume")
 
 (defpoll mic-level :interval "50ms"
                    :initial 0
+                   :run-while show-input-vol-scale
  "pamixer --default-source --get-volume")
 
 (defwidget volume-widget []
