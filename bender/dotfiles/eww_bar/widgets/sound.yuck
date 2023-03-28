@@ -23,18 +23,18 @@
  "pamixer --default-source --get-volume")
 
 (defwidget volume-widget []
-  (eventbox :onhover "eww update show-vol-scale=true"
+  (eventbox :onhover "eww -c . update show-vol-scale=true"
             :class "volume"
-            :onhoverlost "eww update show-vol-scale=false"
+            :onhoverlost "eww -c . update show-vol-scale=false"
     (scaler-change :label ""
                    :value audio-level
                    :onchange "pamixer --set-volume {}"
                    :visibility show-vol-scale)))
 
 (defwidget input-volume-widget []
-  (eventbox :onhover "eww update show-input-vol-scale=true"
+  (eventbox :onhover "eww -c . update show-input-vol-scale=true"
             :class "mic"
-            :onhoverlost "eww update show-input-vol-scale=false"
+            :onhoverlost "eww -c . update show-input-vol-scale=false"
       (scaler-change :label ""
                      :value mic-level
                      :onchange "pamixer --default-source --set-volume {}"
