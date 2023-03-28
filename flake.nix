@@ -42,7 +42,7 @@
             inherit system;
           };
 
-          eww = eww-flake.packages.${system}.defaultPackage;
+          eww-wayland = eww-flake.packages.${system}.eww-wayland;
 
           nixpkgs-unstable = import nixpkgs-unstable {
             inherit system;
