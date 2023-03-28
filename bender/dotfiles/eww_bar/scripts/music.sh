@@ -1,22 +1,17 @@
 #!/usr/bin/env bash
 case $1 in
     "current-song")
-        while true; do
-            sleep 0.05
-            playerctl metadata title
-        done
+        playerctl -p tidal-hifi --follow metadata title
         ;;
     "image")
-        temp_dir=$(mktemp -d)
-        current_song=""
-        while true; do
-            sleep 0.05
-            if [ "$current_song" != "$(playerctl metadata title)" ]; then
-                current_song=$(playerctl metadata title)
-                image_url=$(playerctl metadata mpris:artUrl)
-                curl $image_url 2> /dev/null > $temp_dir/pic.jpg
-                echo "$temp_dir/pic.jpg"
-            fi
+        mkdir ~/.cache/artUrls || true
+        image_folder=~/.cache/artUrls
+
+        playerctl -p tidal-hifi --follow metadata mpris:artUrl | while read url; do
+          file_name=$(echo "$url" | sed -s 's/\//_/g')
+          if [ ! -f "$image_folder/$file_name" ]; then
+              curl "$url" > "$image_folder/$file_name" 2> /dev/null
+          fi
+          echo "$image_folder/$file_name"
         done
-        ;;
 esac
