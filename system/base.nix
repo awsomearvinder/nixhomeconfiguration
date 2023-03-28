@@ -52,6 +52,16 @@
       enableSystemSlice = true;
       enableRootSlice = true;
       enableUserServices = true;
+      extraConfig = {
+        SwapUsedLimitPercent = "50%";
+      };
+    };
+    systemd.extraConfig = ''
+      DefaultMemoryAccounting=yes
+      DefaultTasksAccounting=yes
+    '';
+    systemd.slices.user.sliceConfig = {
+      ManagedOOMSwap = "kill";
     };
 
     networking.firewall.allowedTCPPorts = [
