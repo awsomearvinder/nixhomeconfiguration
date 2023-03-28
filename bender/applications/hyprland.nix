@@ -26,6 +26,7 @@ in {
         then "alacritty msg create-window || systemd-run --no-ask-password --user --scope alacritty"
         else "systemd-run --no-ask-password --user --scope footclient"
       }
+
       $mod=SUPER
       $launcher=systemd-run --no-ask-password --user --scope $(${pkgs.bemenu}/bin/bemenu-run -l 10 --prompt ">" -P "" -H 10 -n -W 0.5 -c --nb "##1d2021" --fb "##1d2021" --hb "##1d2021" --ab "##1d2021" --tb "##1d2021" --no-exec)
 
@@ -84,7 +85,7 @@ in {
           s_i = builtins.toString i;
         in ''
           bind=$mod,${s_i}, workspace, ${s_i}
-          bind=$mod SHIFT,${s_i}, movetoworkspace, ${s_i}
+          bind=$mod SHIFT,${s_i}, movetoworkspacesilent, ${s_i}
         '') (lib.range 1 9))
       }
 
