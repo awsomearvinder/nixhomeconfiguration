@@ -65,7 +65,7 @@ in {
 
       general {
         border_size=2
-        col.active_border=${colors.accent} ${colors.dark-grey} 45deg
+        col.active_border=${colors.accent} ${colors.accent} 45deg
         col.inactive_border=${colors.dark-grey}
       }
 
