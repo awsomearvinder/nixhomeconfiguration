@@ -23,11 +23,10 @@
     (box :orientation "vertical"
          :space-evenly true
          :class "music-info"
-         :width 290
       (label :text current-song
-             :xalign 0.5
-             :halign "center"
              :class "active-song"
+             :wrap true
+             :justify "center"
              :width 290)
       (music-controls))))
 
