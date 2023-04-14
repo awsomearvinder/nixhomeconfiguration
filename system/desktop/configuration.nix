@@ -154,6 +154,7 @@
     virt-manager
     distrobox
     pinentry-curses
+    looking-glass-client
   ];
 
   hardware.opentabletdriver.enable = true;
