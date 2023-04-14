@@ -29,6 +29,9 @@
       ]
     '';
   };
+  systemd.tmpfiles.rules = [
+    "f /dev/shm/looking-glass 0660 bender qemu-libvirtd -"
+  ];
 
   home-manager.users.bender = import ../../bender/desktop.nix;
   home-manager.useGlobalPkgs = true;
