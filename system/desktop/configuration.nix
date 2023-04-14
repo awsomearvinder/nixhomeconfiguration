@@ -27,6 +27,7 @@
       nvram = [
         "/run/libvirt/nix-ovmf/OVMF_CODE.fd:/run/libvirt/nix-ovmf/OVMF_VARS.fd"
       ]
+      user = "bender"
     '';
   };
   systemd.tmpfiles.rules = [
