@@ -135,7 +135,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.bender = {
     isNormalUser = true;
-    extraGroups = ["wheel" "libvirtd"]; # Enable ‘sudo’ for the user.
+    extraGroups = ["wheel" "libvirtd" "kvm" "qemu-libvirtd"]; # Enable ‘sudo’ for the user.
   };
 
   # List packages installed in system profile. To search, run:
