@@ -11,14 +11,7 @@
   imports = [(modulesPath + "/installer/scan/not-detected.nix")];
 
   boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "usbhid" "sd_mod" "vfio-pci"];
-  boot.initrd.kernelModules = [];
-  boot.initrd.preDeviceCommands = ''
-    DEVS="0000:29:00.0 0000:29:00.1"
-    for DEV in $DEVS; do
-      echo "vfio-pci" > /sys/bus/pci/devices/$DEV/driver_override
-    done
-    modprobe -i vfio-pci
-  '';
+  boot.initrd.kernelModules = ["vfio_pci" "vfio" "vfio_iommu_type1"];
   boot.kernelModules = ["kvm-amd" "v4l2loopback"];
   boot.extraModulePackages = [config.boot.kernelPackages.v4l2loopback];
   boot.kernelParams = ["amd_iommu=on" "iommu=pt" "vfio-pci.ids=1002:67df,1002:aaf0"];
