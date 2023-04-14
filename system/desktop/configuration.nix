@@ -18,8 +18,6 @@
   virtualisation.libvirtd = {
     enable = true;
     qemu.ovmf.enable = true;
-    qemu.ovmf.packages = [pkgs.OVMFFull];
-    qemu.runAsRoot = true;
     qemu.swtpm.enable = true;
     onBoot = "ignore";
     onShutdown = "shutdown";
