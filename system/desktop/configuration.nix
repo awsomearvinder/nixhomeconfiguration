@@ -22,6 +22,13 @@
     onBoot = "ignore";
     onShutdown = "shutdown";
   };
+  environment.etc."libvirt/qemu.conf" = {
+    text = ''
+      nvram = [
+        "/run/libvirt/nix-ovmf/OVMF_CODE.fd:/run/libvirt/nix-ovmf/OVMF_VARS.fd"
+      ]
+    '';
+  };
 
   home-manager.users.bender = import ../../bender/desktop.nix;
   home-manager.useGlobalPkgs = true;
