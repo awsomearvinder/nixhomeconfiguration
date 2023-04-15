@@ -14,10 +14,14 @@
   boot.kernelModules = ["v4l2loopback"];
   boot.extraModulePackages = [config.boot.kernelPackages.v4l2loopback];
 
-  vfio = {
-    enable = true;
-    pci-ids = ["1002:67df" "1002:aaf0"];
-    cpu-type = "amd";
+  specialisation = {
+    "VFIO".configuration = {
+      vfio = {
+        enable = true;
+        pci-ids = ["1002:67df" "1002:aaf0"];
+        cpu-type = "amd";
+      };
+    };
   };
 
   fileSystems."/" = {
