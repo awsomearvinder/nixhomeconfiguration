@@ -9,6 +9,13 @@
     };
     languages = [
       {
+        name = "typst";
+        file-types = ["typ"];
+        scope = "source.typst";
+        roots = [".git"];
+        language-server = {command = "typst-lsp"; args = []; language-id = "typst"; };
+      }
+      {
         name = "nix";
         auto-format = true;
         config = {
