@@ -15,6 +15,7 @@
     custom-neovim.url = "github:awsomearvinder/custom-neovim-flake";
     custom-neovim.inputs.nixpkgs.follows = "nixpkgs-unstable";
     deploy-rs.url = "github:serokell/deploy-rs";
+    impermanence.url = "github:nix-community/impermanence";
   };
 
   outputs = {
@@ -29,6 +30,7 @@
     eww-flake,
     helix-flake,
     custom-neovim,
+    impermanence,
     ...
   }: let
     system = "x86_64-linux";

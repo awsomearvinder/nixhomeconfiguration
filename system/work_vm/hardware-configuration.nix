@@ -16,32 +16,40 @@
   boot.extraModulePackages = [];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/94089aaf-154e-478e-81b8-045f4c10dd7c";
-    fsType = "btrfs";
-    options = ["subvol=root" "compress=zstd"];
-  };
-
-  fileSystems."/nix" = {
-    device = "/dev/disk/by-uuid/94089aaf-154e-478e-81b8-045f4c10dd7c";
-    fsType = "btrfs";
-    options = ["subvol=nix" "compress=zstd"];
-  };
-
-  fileSystems."/home" = {
-    device = "/dev/disk/by-uuid/94089aaf-154e-478e-81b8-045f4c10dd7c";
-    fsType = "btrfs";
-    options = ["subvol=home" "compress=zstd"];
+    device = "none";
+    fsType = "tmpfs";
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/9D09-3C36";
+    device = "/dev/disk/by-uuid/F92A-F654";
     fsType = "vfat";
   };
 
-  swapDevices = [
-    {device = "/dev/disk/by-uuid/be83ca1f-57a2-438b-bae7-c233de2b551d";}
-  ];
+  fileSystems."/nix" = {
+    device = "/dev/disk/by-uuid/1b041f23-0907-4cc5-9ce6-090e7598bf62";
+    fsType = "btrfs";
+    options = ["subvol=nix" "noatime" "compress-force=zstd" "ssd"];
+  };
 
+  fileSystems."/etc/nixos" = {
+    device = "/dev/disk/by-uuid/1b041f23-0907-4cc5-9ce6-090e7598bf62";
+    fsType = "btrfs";
+    options = ["subvol=config" "noatime" "compress-force=zstd" "ssd"];
+  };
+
+  fileSystems."/home" = {
+    device = "/dev/disk/by-uuid/1b041f23-0907-4cc5-9ce6-090e7598bf62";
+    fsType = "btrfs";
+    options = ["subvol=home" "noatime" "compress-force=zstd" "ssd"];
+  };
+
+  fileSystems."/persist" = {
+    device = "/dev/disk/by-uuid/1b041f23-0907-4cc5-9ce6-090e7598bf62";
+    fsType = "btrfs";
+    options = ["subvol=persist" "noatime" "compress-force=zstd" "ssd"];
+  };
+
+  swapDevices = [];
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
   # still possible to use this option, but it's recommended to use it in conjunction

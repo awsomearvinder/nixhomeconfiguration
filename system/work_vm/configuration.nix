@@ -82,6 +82,7 @@
     extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
     ];
+    hashedPassword = "$2a$05$umA4.sw8PZICbOcyjXmPR.y8r.TUf2AJwJjoVWc8LIK.ERA6s3nLu";
   };
   security.polkit.enable = true;
 
