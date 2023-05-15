@@ -47,6 +47,7 @@
     device = "/dev/disk/by-uuid/1b041f23-0907-4cc5-9ce6-090e7598bf62";
     fsType = "btrfs";
     options = ["subvol=persist" "noatime" "compress-force=zstd" "ssd"];
+    neededForBoot = true;
   };
 
   swapDevices = [];

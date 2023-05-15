@@ -84,6 +84,17 @@
     ];
     hashedPassword = "$2a$05$umA4.sw8PZICbOcyjXmPR.y8r.TUf2AJwJjoVWc8LIK.ERA6s3nLu";
   };
+
+  environment.persistence."/persist" = {
+    hideMounts = true;
+    files = [
+      "/etc/ssh/ssh_host_ed25519_key"
+      "/etc/ssh/ssh_host_ed25519_key.pub"
+      "/etc/ssh/ssh_host_rsa_key"
+      "/etc/ssh/ssh_host_rsa_key.pub"
+    ];
+  };
+
   security.polkit.enable = true;
 
   # List packages installed in system profile. To search, run:

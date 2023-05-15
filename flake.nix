@@ -62,6 +62,7 @@
       ];
     baseModules = system_config: homeModules: [
       (home-manager.nixosModules.home-manager)
+      impermanence.nixosModule
       {
         config = {
           home-manager.users.bender = import ./bender/home.nix system_config homeModules;
