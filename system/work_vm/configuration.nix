@@ -137,6 +137,11 @@
     };
   };
 
+  nix.settings = {
+    max-jobs = 1;
+    cores = 4;
+  };
+
   virtualisation.podman.enable = true;
 
   # List services that you want to enable:
