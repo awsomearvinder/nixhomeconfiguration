@@ -8,7 +8,6 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     hyprland.url = "github:hyprwm/Hyprland";
     eww-flake.url = "github:elkowar/eww";
-    eww-flake.inputs.nixpkgs.follows = "nixpkgs-unstable";
     helix-flake.url = "github:helix-editor/helix";
     helix-flake.inputs.nixpkgs.follows = "nixpkgs-unstable";
     agenix.url = "github:ryantm/agenix";
