@@ -40,7 +40,6 @@ in {
       }
 
       monitor=,highrr,auto,1
-      workspace=,
 
       # SCREENSHOTS
       bind=$mod,p,exec,slurp -d | xargs -Idimensions grim -g dimensions - | wl-copy -t 'image/png'
