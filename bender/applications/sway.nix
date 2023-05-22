@@ -24,12 +24,14 @@
 in {
   home.packages = [
     dbus-sway-environment
+    pkgs.bemenu
   ];
   wayland.windowManager.sway = {
     enable = true;
 
     package = pkgs.nixpkgs-unstable.sway;
     config = {
+      menu = ''systemd-run --no-ask-password --user --scope $(${pkgs.bemenu}/bin/bemenu-run -l 10 --prompt ">" -P "" -H 10 -n -W 0.5 -c --nb "##1d2021" --fb "##1d2021" --hb "##1d2021" --ab "##1d2021" --tb "##1d2021" --no-exec)'';
       bars = [];
       # stolen from https://github.com/ziap/dotfiles/blob/master/.config/sway/config
       gaps = {
