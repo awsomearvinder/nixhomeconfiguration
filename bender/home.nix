@@ -68,6 +68,7 @@ in {
         rnix-lsp
         insomnia
         pandoc
+        podman-compose
 
         starship
       ]
