@@ -9,6 +9,10 @@
     };
     languages = {
       language-server = {
+        pyright = {
+          command = "pyright-langserver";
+          args = ["--stdio"];
+        };
         typst = {
           command = "typst-lsp";
           args = [];
@@ -20,6 +24,15 @@
         };
       };
       language = [
+        {
+          name = "python";
+          roots = ["pyproject.toml"];
+          formatter = {
+            command = "black";
+            args = ["--quiet" "-"];
+          };
+          auto-format = true;
+        }
         {
           name = "typst";
           file-types = ["typ"];
