@@ -7,25 +7,30 @@
     settings = {
       theme = "gruvbox";
     };
-    languages = [
-      {
-        name = "typst";
-        file-types = ["typ"];
-        scope = "source.typst";
-        roots = [".git"];
-        language-server = {command = "typst-lsp"; args = []; language-id = "typst"; };
-      }
-      {
-        name = "nix";
-        auto-format = true;
-        config = {
-          nil = {
-            formatting = {
-              command = ["alejandra" "--quiet"];
-            };
+    languages = {
+      language-server = {
+        typst = {
+          command = "typst-lsp";
+          args = [];
+        };
+        nil = {
+          formatting = {
+            command = ["alejandra" "--quiet"];
           };
         };
-      }
-    ];
+      };
+      language = [
+        {
+          name = "typst";
+          file-types = ["typ"];
+          scope = "source.typst";
+          roots = [".git"];
+        }
+        {
+          name = "nix";
+          auto-format = true;
+        }
+      ];
+    };
   };
 }
