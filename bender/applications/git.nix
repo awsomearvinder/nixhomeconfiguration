@@ -3,6 +3,10 @@
   pkgs,
   ...
 }: {
+  home.packages = [
+    pkgs.sapling
+  ];
+
   programs.git =
     {
       enable = true;
