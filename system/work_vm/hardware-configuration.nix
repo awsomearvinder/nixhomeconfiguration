@@ -59,5 +59,8 @@
   # networking.interfaces.eth0.useDHCP = lib.mkDefault true;
 
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-  virtualisation.hypervGuest.enable = true;
+  virtualisation.hypervGuest = {
+    enable = true;
+    videoMode = "1920x1080";
+  };
 }
