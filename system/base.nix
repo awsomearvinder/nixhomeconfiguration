@@ -42,7 +42,7 @@
     # List services that you want to enable:
     # Enable the OpenSSH daemon.
     services.openssh.enable = true;
-    services.openssh.permitRootLogin = "yes";
+    services.openssh.settings.PermitRootLogin = "yes";
     services.journald.extraConfig = ''
       SystemMaxUse = 1G
     '';

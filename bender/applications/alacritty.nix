@@ -1,4 +1,12 @@
 {...}: {
+  programs.zellij = {
+    enable = true;
+    settings = {
+      default_shell = "elvish";
+      copy_command = "wl-copy";
+    };
+  };
+  
   programs.alacritty = {
     enable = true;
     settings = {
