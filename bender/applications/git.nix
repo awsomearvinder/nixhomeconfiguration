@@ -23,6 +23,9 @@ in {
 
   programs.jujutsu = {
     enable = true;
+    settings = {
+      user = { inherit name email; };
+    };
   };
 
   programs.gh = {
