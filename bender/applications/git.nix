@@ -17,6 +17,10 @@ in {
     pkgs.sapling
   ];
 
+  services.ssh-agent = {
+    enable = true;
+  };
+
   programs.jujutsu = {
     enable = true;
   };
