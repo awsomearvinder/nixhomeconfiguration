@@ -2,16 +2,16 @@
   programs.zellij = {
     enable = true;
     settings = {
-      default_shell = "elvish";
+      default_shell = "fish";
       copy_command = "wl-copy";
     };
   };
-  
+
   programs.alacritty = {
     enable = true;
     settings = {
       shell = {
-        program = "elvish";
+        program = "fish";
       };
       font = {
         size = 12;
