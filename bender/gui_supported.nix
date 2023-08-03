@@ -13,6 +13,7 @@
     ./applications/foot.nix
     ./applications/gtk.nix
     ./applications/eww.nix
+    ./applications/easyeffects.nix
   ];
 
   home.packages = with pkgs;
@@ -69,7 +70,6 @@
         calibre
 
         #Audio
-        easyeffects
         tidal-hifi
 
         dbeaver
