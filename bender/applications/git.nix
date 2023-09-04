@@ -15,6 +15,7 @@
 in {
   home.packages = [
     pkgs.sapling
+    pkgs.git-branchless
   ];
 
   services.ssh-agent = {
