@@ -49,7 +49,7 @@ in {
         #without a stack overflow for some reason.
         ion
         elvish
-        exa
+        eza
         git
         pijul
         ripgrep

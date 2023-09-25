@@ -11,8 +11,8 @@ in {
       starship init fish | source
     '';
     shellAliases = {
-      ls = "exa -a";
-      lsl = "exa -al";
+      ls = "eza -a";
+      lsl = "eza -al";
       sudo = "sudo -E";
       sodu = "sudo --preserve-env=PATH -E";
       nixd = "nix develop --command fish";
