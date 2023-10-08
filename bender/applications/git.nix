@@ -15,7 +15,6 @@
 in {
   home.packages = [
     pkgs.sapling
-    pkgs.git-branchless
   ];
 
   services.ssh-agent = {
@@ -25,7 +24,7 @@ in {
   programs.jujutsu = {
     enable = true;
     settings = {
-      user = { inherit name email; };
+      user = {inherit name email;};
     };
   };
 
@@ -44,26 +43,9 @@ in {
     };
   };
 
-  programs.git = {
-    enable = true;
-    userName = name;
-    userEmail = email;
-    difftastic.enable = true;
-    difftastic.background = "dark";
-    extraConfig = {
-      pull.ff = "only";
-      user.signingkey = gpg_key;
-      commit.gpgSign = true;
-      gpg.program = "${pkgs.gnupg}/bin/gpg";
-      rerere.enabled = true;
-    };
-  };
-  programs.lazygit.enable = true;
-  programs.lazygit.settings = {
-    git = {
-      merging = {
-        args = "--no-ff";
-      };
-    };
+  custom.version_control = {
+    enable_git = true;
+    signing = {inherit gpg_key;};
+    inherit email name;
   };
 }

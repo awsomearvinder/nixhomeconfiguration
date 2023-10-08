@@ -22,6 +22,7 @@ in {
       ./applications/starship.nix
       ./applications/kicad.nix
       ./applications/systemd.nix
+      ./options/lib.nix
     ]
     ++ (
       if gui_supported
