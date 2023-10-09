@@ -20,6 +20,12 @@ in {
           Whether to install jujutsu.
         '';
       };
+      enable_sapling = lib.mkOption {
+        default = false;
+        description = ''
+          Whether to install sapling.
+        '';
+      };
       signing = {
         gpg_key = lib.mkOption {
           description = ''
@@ -40,8 +46,9 @@ in {
     };
   };
   config = {
-    home.packages = lib.mkIf cfg.enable_git [
-      pkgs.git-branchless
+    home.packages = lib.mkMerge [
+      (lib.mkIf cfg.enable_git [pkgs.git-branchless])
+      (lib.mkIf cfg.enable_sapling [pkgs.sapling])
     ];
 
     programs.git = lib.mkIf cfg.enable_git {
@@ -77,6 +84,21 @@ in {
       settings = {
         user = {inherit (cfg) name email;};
       };
+    };
+
+    xdg.configFile."sapling/sapling.conf" = lib.mkIf cfg.enable_sapling {
+      source =
+        (pkgs.formats.ini {}).generate "sapling.conf" {
+          ui = {
+            username = "${cfg.name} <${cfg.email}>";
+            editor = "hx";
+          };
+        }
+        // (
+          if (cfg ? signing ? gpg_key)
+          then {gpg.key = cfg.signing.gpg_key;}
+          else {}
+        );
     };
   };
 }
