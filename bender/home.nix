@@ -15,7 +15,6 @@ in {
       ./applications/helix.nix
       ./applications/git.nix
       ./applications/gnupg.nix
-      ./applications/elvish.nix
       ./applications/starship.nix
       ./applications/kicad.nix
       ./applications/systemd.nix
