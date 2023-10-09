@@ -42,10 +42,4 @@ in {
       key = gpg_key;
     };
   };
-
-  custom.version_control = {
-    enable_git = true;
-    signing = {inherit gpg_key;};
-    inherit email name;
-  };
 }

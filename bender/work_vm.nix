@@ -16,6 +16,12 @@
   ];
 
   custom.sway.enable = true;
+  custom.version_control = {
+    enable_git = true;
+    name = "Arvinder Dhanoa";
+    email = "arvinder.dhanoa@winona.edu";
+    signing.gpg_key = "D938E040245154F8";
+  };
 
   # legacy.
   work_account = true;
