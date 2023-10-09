@@ -20,7 +20,6 @@ in {
       ./applications/kicad.nix
       ./applications/systemd.nix
       ./options/lib.nix
-      ./gui_supported.nix
     ];
 
   options = {

@@ -7,6 +7,7 @@
   imports = [
     ./home.nix
     ./applications/foot.nix
+    ./gui_supported.nix
   ];
   home.packages = with pkgs; [
     pkgs.wayvnc

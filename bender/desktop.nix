@@ -7,6 +7,7 @@
   imports = [
     ./home.nix
     ./applications/alacritty.nix
+    ./gui_supported.nix
   ];
   home.packages = with pkgs; [
     lynx
