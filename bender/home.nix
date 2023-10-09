@@ -43,13 +43,7 @@ in {
         nil
 
         #development stuff
-        mutt
-        nixfmt
-        python39
         gdb
-        insomnia
-        pandoc
-        podman-compose
 
         starship
       ]
