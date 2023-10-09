@@ -6,8 +6,6 @@
 }: {
   imports = [
     ./applications/vscode.nix
-    ./applications/sway.nix
-    ./applications/hyprland.nix
     ./applications/mako.nix
     ./applications/alacritty.nix
     ./applications/foot.nix
@@ -15,6 +13,9 @@
     ./applications/eww.nix
     ./applications/easyeffects.nix
   ];
+
+  custom.sway.enable = true;
+  custom.hyprland.enable = true;
 
   home.packages = with pkgs;
     [

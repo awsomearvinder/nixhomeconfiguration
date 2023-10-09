@@ -9,8 +9,8 @@
     red = "rgb(cc241d)";
     accent = "rgb(ebdbb2)";
   };
-  inherit (config) dots scripts modifier;
-in {
+  inherit (config) dots;
+in lib.mkIf config.custom.hyprland.enable {
   home.packages = [
     pkgs.bemenu
   ];
