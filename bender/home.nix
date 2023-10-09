@@ -16,7 +16,6 @@ in {
       ./applications/git.nix
       ./applications/gnupg.nix
       ./applications/starship.nix
-      ./applications/kicad.nix
       ./applications/systemd.nix
       ./options/lib.nix
     ];

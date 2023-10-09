@@ -8,6 +8,7 @@
     ./home.nix
     ./applications/alacritty.nix
     ./gui_supported.nix
+    ./applications/kicad.nix
   ];
   home.packages = with pkgs; [
     lynx
