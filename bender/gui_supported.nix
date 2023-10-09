@@ -14,10 +14,7 @@
     ./applications/easyeffects.nix
   ];
 
-  custom.sway.enable = true;
-  custom.hyprland.enable = true;
-
-  home.packages = with pkgs;
+  home.packages = lib.mkIf config.gui_supported (with pkgs;
     [
       firefox-wayland
       #Sway.
@@ -39,53 +36,6 @@
       fira-code
       (nerdfonts.override {fonts = ["FiraCode"];})
       font-awesome_5
-    ]
-    ++ (
-      if !config.work_account
-      then [
-        #osu - need I say more?
-        osu-lazer-bin
-
-        #until I setup something with pactl.
-        pavucontrol
-        pamixer
-
-        #Video editing
-        kdenlive
-
-        #chat clients
-        webcord
-        element-desktop
-
-        #stuff.
-        obs-studio
-
-        #Video Viewer
-        vlc
-
-        #art
-        krita
-
-        #general
-        xournalpp
-        calibre
-
-        #Audio
-        tidal-hifi
-
-        dbeaver
-
-        freecad
-        #kicad
-
-        #CLI stuff.
-        alacritty
-      ]
-      else [
-        pkgs.wayvnc
-        pkgs.remmina
-        pkgs.foot
-      ]
-    );
+    ]);
   fonts.fontconfig = {enable = true;};
 }

@@ -83,16 +83,29 @@
 
     mkSystemx86_64Linux = mkSystem "x86_64-linux";
   in {
-    nixosConfigurations.desktop = let
-      config = {gui_supported = true;};
-    in (mkSystemx86_64Linux config ./system/desktop/configuration.nix);
+    nixosConfigurations.desktop =
+    (nixpkgs-unstable.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        home-manager.nixosModules.home-manager
+        impermanence.nixosModule
+        { config = { nixpkgs.overlays = overlays; }; }
+        agenix.nixosModules.age
+        ./system/desktop/configuration.nix
+      ];
+    });
 
-    nixosConfigurations.work_vm = let
-      config = {
-        gui_supported = true;
-        work_account = true;
-      };
-    in (mkSystemx86_64Linux config ./system/work_vm/configuration.nix);
+    nixosConfigurations.work_vm =
+    (nixpkgs-unstable.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        home-manager.nixosModules.home-manager
+        impermanence.nixosModule
+        { config = { nixpkgs.overlays = overlays; }; }
+        agenix.nixosModules.age
+        ./system/work_vm/configuration.nix
+      ];
+    });
 
     homeConfigurations.bender = home-manager.lib.homeManagerConfiguration {
       modules = [

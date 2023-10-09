@@ -18,6 +18,9 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.blacklistedKernelModules = ["hyperv_fb"];
 
+  home-manager.users.bender = import ../../bender/work_vm.nix;
+  home-manager.useGlobalPkgs = true;
+
   # networking.hostName = "nixos"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.

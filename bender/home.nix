@@ -1,14 +1,11 @@
 {
-  gui_supported ? false,
-  work_account ? false,
-}: homeModules: {
   config,
   lib,
   pkgs,
   ...
 }:
 with lib; let
-  user_configuration = import ./configuration.nix {inherit work_account;};
+  user_configuration = import ./configuration.nix {inherit (config) work_account;};
   custom_packages = [
     (pkgs.callPackage ./custom_pkgs/base16-shell.nix {})
   ];
@@ -23,13 +20,8 @@ in {
       ./applications/kicad.nix
       ./applications/systemd.nix
       ./options/lib.nix
-    ]
-    ++ (
-      if gui_supported
-      then [./gui_supported.nix]
-      else []
-    )
-    ++ homeModules;
+      ./gui_supported.nix
+    ];
 
   options = {
     dots = mkOption {type = types.path;};
@@ -41,8 +33,6 @@ in {
 
   config = {
     inherit (user_configuration) dots modifier scripts;
-    inherit gui_supported;
-    inherit work_account;
 
     home.packages = with pkgs;
       [
@@ -73,19 +63,10 @@ in {
 
         starship
       ]
-      ++ custom_packages
-      ++ (
-        if !work_account
-        then [
-          lynx
-          nodejs
-          deno
-          nodePackages.pyright
-        ]
-        else [
-          home-manager
-        ]
-      );
+      ++ custom_packages;
+      # ++ (
+        # lib.mkIf config.work_account [ home-manager ]
+      # );
 
     programs.direnv.enable = true;
     programs.direnv.nix-direnv.enable = true;
