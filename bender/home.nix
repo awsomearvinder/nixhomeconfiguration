@@ -35,13 +35,7 @@ in {
 
     home.packages = with pkgs;
       [
-        #this is making me want to cry, I can't make an overlay with a new version
-        #without a stack overflow for some reason.
-        ion
-        elvish
         eza
-        git
-        pijul
         ripgrep
         bat
         bottom # top sucks.
@@ -55,7 +49,6 @@ in {
         nixfmt
         python39
         gdb
-        rnix-lsp
         insomnia
         pandoc
         podman-compose
