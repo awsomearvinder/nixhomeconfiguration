@@ -14,6 +14,12 @@ in {
           Whether to install git.
         '';
       };
+      enable_jujutsu = lib.mkOption {
+        default = false;
+        description = ''
+          Whether to install jujutsu.
+        '';
+      };
       signing = {
         gpg_key = lib.mkOption {
           description = ''
@@ -33,12 +39,12 @@ in {
       };
     };
   };
-  config = lib.mkIf cfg.enable_git {
-    home.packages = [
+  config = {
+    home.packages = lib.mkIf cfg.enable_git [
       pkgs.git-branchless
     ];
 
-    programs.git = {
+    programs.git = lib.mkIf cfg.enable_git {
       enable = true;
       userName = cfg.name;
       userEmail = cfg.email;
@@ -55,7 +61,7 @@ in {
           commit.gpgSign = true;
         });
     };
-    programs.lazygit = {
+    programs.lazygit = lib.mkIf cfg.enable_git {
       enable = true;
       settings = {
         git = {
@@ -63,6 +69,13 @@ in {
             args = "--no-ff";
           };
         };
+      };
+    };
+
+    programs.jujutsu = lib.mkIf cfg.enable_jujutsu {
+      enable = true;
+      settings = {
+        user = {inherit (cfg) name email;};
       };
     };
   };

@@ -21,13 +21,6 @@ in {
     enable = true;
   };
 
-  programs.jujutsu = {
-    enable = true;
-    settings = {
-      user = {inherit name email;};
-    };
-  };
-
   programs.gh = {
     enable = true;
     settings.git_protocol = "ssh";
