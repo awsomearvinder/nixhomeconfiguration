@@ -85,10 +85,7 @@ in
           };
         };
         inherit modifier;
-        terminal =
-          if !config.work_account
-          then "alacritty msg create-window || alacritty"
-          else "footclient";
+        terminal = config.custom.terminal;
         workspaceAutoBackAndForth = true;
         keybindings = lib.mkOptionDefault {
           "${modifier}+p" = "exec grim -g \"$(slurp -d)\" - | wl-copy -t 'image/png'";
@@ -114,17 +111,7 @@ in
               command = "${dbus-sway-environment}";
               always = false;
             }
-          ]
-          ++ (
-            if config.work_account
-            then [
-              {
-                command = "foot --server";
-                always = false;
-              }
-            ]
-            else []
-          );
+          ];
       };
     };
   }

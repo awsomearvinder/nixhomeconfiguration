@@ -16,6 +16,7 @@
   ];
 
   custom.sway.enable = true;
+  custom.terminal = "systemd-run --no-ask-password --user --scope ${pkgs.foot}/bin/footclient || foot --server";
   custom.version_control = {
     enable_git = true;
     name = "Arvinder Dhanoa";

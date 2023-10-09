@@ -30,6 +30,12 @@ in {
           '';
         };
       };
+      terminal = lib.mkOption {
+        default = "${pkgs.foot}/bin/footclient";
+        description = ''
+          The terminal to use.
+        '';
+      };
     };
   };
   config = lib.mkIf ((cfg.sway.enable) || (cfg.hyprland.enable)) {
