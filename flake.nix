@@ -6,26 +6,21 @@
     home-manager.url = "github:nix-community/home-manager/";
     nixpkgs-master.url = "github:nixos/nixpkgs/master";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    hyprland.url = "github:hyprwm/Hyprland";
     eww-flake.url = "github:elkowar/eww";
     helix-flake.url = "github:helix-editor/helix";
     helix-flake.inputs.nixpkgs.follows = "nixpkgs-unstable";
     agenix.url = "github:ryantm/agenix";
     custom-neovim.url = "github:awsomearvinder/custom-neovim-flake";
     custom-neovim.inputs.nixpkgs.follows = "nixpkgs-unstable";
-    deploy-rs.url = "github:serokell/deploy-rs";
     impermanence.url = "github:nix-community/impermanence";
   };
 
   outputs = {
-    self,
     home-manager,
     nixpkgs,
     nixpkgs-master,
     nixpkgs-unstable,
     agenix,
-    deploy-rs,
-    hyprland,
     eww-flake,
     helix-flake,
     custom-neovim,
@@ -59,29 +54,6 @@
           helix = helix-flake.packages.${system}.helix;
         })
       ];
-    baseModules = system_config: homeModules: [
-      (home-manager.nixosModules.home-manager)
-      impermanence.nixosModule
-      {
-        config = {
-          home-manager.users.bender = import ./bender/home.nix system_config homeModules;
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          nixpkgs.overlays = overlays;
-        };
-      }
-      agenix.nixosModules.age
-    ];
-
-    mkSystem = system: config: system_config:
-      nixpkgs-unstable.lib.nixosSystem {
-        inherit system;
-        modules =
-          (baseModules config [hyprland.homeManagerModules.default])
-          ++ [system_config];
-      };
-
-    mkSystemx86_64Linux = mkSystem "x86_64-linux";
   in {
     nixosConfigurations.desktop =
     (nixpkgs-unstable.lib.nixosSystem {
@@ -106,67 +78,5 @@
         ./system/work_vm/configuration.nix
       ];
     });
-
-    homeConfigurations.bender = home-manager.lib.homeManagerConfiguration {
-      modules = [
-        (import ./bender/home.nix {
-          gui_supported = true;
-          work_account = false;
-        } [hyprland.homeManagerModules.default])
-        {
-          home = {
-            username = "bender";
-            homeDirectory = "/home/bender";
-            stateVersion = "20.09";
-          };
-        }
-      ];
-      pkgs = import nixpkgs-unstable {
-        config.allowUnfree = true;
-        inherit overlays;
-        system = "x86_64-linux";
-      };
-    };
-
-    homeConfigurations.benderWork = home-manager.lib.homeManagerConfiguration {
-      modules = [
-        (import ./bender/home.nix {
-          gui_supported = true;
-          work_account = true;
-        } [hyprland.homeManagerModules.default])
-        {
-          home = {
-            username = "bender";
-            homeDirectory = "/home/bender";
-            stateVersion = "20.09";
-          };
-        }
-      ];
-      pkgs = import nixpkgs-unstable {
-        config.allowUnfree = true;
-        inherit overlays;
-        system = "x86_64-linux";
-      };
-    };
-
-    deploy = let
-      mkSystemNode = host: systemConfigName: {
-        hostname = host;
-        profiles.system = {
-          user = "root";
-          path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.${systemConfigName};
-        };
-      };
-    in {
-      sshUser = "root";
-      user = "root";
-      magicRollback = false;
-      autoRollback = false;
-    };
-
-    checks =
-      builtins.mapAttrs
-      (system: deployLib: deployLib.deployChecks self.deploy)
-      deploy-rs.lib;
   };
 }
