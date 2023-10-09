@@ -35,6 +35,7 @@
   custom.sway.enable = true;
   custom.hyprland.enable = true;
   custom.terminal = "${pkgs.alacritty}/bin/alacritty msg create-window || systemd-run --no-ask-password --user --scope ${pkgs.alacritty}/bin/alacritty";
+  
   custom.version_control = {
     enable_git = true;
     name = "Arvinder Dhanoa";
@@ -45,4 +46,5 @@
   # legacy.
   work_account = false;
   gui_supported = true;
+  modifier = "Mod4";
 }

@@ -27,4 +27,5 @@
   # legacy.
   work_account = true;
   gui_supported = true;
+  modifier = "Mod1";
 }

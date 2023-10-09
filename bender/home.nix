@@ -5,7 +5,6 @@
   ...
 }:
 with lib; let
-  user_configuration = import ./configuration.nix {inherit (config) work_account;};
   custom_packages = [
     (pkgs.callPackage ./custom_pkgs/base16-shell.nix {})
   ];
@@ -30,7 +29,7 @@ in {
   };
 
   config = {
-    inherit (user_configuration) dots modifier scripts;
+    dots = ./dotfiles;
 
     home.packages = with pkgs;
       [
