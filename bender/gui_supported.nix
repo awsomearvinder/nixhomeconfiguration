@@ -7,8 +7,6 @@
   imports = [
     ./applications/vscode.nix
     ./applications/mako.nix
-    ./applications/alacritty.nix
-    ./applications/foot.nix
     ./applications/gtk.nix
     ./applications/eww.nix
     ./applications/easyeffects.nix
