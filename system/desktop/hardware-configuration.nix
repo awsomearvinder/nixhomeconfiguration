@@ -8,12 +8,21 @@
   modulesPath,
   ...
 }: {
-  imports = [(modulesPath + "/installer/scan/not-detected.nix")];
+  imports = [(modulesPath + "/installer/scan/not-detected.nix") ./vfio.nix];
 
-  boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "usbhid" "sd_mod"];
-  boot.initrd.kernelModules = [];
-  boot.kernelModules = ["kvm-amd" "v4l2loopback"];
+  boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "usbhid" "sd_mod" "vfio-pci"];
+  boot.kernelModules = ["v4l2loopback"];
   boot.extraModulePackages = [config.boot.kernelPackages.v4l2loopback];
+
+  specialisation = {
+    "VFIO".configuration = {
+      vfio = {
+        enable = true;
+        pci-ids = ["1002:67df" "1002:aaf0"];
+        cpu-type = "amd";
+      };
+    };
+  };
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/f8c1f525-0437-4cee-ac01-365eb2d87455";

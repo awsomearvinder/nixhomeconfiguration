@@ -18,9 +18,21 @@
   virtualisation.libvirtd = {
     enable = true;
     qemu.ovmf.enable = true;
-    qemu.ovmf.packages = [pkgs.OVMFFull];
     qemu.swtpm.enable = true;
+    onBoot = "ignore";
+    onShutdown = "shutdown";
   };
+  environment.etc."libvirt/qemu.conf" = {
+    text = ''
+      nvram = [
+        "/run/libvirt/nix-ovmf/OVMF_CODE.fd:/run/libvirt/nix-ovmf/OVMF_VARS.fd"
+      ]
+      user = "bender"
+    '';
+  };
+  systemd.tmpfiles.rules = [
+    "f /dev/shm/looking-glass 0660 bender qemu-libvirtd -"
+  ];
 
   home-manager.users.bender = import ../../bender/desktop.nix;
   home-manager.useGlobalPkgs = true;
@@ -127,7 +139,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.bender = {
     isNormalUser = true;
-    extraGroups = ["wheel" "libvirtd"]; # Enable ‘sudo’ for the user.
+    extraGroups = ["wheel" "libvirtd" "kvm" "qemu-libvirtd"]; # Enable ‘sudo’ for the user.
   };
 
   # List packages installed in system profile. To search, run:
@@ -143,6 +155,7 @@
     virt-manager
     distrobox
     pinentry-curses
+    looking-glass-client
   ];
 
   hardware.opentabletdriver.enable = true;
