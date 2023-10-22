@@ -6,7 +6,6 @@
     home-manager.url = "github:nix-community/home-manager/";
     nixpkgs-master.url = "github:nixos/nixpkgs/master";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    eww-flake.url = "github:elkowar/eww";
     helix-flake.url = "github:helix-editor/helix";
     helix-flake.inputs.nixpkgs.follows = "nixpkgs-unstable";
     agenix.url = "github:ryantm/agenix";
@@ -21,7 +20,6 @@
     nixpkgs-master,
     nixpkgs-unstable,
     agenix,
-    eww-flake,
     helix-flake,
     custom-neovim,
     impermanence,
@@ -37,8 +35,6 @@
             config.allowUnfree = true;
             inherit system;
           };
-
-          eww-wayland = eww-flake.packages.${system}.eww-wayland;
 
           nixpkgs-unstable = import nixpkgs-unstable {
             inherit system;
