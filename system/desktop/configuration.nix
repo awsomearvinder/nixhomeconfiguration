@@ -33,6 +33,7 @@
   # Define on which hard drive you want to install Grub.
   # boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
   boot.loader.systemd-boot.enable = true;
+  boot.kernelPackages = pkgs.linuxPackages_zen;
 
   networking.firewall.allowPing = true;
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
