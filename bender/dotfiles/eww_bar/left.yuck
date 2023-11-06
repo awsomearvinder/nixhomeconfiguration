@@ -9,4 +9,5 @@
         { workspace.name }))))
 
 (defpoll workspaces :interval ".05s"
+                    :initial "[]"
   "./scripts/workspace.sh")

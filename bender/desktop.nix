@@ -21,7 +21,12 @@
     obs-studio
     vlc
     krita
-    tidal-hifi
+    (tidal-hifi.overrideAttrs (_old: {
+      src = fetchurl {
+        url = "https://github.com/Mastermindzh/tidal-hifi/releases/download/5.7.1/tidal-hifi_5.7.1_amd64.deb";
+        sha256 = "sha256-7wBQgoglLS67aiQsF9iUeFoJDDqq0fJgu5BSyH+HI7M=";
+      };
+    }))
     alacritty
   ];
 

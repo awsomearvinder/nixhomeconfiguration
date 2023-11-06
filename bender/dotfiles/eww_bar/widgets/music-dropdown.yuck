@@ -43,4 +43,7 @@
       (button :onclick "playerctl play-pause"
         "||")
       (button :onclick "playerctl next"
-        "|>"))))
+        "|>"))
+    (scale :orientation "h"
+           :class "music-dropdown-seek"
+           :value prog)))

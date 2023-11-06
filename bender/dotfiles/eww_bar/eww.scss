@@ -44,9 +44,18 @@ button {
     border-radius: 100px;
 }
 
+.music-dropdown-seek trough {
+    min-width: inherit;
+}
+
+.music-dropdown-seek trough {
+    min-width: inherit;
+}
+
 scale trough {
     all: unset;
-    background-color: $background;
+    background-color: $accent;
+    border-radius: 1.5px;
 }
 
 scale {
@@ -58,15 +67,12 @@ scale trough slider {
     outline-color: transparent;
     border-color: transparent;
     color: transparent;
-    margin: 0;
     box-shadow: none;
 }
 
 scale trough highlight {
     background-color: $text;
     border-color: transparent;
-    margin: 8px 0px;
-    border-radius: 1.5px;
 }
 
 .right-bar {

@@ -2,6 +2,9 @@
 (deflisten current-song :initial ""
   "./scripts/music.sh current-song")
 
+(deflisten prog :initial '0'
+  "./scripts/music.sh progress")
+
 (deflisten current-song-image :initial ""
   "./scripts/music.sh image")
 
