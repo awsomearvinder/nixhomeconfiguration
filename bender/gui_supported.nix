@@ -14,7 +14,6 @@
 
   home.packages = lib.mkIf config.gui_supported (with pkgs;
     [
-      firefox-wayland
       #Sway.
       notify-desktop
       dolphin
@@ -35,5 +34,11 @@
       (nerdfonts.override {fonts = ["FiraCode"];})
       font-awesome_5
     ]);
+
+  programs.firefox = {
+    enable = true;
+    package = pkgs.firefox-devedition;
+  };
+
   fonts.fontconfig = {enable = true;};
 }
