@@ -4,10 +4,9 @@ case $1 in
         playerctl -p tidal-hifi --follow metadata title
         ;;
     "image")
-        mkdir ~/.cache/artUrls || true
         # stack overflow go brrrt
         image_folder=${XDG_RUNTIME_DIR:-${TMPDIR:-${TMP:-${TEMP:-/tmp}}}}/artUrls
-        mkdir -p $image_folder
+        mkdir -p $image_folder 2> /dev/null
 
         playerctl -p tidal-hifi --follow metadata mpris:artUrl | while read url; do
           file_name=$(echo "$url" | sed -s 's/\//_/g')
