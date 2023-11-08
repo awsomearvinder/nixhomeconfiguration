@@ -2,7 +2,6 @@
   description = "My home configuration.";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-22.05";
     home-manager.url = "github:nix-community/home-manager/";
     nixpkgs-master.url = "github:nixos/nixpkgs/master";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -16,7 +15,6 @@
 
   outputs = {
     home-manager,
-    nixpkgs,
     nixpkgs-master,
     nixpkgs-unstable,
     agenix,
@@ -41,12 +39,6 @@
             config.allowUnfree = true;
           };
 
-          bind = nixpkgs.legacyPackages.${system}.bind.overrideAttrs (old: {
-            configureFlags =
-              old.configureFlags
-              ++ ["--with-dlz-ldap=${nixpkgs.lib.getDev nixpkgs.legacyPackages.${system}.ldb}" "--with-dlz-filesystem" "--with-dlopen"];
-            buildInputs = old.buildInputs ++ [(nixpkgs.lib.getDev nixpkgs.legacyPackages.${system}.ldb) (nixpkgs.lib.getDev nixpkgs.legacyPackages.${system}.openldap)];
-          });
           helix = helix-flake.packages.${system}.helix;
         })
       ];
