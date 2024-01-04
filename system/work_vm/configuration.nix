@@ -120,7 +120,7 @@
   #   enableSSHSupport = true;
   # };
   fonts = {
-    fonts = with pkgs; [
+    packages = with pkgs; [
       # normal fonts
       noto-fonts
       noto-fonts-cjk
@@ -131,7 +131,7 @@
     ];
 
     # use fonts specified by user rather than default ones
-    enableDefaultFonts = false;
+    enableDefaultPackages = false;
 
     fontconfig.defaultFonts = {
       serif = ["Noto Serif" "Noto Color Emoji"];
