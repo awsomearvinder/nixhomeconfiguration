@@ -167,6 +167,11 @@
     package = pkgs.mariadb;
   };
 
+  zramSwap = {
+    enable = true;
+    algorithm = "zstd";
+  };
+
   services.dnscrypt-proxy2 = {
     enable = true;
     settings = {
