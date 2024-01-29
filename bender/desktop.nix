@@ -33,6 +33,8 @@
   custom.sway.enable = true;
   custom.hyprland.enable = true;
   custom.terminal = "${pkgs.alacritty}/bin/alacritty msg create-window || systemd-run --no-ask-password --user --scope ${pkgs.alacritty}/bin/alacritty";
+
+  custom.goldwarden.enable = true;
   
   custom.version_control = {
     enable_git = true;
