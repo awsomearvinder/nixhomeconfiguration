@@ -172,6 +172,8 @@
     algorithm = "zstd";
   };
 
+  security.polkit.enable = true;
+
   services.dnscrypt-proxy2 = {
     enable = true;
     settings = {
