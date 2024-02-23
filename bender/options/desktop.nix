@@ -22,6 +22,13 @@ in {
         };
       };
 
+      wallpaper = lib.mkOption {
+        default = null;
+        description = ''
+          The wallpaper background for your desktop
+        '';
+      };
+
       hyprland = {
         enable = lib.mkOption {
           default = false;

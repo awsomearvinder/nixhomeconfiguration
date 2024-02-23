@@ -17,6 +17,7 @@
 
   custom.sway.enable = true;
   custom.terminal = "systemd-run --no-ask-password --user --scope ${pkgs.foot}/bin/footclient || foot --server";
+  custom.wallpaper = "${./dotfiles/work_wallpaper.png}";
   custom.version_control = {
     enable_git = true;
     name = "Arvinder Dhanoa";

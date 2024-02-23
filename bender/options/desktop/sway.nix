@@ -77,11 +77,13 @@ in
         output = {
           "ASUSTek COMPUTER INC ASUS VG249 0x00005F38" = {
             mode = "1920x1080@143Hz";
-            background = mkWallpaper "${dots}/home_wallpaper.jpg";
+          } // lib.mkIf (config.custom.wallpaper != null) {
+            background = mkWallpaper config.custom.wallpaper;
           };
           "HEADLESS-1" = {
             mode = "1680x1050";
-            background = mkWallpaper "${dots}/work_wallpaper.png";
+          } // lib.mkIf (config.custom.wallpaper != null) {
+            background = mkWallpaper config.custom.wallpaper;
           };
         };
         inherit modifier;
