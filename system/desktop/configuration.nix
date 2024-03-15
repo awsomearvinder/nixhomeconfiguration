@@ -138,7 +138,6 @@
     neovim
     helix
     git
-    linuxPackages.v4l2loopback
     wireguard-tools
     podman
     virt-manager
