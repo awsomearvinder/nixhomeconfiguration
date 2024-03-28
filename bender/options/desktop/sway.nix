@@ -75,17 +75,26 @@ in
           };
         };
         output = {
-          "ASUSTek COMPUTER INC ASUS VG249 0x00005F38" = {
-            mode = "1920x1080@143Hz";
-          } // lib.mkIf (config.custom.wallpaper != null) {
+          "ASUSTek COMPUTER INC ASUS VG249 0x00035F38" = {
+            mode = "1920x1080@143Hz pos 1600 0";
+          } // (if config.custom.wallpaper != null then {
             background = mkWallpaper config.custom.wallpaper;
-          };
-          "HEADLESS-1" = {
-            mode = "1680x1050";
-          } // lib.mkIf (config.custom.wallpaper != null) {
+          } else {});
+
+          "Dell Inc. DELL IN2030M V18WW2CD2BFM" = {
+            mode = "1600x900@60Hz pos 0 0";
+          } // (if (config.custom.wallpaper != null) then {
             background = mkWallpaper config.custom.wallpaper;
-          };
+          } else {});
         };
+
+        workspaceOutputAssign = builtins.map (i: {
+          workspace = "${builtins.toString i}";
+          output = if (lib.mod i 2) == 0 
+            then "ASUSTek COMPUTER INC ASUS VG249 0x00035F38"
+            else "Dell Inc. DELL IN2030M V18WW2CD2BFM";
+        }) (lib.range 0 9);
+
         inherit modifier;
         terminal = config.custom.terminal;
         workspaceAutoBackAndForth = true;
