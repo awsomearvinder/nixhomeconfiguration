@@ -21,6 +21,9 @@
     obs-studio
     vlc
     krita
+    nicotine-plus
+    rhythmbox
+    gnome.adwaita-icon-theme
     (tidal-hifi.overrideAttrs (_old: {
       src = fetchurl {
         url = "https://github.com/Mastermindzh/tidal-hifi/releases/download/5.7.1/tidal-hifi_5.7.1_amd64.deb";
