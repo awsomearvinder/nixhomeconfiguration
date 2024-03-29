@@ -55,6 +55,17 @@
       ];
     });
 
+    nixosConfigurations.laptop =
+    (nixpkgs-unstable.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        home-manager.nixosModules.home-manager
+        impermanence.nixosModule
+        ./system/laptop/configuration.nix
+        { config = { nixpkgs.overlays = overlays; }; }
+      ];
+    });
+
     nixosConfigurations.work_vm =
     (nixpkgs-unstable.lib.nixosSystem {
       system = "x86_64-linux";
