@@ -5,8 +5,6 @@
     home-manager.url = "github:nix-community/home-manager/";
     nixpkgs-master.url = "github:nixos/nixpkgs/master";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    helix-flake.url = "github:helix-editor/helix";
-    helix-flake.inputs.nixpkgs.follows = "nixpkgs-unstable";
     agenix.url = "github:ryantm/agenix";
     custom-neovim.url = "github:awsomearvinder/custom-neovim-flake";
     custom-neovim.inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -18,7 +16,6 @@
     nixpkgs-master,
     nixpkgs-unstable,
     agenix,
-    helix-flake,
     custom-neovim,
     impermanence,
     ...
@@ -39,7 +36,6 @@
             config.allowUnfree = true;
           };
 
-          helix = helix-flake.packages.${system}.helix;
         })
       ];
   in {
