@@ -1,11 +1,13 @@
-{config, ...}: let
+{ config, ... }:
+let
   inherit (config) dots;
-in {
+in
+{
   xdg.configFile."elvish".source = ''${dots}/elvish'';
   programs.fish = {
     enable = true;
     shellInit = ''
-    set SSH_AUTH_LOCK /run/user/1000/ssh-agent
+      set SSH_AUTH_LOCK /run/user/1000/ssh-agent
     '';
     interactiveShellInit = ''
       starship init fish | source

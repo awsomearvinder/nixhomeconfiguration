@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   systemd.user.slices = {
     app = {
       Unit = {

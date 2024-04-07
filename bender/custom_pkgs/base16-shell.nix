@@ -7,9 +7,7 @@ stdenv.mkDerivation rec {
   pname = "base16-shell";
   version = "07-05-2022";
 
-  buildInputs = [
-    bash
-  ];
+  buildInputs = [ bash ];
 
   src = fetchFromGitHub {
     owner = "base16-project";

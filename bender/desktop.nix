@@ -1,7 +1,5 @@
+{ pkgs, ... }:
 {
-  pkgs,
-  ...
-}: {
   imports = [
     ./home.nix
     ./applications/alacritty.nix
@@ -39,7 +37,7 @@
 
   custom.goldwarden.enable = true;
   custom.polkit.enable = true;
-  
+
   custom.version_control = {
     enable_git = true;
     name = "Arvinder Dhanoa";

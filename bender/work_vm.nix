@@ -1,7 +1,5 @@
+{ pkgs, ... }:
 {
-  pkgs,
-  ...
-}: {
   imports = [
     ./home.nix
     ./applications/foot.nix

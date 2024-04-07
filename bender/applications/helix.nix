@@ -1,7 +1,6 @@
-{pkgs, ...}: {
-  home.packages = [
-    pkgs.alejandra
-  ];
+{ pkgs, ... }:
+{
+  home.packages = [ pkgs.alejandra ];
   programs.helix = {
     enable = true;
     settings = {
@@ -11,34 +10,43 @@
       language-server = {
         pyright = {
           command = "pyright-langserver";
-          args = ["--stdio"];
+          args = [ "--stdio" ];
         };
         typst = {
           command = "typst-lsp";
-          args = [];
+          args = [ ];
         };
         nil = {
           formatting = {
-            command = ["alejandra" "--quiet"];
+            command = [
+              "alejandra"
+              "--quiet"
+            ];
           };
         };
       };
       language = [
         {
           name = "python";
-          roots = ["pyproject.toml"];
+          roots = [ "pyproject.toml" ];
           formatter = {
             command = "black";
-            args = ["--quiet" "-"];
+            args = [
+              "--quiet"
+              "-"
+            ];
           };
-          language-servers = ["pylsp" "pyright"];
+          language-servers = [
+            "pylsp"
+            "pyright"
+          ];
           auto-format = true;
         }
         {
           name = "typst";
-          file-types = ["typ"];
+          file-types = [ "typ" ];
           scope = "source.typst";
-          roots = [".git"];
+          roots = [ ".git" ];
         }
         {
           name = "nix";

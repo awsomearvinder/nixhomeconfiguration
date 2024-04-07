@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     ./applications/vscode.nix
     ./applications/mako.nix
@@ -12,7 +13,8 @@
     ./applications/easyeffects.nix
   ];
 
-  home.packages = lib.mkIf config.gui_supported (with pkgs;
+  home.packages = lib.mkIf config.gui_supported (
+    with pkgs;
     [
       #Sway.
       notify-desktop
@@ -31,14 +33,17 @@
       #fonts
       font-awesome
       fira-code
-      (nerdfonts.override {fonts = ["FiraCode"];})
+      (nerdfonts.override { fonts = [ "FiraCode" ]; })
       font-awesome_5
-    ]);
+    ]
+  );
 
   programs.firefox = {
     enable = true;
     package = pkgs.firefox-devedition;
   };
 
-  fonts.fontconfig = {enable = true;};
+  fonts.fontconfig = {
+    enable = true;
+  };
 }

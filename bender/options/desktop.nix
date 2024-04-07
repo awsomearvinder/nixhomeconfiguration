@@ -3,9 +3,11 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.custom;
-in {
+in
+{
   imports = [
     ./desktop/sway.nix
     ./desktop/hyprland.nix

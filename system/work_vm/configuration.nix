@@ -1,11 +1,8 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
+{ config, pkgs, ... }:
 {
-  config,
-  pkgs,
-  ...
-}: {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -16,7 +13,7 @@
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.blacklistedKernelModules = ["hyperv_fb"];
+  boot.blacklistedKernelModules = [ "hyperv_fb" ];
 
   home-manager.users.bender = import ../../bender/work_vm.nix;
   home-manager.useGlobalPkgs = true;
@@ -83,9 +80,8 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.bender = {
     isNormalUser = true;
-    extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [
-    ];
+    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    packages = with pkgs; [ ];
     hashedPassword = "$2a$05$umA4.sw8PZICbOcyjXmPR.y8r.TUf2AJwJjoVWc8LIK.ERA6s3nLu";
   };
 
@@ -127,17 +123,23 @@
       noto-fonts-emoji
 
       # nerdfonts
-      (nerdfonts.override {fonts = ["FiraCode"];})
+      (nerdfonts.override { fonts = [ "FiraCode" ]; })
     ];
 
     # use fonts specified by user rather than default ones
     enableDefaultPackages = false;
 
     fontconfig.defaultFonts = {
-      serif = ["Noto Serif" "Noto Color Emoji"];
-      sansSerif = ["Noto Sans" "Noto Color Emoji"];
-      monospace = ["FiraCode"];
-      emoji = ["Noto Color Emoji"];
+      serif = [
+        "Noto Serif"
+        "Noto Color Emoji"
+      ];
+      sansSerif = [
+        "Noto Sans"
+        "Noto Color Emoji"
+      ];
+      monospace = [ "FiraCode" ];
+      emoji = [ "Noto Color Emoji" ];
     };
   };
 

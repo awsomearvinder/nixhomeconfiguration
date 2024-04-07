@@ -1,5 +1,7 @@
-{config, ...}: let
+{ config, ... }:
+let
   inherit (config) dots;
-in {
+in
+{
   xdg.configFile."mako/config".text = builtins.readFile (dots + "/mako.conf");
 }

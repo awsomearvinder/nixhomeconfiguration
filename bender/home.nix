@@ -4,34 +4,34 @@
   pkgs,
   ...
 }:
-with lib; let
-  custom_packages = [
-    (pkgs.callPackage ./custom_pkgs/base16-shell.nix {})
+with lib;
+let
+  custom_packages = [ (pkgs.callPackage ./custom_pkgs/base16-shell.nix { }) ];
+in
+{
+  imports = [
+    ./applications/helix.nix
+    ./applications/git.nix
+    ./applications/gnupg.nix
+    ./applications/elvish.nix
+    ./applications/starship.nix
+    ./applications/systemd.nix
+    ./options/lib.nix
   ];
-in {
-  imports =
-    [
-      ./applications/helix.nix
-      ./applications/git.nix
-      ./applications/gnupg.nix
-      ./applications/elvish.nix
-      ./applications/starship.nix
-      ./applications/systemd.nix
-      ./options/lib.nix
-    ];
 
   options = {
-    dots = mkOption {type = types.path;};
-    modifier = mkOption {type = types.str;};
-    scripts = mkOption {type = types.path;};
-    gui_supported = mkOption {type = types.bool;};
-    work_account = mkOption {type = types.bool;};
+    dots = mkOption { type = types.path; };
+    modifier = mkOption { type = types.str; };
+    scripts = mkOption { type = types.path; };
+    gui_supported = mkOption { type = types.bool; };
+    work_account = mkOption { type = types.bool; };
   };
 
   config = {
     dots = ./dotfiles;
 
-    home.packages = with pkgs;
+    home.packages =
+      with pkgs;
       [
         eza
         ripgrep
@@ -48,9 +48,9 @@ in {
         starship
       ]
       ++ custom_packages;
-      # ++ (
-        # lib.mkIf config.work_account [ home-manager ]
-      # );
+    # ++ (
+    # lib.mkIf config.work_account [ home-manager ]
+    # );
 
     programs.direnv.enable = true;
     programs.direnv.nix-direnv.enable = true;

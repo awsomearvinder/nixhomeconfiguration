@@ -11,19 +11,19 @@
     impermanence.url = "github:nix-community/impermanence";
   };
 
-  outputs = {
-    home-manager,
-    nixpkgs-master,
-    nixpkgs-unstable,
-    agenix,
-    custom-neovim,
-    impermanence,
-    ...
-  }: let
-    system = "x86_64-linux";
-    overlays =
-      import ./bender/overlays
-      ++ [
+  outputs =
+    {
+      home-manager,
+      nixpkgs-master,
+      nixpkgs-unstable,
+      agenix,
+      custom-neovim,
+      impermanence,
+      ...
+    }:
+    let
+      system = "x86_64-linux";
+      overlays = import ./bender/overlays ++ [
         (_final: _prev: {
           custom-neovim = custom-neovim.defaultPackage."x86_64-linux";
           nixpkgs-master = import nixpkgs-master {
@@ -35,43 +35,58 @@
             inherit system;
             config.allowUnfree = true;
           };
-
         })
       ];
-  in {
-    nixosConfigurations.desktop =
-    (nixpkgs-unstable.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        home-manager.nixosModules.home-manager
-        impermanence.nixosModule
-        { config = { nixpkgs.overlays = overlays; }; }
-        agenix.nixosModules.age
-        ./system/desktop/configuration.nix
-      ];
-    });
+    in
+    {
+      nixosConfigurations.desktop = (
+        nixpkgs-unstable.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            home-manager.nixosModules.home-manager
+            impermanence.nixosModule
+            {
+              config = {
+                nixpkgs.overlays = overlays;
+              };
+            }
+            agenix.nixosModules.age
+            ./system/desktop/configuration.nix
+          ];
+        }
+      );
 
-    nixosConfigurations.laptop =
-    (nixpkgs-unstable.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        home-manager.nixosModules.home-manager
-        impermanence.nixosModule
-        ./system/laptop/configuration.nix
-        { config = { nixpkgs.overlays = overlays; }; }
-      ];
-    });
+      nixosConfigurations.laptop = (
+        nixpkgs-unstable.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            home-manager.nixosModules.home-manager
+            impermanence.nixosModule
+            ./system/laptop/configuration.nix
+            {
+              config = {
+                nixpkgs.overlays = overlays;
+              };
+            }
+          ];
+        }
+      );
 
-    nixosConfigurations.work_vm =
-    (nixpkgs-unstable.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        home-manager.nixosModules.home-manager
-        impermanence.nixosModule
-        { config = { nixpkgs.overlays = overlays; }; }
-        agenix.nixosModules.age
-        ./system/work_vm/configuration.nix
-      ];
-    });
-  };
+      nixosConfigurations.work_vm = (
+        nixpkgs-unstable.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            home-manager.nixosModules.home-manager
+            impermanence.nixosModule
+            {
+              config = {
+                nixpkgs.overlays = overlays;
+              };
+            }
+            agenix.nixosModules.age
+            ./system/work_vm/configuration.nix
+          ];
+        }
+      );
+    };
 }

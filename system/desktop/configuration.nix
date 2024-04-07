@@ -1,11 +1,8 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
+{ config, pkgs, ... }:
 {
-  config,
-  pkgs,
-  ...
-}: {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -18,7 +15,7 @@
   virtualisation.libvirtd = {
     enable = true;
     qemu.ovmf.enable = true;
-    qemu.ovmf.packages = [pkgs.OVMFFull];
+    qemu.ovmf.packages = [ pkgs.OVMFFull ];
     qemu.swtpm.enable = true;
   };
 
@@ -69,17 +66,23 @@
       noto-fonts-emoji
 
       # nerdfonts
-      (nerdfonts.override {fonts = ["FiraCode"];})
+      (nerdfonts.override { fonts = [ "FiraCode" ]; })
     ];
 
     # use fonts specified by user rather than default ones
     enableDefaultPackages = false;
 
     fontconfig.defaultFonts = {
-      serif = ["Noto Serif" "Noto Color Emoji"];
-      sansSerif = ["Noto Sans" "Noto Color Emoji"];
-      monospace = ["FiraCode"];
-      emoji = ["Noto Color Emoji"];
+      serif = [
+        "Noto Serif"
+        "Noto Color Emoji"
+      ];
+      sansSerif = [
+        "Noto Sans"
+        "Noto Color Emoji"
+      ];
+      monospace = [ "FiraCode" ];
+      emoji = [ "Noto Color Emoji" ];
     };
   };
 
@@ -114,6 +117,7 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    jack.enable = true;
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
 
@@ -128,7 +132,10 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.bender = {
     isNormalUser = true;
-    extraGroups = ["wheel" "libvirtd"]; # Enable ‘sudo’ for the user.
+    extraGroups = [
+      "wheel"
+      "libvirtd"
+    ]; # Enable ‘sudo’ for the user.
   };
 
   # List packages installed in system profile. To search, run:
@@ -149,7 +156,6 @@
   hardware.opentabletdriver.daemon.enable = true;
 
   environment.variables.EDITOR = "hx";
-
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -183,7 +189,10 @@
       ipv4_servers = true;
       ipv6_servers = false; # sad, no ipv6 yet.
       sources.public-resolvers = {
-        urls = ["https://raw.githubusercontent.com/DNSCrypt/dnscrypt-resolvers/master/v3/public-resolvers.md" "https://download.dnscrypt.info/resolvers-list/v3/public-resolvers.md"];
+        urls = [
+          "https://raw.githubusercontent.com/DNSCrypt/dnscrypt-resolvers/master/v3/public-resolvers.md"
+          "https://download.dnscrypt.info/resolvers-list/v3/public-resolvers.md"
+        ];
         minisign_key = "RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3";
         cache_file = "public-resolvers.md";
       };
