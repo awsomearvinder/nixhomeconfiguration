@@ -23,6 +23,7 @@
     krita
     nicotine-plus
     rhythmbox
+    lollypop
     gnome.adwaita-icon-theme
     (tidal-hifi.overrideAttrs (_old: {
       src = fetchurl {
