@@ -31,6 +31,7 @@
             command = "black";
             args = ["--quiet" "-"];
           };
+          language-servers = ["pylsp" "pyright"];
           auto-format = true;
         }
         {
