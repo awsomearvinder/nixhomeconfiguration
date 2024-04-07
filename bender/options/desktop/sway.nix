@@ -92,7 +92,7 @@ lib.mkIf config.custom.sway.enable {
             mode = "1600x900@60Hz pos 0 0";
           }
           // (
-            if (config.custom.wallpaper != null) then
+            if config.custom.wallpaper != null then
               { background = mkWallpaper config.custom.wallpaper; }
             else
               { }
