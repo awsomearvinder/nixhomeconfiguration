@@ -63,10 +63,10 @@ in {
           gpg.program = "${pkgs.gnupg}/bin/gpg";
           rerere.enabled = true;
         }
-        // (lib.mkIf (cfg ? signing ? gpg_key) {
+        // (if (cfg ? signing ? gpg_key) then {
           user.signingkey = cfg.signing.gpg_key;
           commit.gpgSign = true;
-        });
+        } else {});
     };
     programs.lazygit = lib.mkIf cfg.enable_git {
       enable = true;
