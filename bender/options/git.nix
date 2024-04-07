@@ -59,6 +59,9 @@ in {
       difftastic.background = "dark";
       extraConfig =
         {
+          "remote \"origin\"" = {
+            fetch = "+refs/pull/*/head:refs/remotes/origin/pr/*";
+          };
           pull.ff = "only";
           gpg.program = "${pkgs.gnupg}/bin/gpg";
           rerere.enabled = true;
