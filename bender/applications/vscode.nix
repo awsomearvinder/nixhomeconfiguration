@@ -1,6 +1,5 @@
 # Make this an overlay.
 {
-  config,
   pkgs,
   ...
 }: let

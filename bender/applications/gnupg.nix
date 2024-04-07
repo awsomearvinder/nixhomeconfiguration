@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ ...}: {
   home.packages = [
   ];
   programs.gpg.enable = true;
