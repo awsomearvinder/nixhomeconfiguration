@@ -12,7 +12,7 @@
     osu-lazer-bin
     pavucontrol
     pamixer
-    webcord
+    vesktop
     element-desktop
     obs-studio
     vlc
