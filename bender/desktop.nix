@@ -8,7 +8,7 @@
   ];
   home.packages = with pkgs; [
     nodejs
-    nodePackages.pyright
+    # nodePackages.pyright
     osu-lazer-bin
     pavucontrol
     pamixer
