@@ -7,7 +7,6 @@
     ./applications/kicad.nix
   ];
   home.packages = with pkgs; [
-    nodejs
     # nodePackages.pyright
     rust-analyzer
     osu-lazer-bin
