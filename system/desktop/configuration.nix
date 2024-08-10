@@ -167,11 +167,6 @@
   services.openssh.enable = true;
 
   # mariadb for school
-  services.mysql = {
-    enable = true;
-    package = pkgs.mariadb;
-  };
-
   zramSwap = {
     enable = true;
     algorithm = "zstd";
