@@ -20,6 +20,7 @@
     nicotine-plus
     rhythmbox
     lollypop
+    feishin
     gnome.adwaita-icon-theme
     (tidal-hifi.overrideAttrs (_old: {
       src = fetchurl {
