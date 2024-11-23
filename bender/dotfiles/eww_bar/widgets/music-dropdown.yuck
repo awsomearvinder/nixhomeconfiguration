@@ -46,4 +46,5 @@
         "|>"))
     (scale :orientation "h"
            :class "music-dropdown-seek"
-           :value prog)))
+           :value prog
+           :onchange "./scripts/music.sh set-progress {}")))

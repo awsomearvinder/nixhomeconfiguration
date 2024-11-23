@@ -5,12 +5,14 @@ case $1 in
         ;;
 
     "progress")
-        playerctl metadata --format "{{ position * 100 / mpris:length }}" --follow
+        while true; do
+            playerctl metadata --format "{{ position * 100 / mpris:length }}"
+        done
         ;;
 
     "set-progress")
-        offset=$(playerctl -p tidal-hifi metadata --format "{{ ($2 * mpris:length) / 100000000 }}")
-        playerctl -p tidal-hifi position "$offset" +
+        offset=$(playerctl metadata --format "{{ ($2 * mpris:length) / 100000000 }}")
+        playerctl position "$offset" +
         # fi
         ;;
 
@@ -19,7 +21,7 @@ case $1 in
         image_folder=${XDG_RUNTIME_DIR:-${TMPDIR:-${TMP:-${TEMP:-/tmp}}}}/artUrls
         mkdir -p $image_folder 2> /dev/null
 
-        playerctl -p tidal-hifi --follow metadata mpris:artUrl | while read url; do
+        playerctl --follow metadata mpris:artUrl | while read url; do
           file_name=$(echo "$url" | sed -s 's/\//_/g')
           if [ ! -f "$image_folder/$file_name" ]; then
               curl "$url" > "$image_folder/$file_name" 2> /dev/null
