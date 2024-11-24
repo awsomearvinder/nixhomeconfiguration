@@ -101,11 +101,7 @@ lib.mkIf config.custom.sway.enable {
 
       workspaceOutputAssign = builtins.map (i: {
         workspace = "${builtins.toString i}";
-        output =
-          if (lib.mod i 2) == 0 then
-            "ASUSTek COMPUTER INC ASUS VG249 0x00035F38"
-          else
-            "Dell Inc. DELL IN2030M V18WW2CD2BFM";
+        output = "ASUSTek COMPUTER INC ASUS VG249 0x00035F38";
       }) (lib.range 1 9);
 
       inherit modifier;
