@@ -106,7 +106,7 @@ lib.mkIf config.custom.sway.enable {
             "ASUSTek COMPUTER INC ASUS VG249 0x00035F38"
           else
             "Dell Inc. DELL IN2030M V18WW2CD2BFM";
-      }) (lib.range 0 9);
+      }) (lib.range 1 9);
 
       inherit modifier;
       terminal = config.custom.terminal;
