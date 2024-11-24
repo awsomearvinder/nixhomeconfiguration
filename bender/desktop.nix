@@ -9,6 +9,7 @@
   home.packages = with pkgs; [
     nodejs
     # nodePackages.pyright
+    rust-analyzer
     osu-lazer-bin
     pavucontrol
     pamixer
