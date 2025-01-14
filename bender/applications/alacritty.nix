@@ -11,9 +11,7 @@
   programs.alacritty = {
     enable = true;
     settings = {
-      shell = {
-        program = "fish";
-      };
+      terminal.shell = "fish";
       font = {
         size = 12;
         normal = {
