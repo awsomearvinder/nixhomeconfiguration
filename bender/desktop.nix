@@ -21,7 +21,7 @@
     rhythmbox
     lollypop
     feishin
-    gnome.adwaita-icon-theme
+    adwaita-icon-theme
     alacritty
   ];
 
