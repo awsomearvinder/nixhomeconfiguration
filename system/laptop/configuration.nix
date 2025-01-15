@@ -88,6 +88,7 @@
       "/etc/nixos"
       "/home"
       "/etc/ssh"
+      "/var/lib/nixos"
     ];
   };
 
