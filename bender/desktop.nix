@@ -17,9 +17,6 @@
     obs-studio
     vlc
     krita
-    nicotine-plus
-    rhythmbox
-    lollypop
     feishin
     adwaita-icon-theme
     alacritty
