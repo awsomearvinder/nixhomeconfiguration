@@ -33,7 +33,7 @@
       #fonts
       font-awesome
       fira-code
-      (nerdfonts.override { fonts = [ "FiraCode" ]; })
+      nerd-fonts.fira-code
       font-awesome_5
     ]
   );

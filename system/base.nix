@@ -22,6 +22,9 @@
         options = "--delete-older-than 10d";
       };
     };
+    nixpkgs.config.permittedInsecurePackages = [
+      "electron-31.7.7" # feishin reeee
+    ];
     nixpkgs.config.allowUnfree = true;
     boot.loader.systemd-boot.enable = true;
 
