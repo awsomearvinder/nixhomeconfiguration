@@ -107,8 +107,6 @@
     };
   };
 
-  # Enable sound.
-  hardware.pulseaudio.enable = false;
   # rtkit is optional but recommended
   security.rtkit.enable = true;
   programs.dconf.enable = true;
