@@ -145,10 +145,11 @@
     git
     wireguard-tools
     podman
-    virt-manager
     distrobox
     pinentry-curses
   ];
+
+  programs.virt-manager.enable = true;
 
   hardware.opentabletdriver.enable = true;
   hardware.opentabletdriver.daemon.enable = true;
