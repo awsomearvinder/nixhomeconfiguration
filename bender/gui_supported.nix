@@ -30,6 +30,9 @@
       #pdf viewer
       zathura
 
+      # password management.
+      bitwarden
+
       #fonts
       font-awesome
       fira-code
