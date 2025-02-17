@@ -1,4 +1,5 @@
 (include "./widgets/sound.yuck")
+(include "./widgets/laptop.yuck")
 (defpoll time :interval "1s"
  "date '+%H:%M'")
 
@@ -10,5 +11,6 @@
       :space-evenly false
    (volume-widget)
    (input-volume-widget)
+   (battery-widget)
    "${time}"))
 

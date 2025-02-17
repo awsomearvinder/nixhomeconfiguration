@@ -9,6 +9,7 @@
     custom-neovim.url = "github:awsomearvinder/custom-neovim-flake";
     custom-neovim.inputs.nixpkgs.follows = "nixpkgs-unstable";
     impermanence.url = "github:nix-community/impermanence";
+    nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
   };
 
   outputs =
@@ -19,6 +20,7 @@
       agenix,
       custom-neovim,
       impermanence,
+      nixos-cosmic,
       ...
     }:
     let
@@ -68,6 +70,13 @@
                 nixpkgs.overlays = overlays;
               };
             }
+            {
+              nix.settings = {
+                substituters = [ "https://cosmic.cachix.org/" ];
+                trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
+              };
+            }
+            nixos-cosmic.nixosModules.default
           ];
         }
       );
