@@ -35,11 +35,9 @@
   # };
 
   # Enable the Plasma 5 Desktop Environment.
-  # services.xserver.enable = true;
-  # services.xserver.displayManager.sddm.enable = true;
-  # services.xserver.displayManager.sddm.wayland.enable = true;
-  services.desktopManager.cosmic.enable = false;
-  services.displayManager.cosmic-greeter.enable = false;
+  services.xserver.enable = true;
+  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.displayManager.sddm.wayland.enable = true;
 
   services.desktopManager.plasma6.enable = true;
 
@@ -74,7 +72,6 @@
     enable = true;
     powerOnBoot = true;
   };
-  hardware.graphics.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
@@ -103,17 +100,6 @@
     helix
   ];
 
-  xdg = {
-    portal = {
-      config.common.default = "*";
-      enable = true;
-      wlr.enable = true;
-      extraPortals = [
-        pkgs.xdg-desktop-portal-wlr
-        pkgs.xdg-desktop-portal-gtk
-      ];
-    };
-  };
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;

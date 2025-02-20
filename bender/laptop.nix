@@ -10,8 +10,6 @@
     pavucontrol
     webcord
     alacritty
-    vesktop
-    feishin
   ];
   custom.sway.enable = true;
   custom.wallpaper = "${./dotfiles/home_wallpaper.jpg}";
