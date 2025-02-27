@@ -30,7 +30,7 @@
   # Define on which hard drive you want to install Grub.
   # boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
   boot.loader.systemd-boot.enable = true;
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_testing;
 
   networking.firewall.allowPing = true;
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -89,6 +89,7 @@
 
   # services.xserver.videoDrivers = ["nvidia"];
   hardware.graphics.enable = true;
+  hardware.graphics.extraPackages = with pkgs; [ intel-media-driver intel-ocl ];
 
   # Configure keymap in X11
   # services.xserver.layout = "us";

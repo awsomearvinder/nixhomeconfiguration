@@ -18,14 +18,14 @@
     [
       #Sway.
       notify-desktop
-      dolphin
-      breeze-icons
+      kdePackages.dolphin
+      kdePackages.breeze-icons
       mako # notification daemon.
       grim
       slurp
       wl-clipboard
 
-      konsole
+      kdePackages.konsole
 
       #pdf viewer
       zathura
