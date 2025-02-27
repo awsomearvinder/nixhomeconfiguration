@@ -78,7 +78,7 @@ lib.mkIf config.custom.sway.enable {
       output = {
         "ASUSTek COMPUTER INC ASUS VG249 0x00035F38" =
           {
-            mode = "1920x1080@143Hz pos 1600 0";
+            mode = "1920x1080@143Hz pos 0 0";
           }
           // (
             if config.custom.wallpaper != null then

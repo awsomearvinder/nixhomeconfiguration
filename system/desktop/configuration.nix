@@ -60,6 +60,7 @@
 
   fonts = {
     packages = with pkgs; [
+      liberation_ttf
       # normal fonts
       noto-fonts
       noto-fonts-cjk-sans
@@ -139,6 +140,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    bubblewrap
     wget
     neovim
     helix
@@ -193,6 +195,14 @@
     };
   };
 
+  programs.steam = {
+    enable = true;
+  };
+
+  programs.anime-game-launcher.enable = true;
+  programs.anime-games-launcher.enable = true;
+  programs.honkers-railway-launcher.enable = true;
+  
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];

@@ -20,6 +20,8 @@
     feishin
     adwaita-icon-theme
     alacritty
+
+    bottles
   ];
 
   custom.sway.enable = true;
