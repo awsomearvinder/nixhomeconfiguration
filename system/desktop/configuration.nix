@@ -89,7 +89,7 @@
 
   # services.xserver.videoDrivers = ["nvidia"];
   hardware.graphics.enable = true;
-  hardware.graphics.extraPackages = with pkgs; [ intel-media-driver intel-ocl ];
+  hardware.graphics.extraPackages = with pkgs; [ intel-media-driver intel-ocl vpl-gpu-rt ];
 
   # Configure keymap in X11
   # services.xserver.layout = "us";
@@ -150,6 +150,7 @@
     podman
     distrobox
     pinentry-curses
+    gamescope
   ];
 
   programs.virt-manager.enable = true;
