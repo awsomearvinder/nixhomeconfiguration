@@ -47,6 +47,14 @@
 
   services.flatpak.enable = true;
 
+  age.secrets.k3sToken.file = ../../secrets/k3sToken.age;
+  services.k3s = {
+    enable = true;
+    tokenFile = "${config.age.secrets.k3sToken.path}";
+    role = "server";
+    clusterInit = true;
+  };
+
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
