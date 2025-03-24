@@ -25,7 +25,7 @@
   ];
 
   custom.sway.enable = true;
-  custom.wallpaper = "${./dotfiles/home_wallpaper.jpg}";
+  custom.wallpaper = "${./dotfiles/home_wallpaper.png}";
   custom.hyprland.enable = true;
   custom.terminal = "${pkgs.alacritty}/bin/alacritty msg create-window || systemd-run --no-ask-password --user --scope ${pkgs.alacritty}/bin/alacritty";
 

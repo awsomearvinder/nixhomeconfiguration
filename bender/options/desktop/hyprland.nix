@@ -28,7 +28,7 @@ lib.mkIf config.custom.hyprland.enable {
 
       exec-once=eww open bar
       exec-once=mako
-      exec-once=${pkgs.swaybg}/bin/swaybg -i ${dots}/home_wallpaper.jpg
+      exec-once=${pkgs.swaybg}/bin/swaybg -i ${dots}/home_wallpaper.png
 
       monitor=,highrr,auto,1
 
