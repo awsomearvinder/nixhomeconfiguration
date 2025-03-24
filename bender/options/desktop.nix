@@ -31,6 +31,13 @@ in
         '';
       };
 
+      pfp = lib.mkOption {
+        default = null;
+        description = ''
+          The pfp to use in different parts of the desktop
+        '';
+      };
+
       hyprland = {
         enable = lib.mkOption {
           default = false;
