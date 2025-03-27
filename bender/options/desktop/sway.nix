@@ -153,7 +153,7 @@ lib.mkIf config.custom.sway.enable {
         "${modifier}+p" = "exec grim -g \"$(slurp -d)\" - | wl-copy -t 'image/png'";
         "${modifier}+Shift+p" = "exec grim -o \"$(swaymsg --pretty -t get_outputs | awk '/focused/ {print $2}')\" - | wl-copy -t 'image/png'";
         "${modifier}+Shift+d" = ''exec "shutdown -h now"'';
-        "${modifier}+Shift+l" = ''exec "hyprlock"'';
+        "${modifier}+Next" = ''exec "hyprlock"'';
       };
       window = {
         border = 3;
