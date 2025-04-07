@@ -17,6 +17,7 @@ in
       lsl = "eza -al";
       sudo = "sudo -E";
       sodu = "sudo --preserve-env=PATH -E";
+      fucking = "sudo --preserve-env=PATH -E (string split ' ' $history[1])";
       nixd = "nix develop --command fish";
       lg = "lazygit";
     };
