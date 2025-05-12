@@ -21,6 +21,7 @@
     adwaita-icon-theme
     alacritty
 
+    heroic
     bottles
   ];
 
