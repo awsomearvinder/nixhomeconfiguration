@@ -170,6 +170,7 @@
   ];
 
   programs.virt-manager.enable = true;
+  security.sudo-rs.enable = true;
 
   hardware.opentabletdriver.enable = true;
   hardware.opentabletdriver.daemon.enable = true;
