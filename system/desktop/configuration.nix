@@ -149,6 +149,7 @@
     isNormalUser = true;
     extraGroups = [
       "wheel"
+      "video"
       "libvirtd"
     ]; # Enable ‘sudo’ for the user.
   };
