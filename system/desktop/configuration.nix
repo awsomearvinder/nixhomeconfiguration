@@ -32,6 +32,13 @@
   boot.loader.systemd-boot.enable = true;
   boot.kernelPackages = pkgs.linuxPackages_testing;
 
+  
+  # Enable the COSMIC login manager
+  services.xserver.displayManager.gdm.enable = true;
+
+  # Enable the COSMIC desktop environment
+  services.desktopManager.cosmic.enable = true;
+
   networking.firewall.allowPing = true;
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
