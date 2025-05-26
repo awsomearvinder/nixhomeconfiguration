@@ -59,9 +59,9 @@ in {
       difftastic.background = "dark";
       extraConfig =
         {
-          "remote \"origin\"" = {
-            fetch = "+refs/pull/*/head:refs/remotes/origin/pr/*";
-          };
+          # "remote \"origin\"" = {
+          #   fetch = "+refs/pull/*/head:refs/remotes/origin/pr/*";
+          # };
           pull.ff = "only";
           gpg.program = "${pkgs.gnupg}/bin/gpg";
           rerere.enabled = true;
@@ -86,6 +86,18 @@ in {
       enable = true;
       settings = {
         user = {inherit (cfg) name email;};
+        aliases = {
+          "msync" = [
+            "rebase"
+            "-r"
+            "all:fork_point(mutable_heads() | trunk())..mutable_heads()"
+            "-d"
+            "trunk()"
+          ];
+        };
+        revset-aliases = {
+          "mutable_heads()" = "visible_heads() & mutable()";
+        };
       };
     };
 
