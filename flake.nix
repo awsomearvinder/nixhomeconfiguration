@@ -9,7 +9,6 @@
     custom-neovim.url = "github:awsomearvinder/custom-neovim-flake";
     custom-neovim.inputs.nixpkgs.follows = "nixpkgs-unstable";
     impermanence.url = "github:nix-community/impermanence";
-    nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
     aagl.url = "github:ezKEa/aagl-gtk-on-nix";
     aagl.inputs.nixpkgs.follows = "nixpkgs-unstable";
   };
@@ -22,7 +21,6 @@
       agenix,
       custom-neovim,
       impermanence,
-      nixos-cosmic,
       aagl,
       ...
     }:
@@ -80,7 +78,6 @@
                 trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
               };
             }
-            nixos-cosmic.nixosModules.default
           ];
         }
       );
