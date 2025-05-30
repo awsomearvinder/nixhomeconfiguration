@@ -154,6 +154,13 @@
     ]; # Enable ‘sudo’ for the user.
   };
 
+  users.users.rose = {
+    isNormalUser = true;
+    extraGroups = [
+      "video"
+    ];
+  };
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
