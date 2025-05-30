@@ -7,6 +7,8 @@
     ./applications/kicad.nix
   ];
   home.packages = with pkgs; [
+    prismlauncher
+    
     # nodePackages.pyright
     rust-analyzer
     osu-lazer-bin
