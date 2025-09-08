@@ -59,10 +59,10 @@
         DefaultMemoryPressureDurationSec = "5s";
       };
     };
-    systemd.extraConfig = ''
-      DefaultMemoryAccounting=yes
-      DefaultTasksAccounting=yes
-    '';
+    systemd.settings.Manager = {
+      DefaultMemoryAccounting = "yes";
+      DefaultTasksAccounting = "yes";
+    };
     systemd.slices.user.sliceConfig = {
       ManagedOOMSwap = "kill";
     };
