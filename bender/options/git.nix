@@ -47,7 +47,6 @@ in {
   };
   config = {
     home.packages = lib.mkMerge [
-      (lib.mkIf cfg.enable_git [pkgs.git-branchless])
       (lib.mkIf cfg.enable_sapling [pkgs.sapling])
     ];
 
