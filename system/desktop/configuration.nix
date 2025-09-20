@@ -19,8 +19,6 @@
   virtualisation.podman.enable = true;
   virtualisation.libvirtd = {
     enable = true;
-    qemu.ovmf.enable = true;
-    qemu.ovmf.packages = [ pkgs.OVMFFull ];
     qemu.swtpm.enable = true;
   };
 
@@ -58,7 +56,8 @@
       drm-tip = pkgs.callPackage drm-tip-kernel-pkg { };
 
     in
-    pkgs.recurseIntoAttrs (pkgs.linuxPackagesFor drm-tip);
+    # pkgs.recurseIntoAttrs (pkgs.linuxPackagesFor drm-tip);
+    pkgs.linuxPackages_latest;
 
   # Enable the COSMIC login manager
   services.xserver.displayManager.gdm.enable = true;
