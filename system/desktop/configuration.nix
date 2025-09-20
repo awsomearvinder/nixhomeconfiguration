@@ -123,10 +123,8 @@
   # services.xserver.videoDrivers = ["nvidia"];
   hardware.graphics.enable = true;
   hardware.graphics.extraPackages = with pkgs; [
-    intel-media-driver
-    intel-ocl
     vpl-gpu-rt
-    intel-vaapi-driver
+    intel-media-driver
   ];
 
   # Configure keymap in X11
