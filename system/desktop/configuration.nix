@@ -1,7 +1,12 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{ config, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   imports = [
     # Include the results of the hardware scan.
@@ -30,9 +35,30 @@
   # Define on which hard drive you want to install Grub.
   # boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
   boot.loader.systemd-boot.enable = true;
-  boot.kernelPackages = pkgs.linuxPackages_testing;
+  boot.kernelPackages =
+    let
+      drm-tip-kernel-pkg =
+        { fetchFromGitLab, buildLinux, ... }@args:
+        buildLinux (
+          args
+          // {
+            version = "6.18.0-rc+drm-tip";
+            modDirVersion = "6.17.0-rc7";
+            src = pkgs.fetchFromGitLab {
+              owner = "drm";
+              domain = "gitlab.freedesktop.org";
+              repo = "tip";
+              rev = "547682ff49fc0459e80b1dca71dcbfec7082b43b";
+              hash = "sha256-Wxw2YZleXRD4WACPXdto/iaQ+0/4dstA0JYf8DiRTWo=";
+            };
+          }
+          // (args.argsOverride or { })
+        );
+      drm-tip = pkgs.callPackage drm-tip-kernel-pkg { };
 
-  
+    in
+    pkgs.recurseIntoAttrs (pkgs.linuxPackagesFor drm-tip);
+
   # Enable the COSMIC login manager
   services.xserver.displayManager.gdm.enable = true;
 

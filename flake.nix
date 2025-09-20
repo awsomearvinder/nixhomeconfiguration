@@ -4,7 +4,7 @@
   inputs = {
     home-manager.url = "github:nix-community/home-manager/";
     nixpkgs-master.url = "github:nixos/nixpkgs/master";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:awsomearvinder/nixpkgs/nixos-unstable";
     agenix.url = "github:ryantm/agenix";
     custom-neovim.url = "github:awsomearvinder/custom-neovim-flake";
     custom-neovim.inputs.nixpkgs.follows = "nixpkgs-unstable";
