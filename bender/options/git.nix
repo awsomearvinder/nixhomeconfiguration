@@ -50,14 +50,18 @@ in {
       (lib.mkIf cfg.enable_sapling [pkgs.sapling])
     ];
 
+    programs.difftastic= lib.mkIf cfg.enable_git {
+      enable = true;
+      options.background = "dark";
+      git.enable = true;
+    };
+
     programs.git = lib.mkIf cfg.enable_git {
       enable = true;
-      userName = cfg.name;
-      userEmail = cfg.email;
-      difftastic.enable = true;
-      difftastic.background = "dark";
-      extraConfig =
+      settings =
         {
+          user.name = cfg.name;
+          user.email = cfg.email;
           # "remote \"origin\"" = {
           #   fetch = "+refs/pull/*/head:refs/remotes/origin/pr/*";
           # };

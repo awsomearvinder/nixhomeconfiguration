@@ -59,8 +59,7 @@
     # pkgs.recurseIntoAttrs (pkgs.linuxPackagesFor drm-tip);
     pkgs.linuxPackages_latest;
 
-  # Enable the COSMIC login manager
-  services.xserver.displayManager.gdm.enable = true;
+  services.displayManager.gdm.enable = true;
 
   # Enable the COSMIC desktop environment
   services.desktopManager.cosmic.enable = true;
