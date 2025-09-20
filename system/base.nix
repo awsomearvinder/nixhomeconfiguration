@@ -23,7 +23,8 @@
       };
     };
     nixpkgs.config.permittedInsecurePackages = [
-      "electron-33.4.11"
+      # feishin...
+      "electron-36.9.5"
     ];
     nixpkgs.config.allowUnfree = true;
     boot.loader.systemd-boot.enable = true;
