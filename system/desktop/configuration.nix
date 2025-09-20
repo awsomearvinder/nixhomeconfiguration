@@ -226,6 +226,8 @@
   programs.anime-games-launcher.enable = true;
   programs.honkers-railway-launcher.enable = true;
   
+  hardware.bluetooth.enable = true;
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
