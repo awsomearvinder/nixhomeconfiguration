@@ -222,26 +222,6 @@
 
   security.polkit.enable = true;
 
-  services.dnscrypt-proxy2 = {
-    enable = true;
-    settings = {
-      require_nolog = true;
-      require_dnssec = true;
-      doh_servers = true;
-      dnscrypt_servers = true;
-      ipv4_servers = true;
-      ipv6_servers = false; # sad, no ipv6 yet.
-      sources.public-resolvers = {
-        urls = [
-          "https://raw.githubusercontent.com/DNSCrypt/dnscrypt-resolvers/master/v3/public-resolvers.md"
-          "https://download.dnscrypt.info/resolvers-list/v3/public-resolvers.md"
-        ];
-        minisign_key = "RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3";
-        cache_file = "public-resolvers.md";
-      };
-    };
-  };
-
   services.printing.enable = true;
 
   programs.steam = {
