@@ -31,7 +31,7 @@
       zathura
 
       # password management.
-      bitwarden
+      bitwarden-desktop
 
       #fonts
       font-awesome

@@ -37,7 +37,6 @@ in
         ripgrep
         bat
         bottom # top sucks.
-        custom-neovim
         xdg-utils
         sqls
         nil
