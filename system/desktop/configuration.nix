@@ -34,6 +34,9 @@
   # Define on which hard drive you want to install Grub.
   # boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
   boot.loader.systemd-boot.enable = true;
+  boot.supportedFilesystems = {
+    bcachefs = true;
+  };
   boot.kernelPackages =
     let
       drm-tip-kernel-pkg =
@@ -172,6 +175,7 @@
       "video"
       "libvirtd"
     ]; # Enable ‘sudo’ for the user.
+    hashedPassword = "$y$j9T$kcY5QKjQX4vTe2Y2USXOW.$2SVXDIU4nCMUZ6HVrw6zP2EX0g1gtkdSxZSd9nYq.65";
   };
 
   users.users.rose = {
@@ -228,7 +232,7 @@
   };
 
   programs.honkers-railway-launcher.enable = true;
-  
+
   hardware.bluetooth.enable = true;
 
   # Open ports in the firewall.
