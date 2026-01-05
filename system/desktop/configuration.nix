@@ -183,6 +183,7 @@
     extraGroups = [
       "video"
     ];
+    hashedPassword = "$y$j9T$YR7WprkbHShG.IZbMowpB.$I1YHEzIQkbW986iE3ubsNDNyXRX5Xj.DmIolfany/k.";
   };
 
   # List packages installed in system profile. To search, run:
