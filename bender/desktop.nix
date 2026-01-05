@@ -25,6 +25,7 @@
 
     heroic
     bottles
+    fastmail-desktop
   ];
 
   custom.sway.enable = true;
