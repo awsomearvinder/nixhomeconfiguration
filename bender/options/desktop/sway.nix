@@ -28,41 +28,49 @@ lib.mkIf config.custom.sway.enable {
   programs.hyprlock = {
     enable = true;
     settings = {
-      background = [{
-        path = "${config.custom.wallpaper}";
-        blur_passes = 2;
-      }];
-      general = [{
-        hide_cursor = true;
-        no_fade_in = false;
-        no_fade_out = false;
-        grace = 0;
-        disable_loading_bar = true;
-      }];
-      input-field = [{
-        size = "350, 60";
-        outline_thickness = 2;
-        dots_size = 0.2;
-        dots_spacing = 0.35;
-        outer_color = "rgb(fbf1c7)";
-        inner_color = "rgb(282828)";
-        font_color = "rgb(fbf1c7)";
-        fade_on_empty = false;
-        rounding = -1;
-        check_color = "rgb(204, 136, 34)";
-        placeholder_text = "<i> Input Password... </i>";
-        hide_input = false;
-        position = "0, -200";
-        halign = "center";
-        valign = "center";
-      }];
-      image = [{
-        path = "${config.custom.pfp}";
-        size = "250";
-        border_size = 2;
-        border_color = "rgb(fbf1c7)";
-        position = "0, 150";
-      }];
+      background = [
+        {
+          path = "${config.custom.wallpaper}";
+          blur_passes = 2;
+        }
+      ];
+      general = [
+        {
+          hide_cursor = true;
+          no_fade_in = false;
+          no_fade_out = false;
+          grace = 0;
+          disable_loading_bar = true;
+        }
+      ];
+      input-field = [
+        {
+          size = "350, 60";
+          outline_thickness = 2;
+          dots_size = 0.2;
+          dots_spacing = 0.35;
+          outer_color = "rgb(fbf1c7)";
+          inner_color = "rgb(282828)";
+          font_color = "rgb(fbf1c7)";
+          fade_on_empty = false;
+          rounding = -1;
+          check_color = "rgb(204, 136, 34)";
+          placeholder_text = "<i> Input Password... </i>";
+          hide_input = false;
+          position = "0, -200";
+          halign = "center";
+          valign = "center";
+        }
+      ];
+      image = [
+        {
+          path = "${config.custom.pfp}";
+          size = "250";
+          border_size = 2;
+          border_color = "rgb(fbf1c7)";
+          position = "0, 150";
+        }
+      ];
     };
   };
   home.packages = [
@@ -118,27 +126,25 @@ lib.mkIf config.custom.sway.enable {
         };
       };
       output = {
-        "ASUSTek COMPUTER INC ASUS VG249 0x00035F38" =
-          {
-            mode = "1920x1080@143Hz pos 0 0";
-          }
-          // (
-            if config.custom.wallpaper != null then
-              { background = mkWallpaper config.custom.wallpaper; }
-            else
-              { }
-          );
+        "ASUSTek COMPUTER INC ASUS VG249 0x00035F38" = {
+          mode = "1920x1080@143Hz pos 0 0";
+        }
+        // (
+          if config.custom.wallpaper != null then
+            { background = mkWallpaper config.custom.wallpaper; }
+          else
+            { }
+        );
 
-        "Dell Inc. DELL IN2030M V18WW2CD2BFM" =
-          {
-            mode = "1600x900@60Hz pos 0 0";
-          }
-          // (
-            if config.custom.wallpaper != null then
-              { background = mkWallpaper config.custom.wallpaper; }
-            else
-              { }
-          );
+        "Dell Inc. DELL IN2030M V18WW2CD2BFM" = {
+          mode = "1600x900@60Hz pos 0 0";
+        }
+        // (
+          if config.custom.wallpaper != null then
+            { background = mkWallpaper config.custom.wallpaper; }
+          else
+            { }
+        );
       };
 
       workspaceOutputAssign = builtins.map (i: {
@@ -151,7 +157,8 @@ lib.mkIf config.custom.sway.enable {
       workspaceAutoBackAndForth = true;
       keybindings = lib.mkOptionDefault {
         "${modifier}+p" = "exec grim -g \"$(slurp -d)\" - | wl-copy -t 'image/png'";
-        "${modifier}+Shift+p" = "exec grim -o \"$(swaymsg --pretty -t get_outputs | awk '/focused/ {print $2}')\" - | wl-copy -t 'image/png'";
+        "${modifier}+Shift+p" =
+          "exec grim -o \"$(swaymsg --pretty -t get_outputs | awk '/focused/ {print $2}')\" - | wl-copy -t 'image/png'";
         "${modifier}+Shift+d" = ''exec "shutdown -h now"'';
         "${modifier}+Next" = ''exec "hyprlock"'';
       };

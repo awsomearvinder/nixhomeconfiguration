@@ -3,9 +3,11 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.custom.version_control;
-in {
+in
+{
   options = {
     custom.version_control = {
       enable_git = lib.mkOption {
@@ -47,10 +49,10 @@ in {
   };
   config = {
     home.packages = lib.mkMerge [
-      (lib.mkIf cfg.enable_sapling [pkgs.sapling])
+      (lib.mkIf cfg.enable_sapling [ pkgs.sapling ])
     ];
 
-    programs.difftastic= lib.mkIf cfg.enable_git {
+    programs.difftastic = lib.mkIf cfg.enable_git {
       enable = true;
       options.background = "dark";
       git.enable = true;
@@ -58,21 +60,25 @@ in {
 
     programs.git = lib.mkIf cfg.enable_git {
       enable = true;
-      settings =
-        {
-          user.name = cfg.name;
-          user.email = cfg.email;
-          # "remote \"origin\"" = {
-          #   fetch = "+refs/pull/*/head:refs/remotes/origin/pr/*";
-          # };
-          pull.ff = "only";
-          gpg.program = "${pkgs.gnupg}/bin/gpg";
-          rerere.enabled = true;
-        }
-        // (if (cfg ? signing ? gpg_key) then {
-          user.signingkey = cfg.signing.gpg_key;
-          commit.gpgSign = true;
-        } else {});
+      settings = {
+        user.name = cfg.name;
+        user.email = cfg.email;
+        # "remote \"origin\"" = {
+        #   fetch = "+refs/pull/*/head:refs/remotes/origin/pr/*";
+        # };
+        pull.ff = "only";
+        gpg.program = "${pkgs.gnupg}/bin/gpg";
+        rerere.enabled = true;
+      }
+      // (
+        if (cfg ? signing.gpg_key) then
+          {
+            user.signingkey = cfg.signing.gpg_key;
+            commit.gpgSign = true;
+          }
+        else
+          { }
+      );
     };
     programs.lazygit = lib.mkIf cfg.enable_git {
       enable = true;
@@ -88,7 +94,7 @@ in {
     programs.jujutsu = lib.mkIf cfg.enable_jujutsu {
       enable = true;
       settings = {
-        user = {inherit (cfg) name email;};
+        user = { inherit (cfg) name email; };
         aliases = {
           "msync" = [
             "rebase"
@@ -106,17 +112,13 @@ in {
 
     xdg.configFile."sapling/sapling.conf" = lib.mkIf cfg.enable_sapling {
       source =
-        (pkgs.formats.ini {}).generate "sapling.conf" {
+        (pkgs.formats.ini { }).generate "sapling.conf" {
           ui = {
             username = "${cfg.name} <${cfg.email}>";
             editor = "hx";
           };
         }
-        // (
-          if (cfg ? signing ? gpg_key)
-          then {gpg.key = cfg.signing.gpg_key;}
-          else {}
-        );
+        // (if (cfg ? signing.gpg_key) then { gpg.key = cfg.signing.gpg_key; } else { });
     };
   };
 }

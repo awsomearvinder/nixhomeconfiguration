@@ -94,7 +94,12 @@
       "/etc/ssh/ssh_host_rsa_key.pub"
     ];
     directories = [
-      { user = "root";  group = "users"; mode = "755"; directory = "/var/lib/nixos"; }
+      {
+        user = "root";
+        group = "users";
+        mode = "755";
+        directory = "/var/lib/nixos";
+      }
     ];
   };
 
