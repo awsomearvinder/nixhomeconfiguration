@@ -98,5 +98,6 @@
           ];
         }
       );
+      formatter.${system} = nixpkgs-unstable.legacyPackages.${system}.nixfmt-tree;
     };
 }
