@@ -62,6 +62,10 @@
       "dmask=0022"
     ];
   };
+  fileSystems."/home/bender/nvme_crap" = {
+    device = "/dev/disk/by-uuid/6ca9d629-e0bc-4003-aafc-120c048de2bb";
+    fsType = "bcachefs";
+  };
 
   swapDevices = [ ];
 
