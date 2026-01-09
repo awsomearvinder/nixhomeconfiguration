@@ -178,6 +178,8 @@
     hashedPassword = "$y$j9T$kcY5QKjQX4vTe2Y2USXOW.$2SVXDIU4nCMUZ6HVrw6zP2EX0g1gtkdSxZSd9nYq.65";
   };
 
+  users.mutableUsers = false;
+
   users.users.rose = {
     isNormalUser = true;
     extraGroups = [
