@@ -62,7 +62,7 @@
     # pkgs.recurseIntoAttrs (pkgs.linuxPackagesFor drm-tip);
     pkgs.linuxPackages_latest;
 
-  services.displayManager.gdm.enable = true;
+  services.displayManager.cosmic-greeter.enable = true;
 
   hardware.sane.enable = true;
   hardware.sane.extraBackends = [ pkgs.sane-airscan ];
