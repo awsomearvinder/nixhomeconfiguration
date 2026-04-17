@@ -81,6 +81,11 @@
   networking.useDHCP = false;
   # networking.interfaces.enp0s3.useDHCP = true;
   networking.interfaces.enp35s0.useDHCP = true;
+  systemd.network.enable = true;
+  systemd.network.networks."10-lan" = {
+    matchConfig.Name = "enp35s0";
+    networkConfig.DHCP = "ipv4";
+  };
 
   services.flatpak.enable = true;
 
