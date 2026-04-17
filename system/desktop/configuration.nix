@@ -64,6 +64,8 @@
 
   services.displayManager.gdm.enable = true;
 
+  hardware.sane.enable = true;
+  hardware.sane.extraBackends = [ pkgs.sane-airscan ];
   # Enable the COSMIC desktop environment
   services.desktopManager.cosmic.enable = true;
 
