@@ -56,9 +56,6 @@ in
     # Enable the OpenSSH daemon.
     services.openssh.enable = true;
     services.openssh.settings.PermitRootLogin = "yes";
-    services.journald.extraConfig = ''
-      SystemMaxUse = 1G
-    '';
 
     services.resolved.enable = true;
 
