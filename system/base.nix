@@ -2,6 +2,12 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 { config, pkgs, ... }:
+let
+  caFile = pkgs.fetchurl {
+    url = "https://raw.githubusercontent.com/awsomearvinder/lab/refs/heads/master/secrets/intermediate_ca.crt";
+    hash = "sha256-FtGqVUTekpNOb2h+YmG98HZjE/wRxXP6/53QGOG5ulE=";
+  };
+in
 {
   imports = [ ./options.nix ];
   config = {
@@ -27,6 +33,10 @@
     ];
     nixpkgs.config.allowUnfree = true;
     boot.loader.systemd-boot.enable = true;
+
+    security.pki.certificateFiles = [
+      "${caFile}"
+    ];
 
     networking.hostName = config.machine_name;
     # Set your time zone.
