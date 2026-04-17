@@ -37,30 +37,7 @@
   boot.supportedFilesystems = {
     bcachefs = true;
   };
-  boot.kernelPackages =
-    let
-      drm-tip-kernel-pkg =
-        { fetchFromGitLab, buildLinux, ... }@args:
-        buildLinux (
-          args
-          // {
-            version = "6.18.0-rc+drm-tip";
-            modDirVersion = "6.17.0-rc7";
-            src = pkgs.fetchFromGitLab {
-              owner = "drm";
-              domain = "gitlab.freedesktop.org";
-              repo = "tip";
-              rev = "547682ff49fc0459e80b1dca71dcbfec7082b43b";
-              hash = "sha256-Wxw2YZleXRD4WACPXdto/iaQ+0/4dstA0JYf8DiRTWo=";
-            };
-          }
-          // (args.argsOverride or { })
-        );
-      drm-tip = pkgs.callPackage drm-tip-kernel-pkg { };
-
-    in
-    # pkgs.recurseIntoAttrs (pkgs.linuxPackagesFor drm-tip);
-    pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   services.displayManager.cosmic-greeter.enable = true;
 
