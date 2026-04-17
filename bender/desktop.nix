@@ -24,7 +24,6 @@
     alacritty
 
     heroic
-    bottles
     fastmail-desktop
   ];
 
