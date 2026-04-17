@@ -51,6 +51,8 @@
       SystemMaxUse = 1G
     '';
 
+    services.resolved.enable = true;
+
     systemd.oomd = {
       enable = true;
       enableSystemSlice = true;
