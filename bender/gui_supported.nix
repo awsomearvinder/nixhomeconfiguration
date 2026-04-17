@@ -9,7 +9,6 @@
     ./applications/vscode.nix
     ./applications/mako.nix
     ./applications/gtk.nix
-    ./applications/eww.nix
     ./applications/easyeffects.nix
   ];
 

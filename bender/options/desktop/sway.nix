@@ -173,10 +173,6 @@ lib.mkIf config.custom.sway.enable {
           always = false;
         }
         {
-          command = "eww -c ${dots}/eww_bar open bar";
-          always = false;
-        }
-        {
           command = "${dbus-sway-environment}";
           always = false;
         }
