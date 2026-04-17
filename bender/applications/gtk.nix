@@ -1,9 +1,10 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   gtk = {
     enable = true;
     theme.package = pkgs.gruvbox-dark-gtk;
     theme.name = "gruvbox-dark-gtk";
+    gtk4.theme = config.gtk.theme;
     gtk3.extraCss = "/* Remove rounded corners */
     .window-frame, .window-frame:backdrop {
        box-shadow: 0 0 0 black;
