@@ -37,6 +37,8 @@
       fira-code
       nerd-fonts.fira-code
       font-awesome_5
+
+      protonplus
     ]
   );
 
